@@ -1,12 +1,12 @@
 /* Offline: la app se guarda al instalar; los tiles del mapa se guardan al verlos (máx. 400). */
-const VERSION = 'viaje-v5';
+const VERSION = 'viaje-v7';
 const APP = [
   './', 'index.html', 'manifest.webmanifest',
   'css/m-design.css', 'css/app.css',
-  'js/itinerario.js', 'js/app.js', 'js/visitas.js', 'js/ubicacion.js', 'js/sesion.js',
+  'js/config.js', 'js/nube.js', 'js/itinerario.js', 'js/app.js', 'js/visitas.js', 'js/ubicacion.js', 'js/editar.js', 'js/sesion.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css',
   'vendor/gesture/leaflet-gesture-handling.min.js', 'vendor/gesture/leaflet-gesture-handling.min.css',
-  'vendor/lucide/lucide.min.js',
+  'vendor/lucide/lucide.min.js', 'vendor/supabase/supabase.js',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'
 ];
 const TILES = 'viaje-tiles', FONTS = 'viaje-fonts', MAX_TILES = 400;

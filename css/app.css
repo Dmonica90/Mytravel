@@ -285,3 +285,24 @@ body.has-nowbar .toast{bottom:calc(4.5rem + env(safe-area-inset-bottom,0px))}
 .me-dot{display:block;width:18px;height:18px;border-radius:50%;background:#2b7fff;border:3px solid #fff;box-shadow:0 0 0 2px rgb(43 127 255 / .35),0 2px 6px rgb(0 0 0 / .3)}
 .me-acc{fill:#2b7fff;fill-opacity:.12;stroke:#2b7fff;stroke-opacity:.4;stroke-width:1}
 .voz{font-size:var(--text-sm);line-height:1.55;color:hsl(var(--foreground));font-weight:var(--weight-medium)}
+
+/* --- Compartido (Supabase) y edición ----------------------------------- */
+.gate-hint:not(:empty){font-size:var(--text-sm);color:hsl(var(--muted-foreground));margin-top:calc(-1 * var(--space-2))}
+#gateEmailWrap{display:flex;flex-direction:column}
+.edit-btn{flex-shrink:0;border:0;background:transparent;color:hsl(var(--muted-foreground));padding:.2rem;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition-colors);line-height:0}
+.edit-btn:hover{color:hsl(var(--foreground));background:hsl(var(--accent))}
+.edit-btn svg{width:1rem;height:1rem}
+.item-head{align-items:center}
+.nota{font-size:var(--text-sm);line-height:1.5;padding:.45rem .65rem;border-radius:var(--radius-sm);background:hsl(var(--primary) / .1)}
+.nota b{font-weight:var(--weight-semibold)}
+.edited{font-size:var(--text-xs);color:hsl(var(--secondary));font-weight:var(--weight-semibold)}
+.thumb{position:relative}
+.who-tag,.pend-tag{position:absolute;top:.35rem;left:.35rem;font-size:.65rem;font-weight:var(--weight-bold);padding:.05rem .4rem;border-radius:var(--radius-full);background:hsl(var(--card) / .9);color:hsl(var(--foreground))}
+.thumb:not(.lg) .pend-tag{top:auto;bottom:2px;left:2px;font-size:.55rem;padding:0 .25rem}
+.thumb.lg .pend-tag{left:auto;right:.35rem;background:hsl(var(--secondary));color:hsl(var(--secondary-foreground))}
+.toast-img{width:56px;height:56px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:.35rem}
+.sheet-panel{width:100%;max-width:26rem;display:flex;flex-direction:column;gap:var(--space-2);background:hsl(var(--card));color:hsl(var(--card-foreground));border-radius:var(--radius);padding:var(--space-6);box-shadow:var(--shadow-lg)}
+.sheet-title{font-size:var(--text-xl);font-weight:var(--weight-bold);letter-spacing:var(--tracking-tight);line-height:1.25}
+.sheet-sub:empty{display:none}
+.sheet-sub{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.sheet .md-label{margin-top:var(--space-2);margin-bottom:0}

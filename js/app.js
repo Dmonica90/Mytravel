@@ -18,11 +18,34 @@ function voice(v, ctx={}){
   const nice = x => (x||'').replace(/^0(\d)/, '$1');
   return t.replace(/\{yo\}/g, ME).replace(/\{otro\}/g, OTHER)
     .replace(/\{hora\}/g, nice(ctx.hora)).replace(/\{hasta\}/g, nice(ctx.hasta))
-    .replace(/\{dur\}/g, ctx.hora && ctx.hasta ? durTxt(toM(ctx.hasta)-toM(ctx.hora)) : '');
+    .replace(/\{dur\}/g, ctx.durMin!=null ? durTxt(ctx.durMin) : (ctx.hora && ctx.hasta ? durTxt(toM(ctx.hasta)-toM(ctx.hora)) : ''));
 }
-const vozFor = (k, it, next) => voice((window.VOZ||{})[k], {hora:it.t, hasta: next ? next.t : ''});
+const vozFor = (k, it, next, day) => {
+  const ctx = {hora:it.t, hasta: next ? next.t : ''};
+  if (next && day) ctx.durMin = startMin(day, next) - startMin(day, it);
+  return voice((window.VOZ||{})[k], ctx);
+};
 
 const TZ = 'Europe/Madrid';
+/* Cada día vive en su zona horaria (Cancún, CDMX, España); una parada puede declarar la suya (p. ej. salida desde CDMX). */
+const fmts = {};
+function localNow(tz){
+  const f = fmts[tz] || (fmts[tz] = new Intl.DateTimeFormat('en-CA', {timeZone:tz, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}));
+  const p = Object.fromEntries(f.formatToParts(new Date()).map(x=>[x.type, x.value]));
+  return {date:`${p.year}-${p.month}-${p.day}`, min:(+p.hour)*60 + (+p.minute)};
+}
+function tzOffset(tz, iso){
+  const d = new Date(`${iso}T12:00:00Z`);
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {timeZone:tz, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'}).formatToParts(d).map(x=>[x.type, x.value]));
+  return Math.round((Date.UTC(+p.year, p.month-1, +p.day, +p.hour, +p.minute) - d.getTime())/60000);
+}
+const dayTz = d => d.tz || TZ;
+/* Minutos desde medianoche en la hora del día, aunque la parada esté en otra zona. */
+function startMin(d, it){
+  const [h,m] = it.t.split(':').map(Number);
+  const base = h*60+m;
+  return it.tz && it.tz!==dayTz(d) ? base + tzOffset(dayTz(d), d.iso) - tzOffset(it.tz, d.iso) : base;
+}
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const gm = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const isFree = c => /^(gratis|0€)/i.test(c||'');
@@ -42,6 +65,8 @@ function renderItem(it, dayId, pinIndex, flatIdx, voz){
       <div class="item-head"><div class="item-title"><i data-lucide="${it.icon||'dot'}"></i><span>${esc(it.title)}</span></div>${it.cost?`<span class="cost${isFree(it.cost)?' free':''}">${esc(it.cost)}</span>`:''}</div>
       <span class="status" hidden></span>`;
   if (voz) h += `<p class="voz">${esc(voz)}</p>`;
+  if (it.t0 && it.t!==it.t0) h += `<p class="edited">Hora cambiada (antes ${esc(it.t0)})</p>`;
+  if (it.nota) h += `<p class="nota"><b>Nota de ${esc(NAMES[it.notaWho]||'')}:</b> ${esc(it.nota)}</p>`;
   if (it.why) h += `<p class="why"><b>${it.whoWhy?'¿Por qué Nando?':'¿Por qué?'}</b> ${esc(it.why)}</p>`;
   if (it.detail) h += `<p class="item-detail">${esc(it.detail)}</p>`;
   if (it.opts) {
@@ -92,7 +117,7 @@ function routeUrl(pins, mode){
 function renderMapShell(d){
   const {pins} = DAYDATA[d.id];
   const small = pins.length<=3;
-  const btn = pins.length>1 ? `<a class="md-btn md-btn--outline" href="${esc(routeUrl(pins, d.travel))}" target="_blank" rel="noopener"><i data-lucide="navigation"></i>Ver ruta en Google Maps</a>` : '';
+  const btn = pins.length>1 && d.travel!=='flight' ? `<a class="md-btn md-btn--outline" href="${esc(routeUrl(pins, d.travel))}" target="_blank" rel="noopener"><i data-lucide="navigation"></i>Ver ruta en Google Maps</a>` : '';
   const foot = small ? 'Trayecto del día.' : `${pins.length} paradas. La línea une las paradas en orden; el camino por calles lo da Google Maps.`;
   return `<figure class="map${small?' small':''}"><div class="map-head"><span class="md-eyebrow-label muted">${esc(MAP_TITLES[d.map]||'')}</span>${btn}</div>
     <div class="map-canvas" id="map-${d.id}" role="region" aria-label="Mapa del día ${parseInt(d.n)}"></div>
@@ -106,10 +131,10 @@ function renderDay(d){
   const {items} = DAYDATA[d.id];
   let k = 0;
   const blocks = d.blocks.map(b=>{
-    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t}`, e.it, nx && nx.it)); }).join('');
+    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t0||e.it.t}`, e.it, nx && nx.it, d)); }).join('');
     return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(youLabel(b.label))}</p>`:''}<ol class="tl">${lis}</ol></div>`;
   }).join('');
-  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map((it,i,a)=>renderItem(it,d.id,null,null,vozFor(`pre:${d.id}|${it.t}`, it, a[i+1]))).join('')}</ol></div>` : '';
+  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map((it,i,a)=>renderItem(it,d.id,null,null,vozFor(`pre:${d.id}|${it.t}`, it, a[i+1], d))).join('')}</ol></div>` : '';
   const why = d.why ? `<div class="md-callout md-callout--accent"><div class="md-callout-icon"><i data-lucide="castle"></i></div><div class="md-callout-body"><p class="md-callout-title">¿Por qué Toledo?</p><div class="md-callout-text"><ul>${d.why.map(w=>`<li>${esc(w)}</li>`).join('')}</ul></div></div></div>` : '';
   const post = d.post ? `<div class="md-callout md-callout--info"><div class="md-callout-icon"><i data-lucide="${d.post.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.post.title)}</p><div class="md-callout-text"><ul>${d.post.text.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div></div>` : '';
   const callout = d.callout ? `<div class="md-callout md-callout--${d.callout.tone}"><div class="md-callout-icon"><i data-lucide="${d.callout.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.callout.title)}</p><div class="md-callout-text">${d.callout.text?esc(d.callout.text):`<ul>${d.callout.list.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`}</div></div></div>` : '';
@@ -133,7 +158,7 @@ function renderDay(d){
 }
 
 const $ = id => document.getElementById(id);
-$('heroEyebrow').textContent = `Hola, ${ME} · 15–21 octubre 2026`;
+$('heroEyebrow').textContent = `Hola, ${ME} · 11–21 octubre 2026`;
 $('heroLead').textContent = `Tu viaje con ${OTHER}: siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
 $('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city)}</small></a>`).join('');
 $('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(voice((window.OV||{})[d.id]) || d.ov)}</p></a>`).join('');
@@ -166,7 +191,7 @@ document.addEventListener('click', e=>{
 /* ---------- Theme ---------- */
 const root = document.documentElement;
 const savedTheme = store.get('theme', null);
-$('logoutBtn').addEventListener('click', ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} location.reload(); });
+$('logoutBtn').addEventListener('click', async ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} if (window.Nube && Nube.enabled) await Nube.logout(); location.reload(); });
 if (savedTheme) root.dataset.theme = savedTheme;
 const isDark = () => root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
 $('themeBtn').addEventListener('click', ()=>{ root.dataset.theme = isDark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); applyTiles(); });
@@ -223,7 +248,7 @@ function activate(dayId, idx, {scroll=false, pan=false}={}){
   if (scroll){ const li = sec.querySelector(`.item[data-pin="${idx}"]`); if (li) li.scrollIntoView({block:'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
 }
 $('days').addEventListener('click', e=>{
-  if (e.target.closest('a, .opts, .visit')) return;
+  if (e.target.closest('a, .opts, .visit, .edit-btn')) return;
   const li = e.target.closest('.item[data-pin]'); if (!li) return;
   const id = li.closest('.day').id, i = +li.dataset.pin;
   activate(id, i, {pan:true}); if (MAPS[id]) MAPS[id].markers[i].openPopup();
@@ -246,11 +271,12 @@ const io = new IntersectionObserver(entries=>{
 }, {rootMargin:'-40% 0px -55% 0px'});
 document.querySelectorAll('.day').forEach(s=>io.observe(s));
 
-/* ---------- "Ahora" en vivo (hora de España) ---------- */
-const fmt = new Intl.DateTimeFormat('en-CA', {timeZone:TZ, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'});
-function madridNow(){
-  const p = Object.fromEntries(fmt.formatToParts(new Date()).map(x=>[x.type, x.value]));
-  return {date:`${p.year}-${p.month}-${p.day}`, min:(+p.hour)*60 + (+p.minute)};
+/* ---------- "Ahora" en vivo (hora local de cada día) ---------- */
+const madridNow = () => localNow(TZ);
+/* El día de hoy es aquel cuya fecha local (en su zona) coincide con su fecha. */
+function today(){
+  for (const d of DAYS){ const n = localNow(dayTz(d)); if (n.date===d.iso) return {d, min:n.min}; }
+  return null;
 }
 const dayDiff = (a,b) => Math.round((Date.UTC(...b.split('-').map((v,i)=>i===1?v-1:+v)) - Date.UTC(...a.split('-').map((v,i)=>i===1?v-1:+v)))/864e5);
 const inMin = n => n<60 ? `en ${n} min` : `en ${Math.floor(n/60)} h${n%60?` ${n%60} min`:''}`;
@@ -258,7 +284,7 @@ const hhmm = m => `${String(Math.floor(m/60)%24).padStart(2,'0')}:${String(m%60)
 
 function dayStatus(d, now){
   const {items} = DAYDATA[d.id];
-  const starts = items.map(e=>toMin(e.it.t));
+  const starts = items.map(e=>startMin(d, e.it));
   let cur = -1, next = -1;
   const st = items.map((e,i)=>{
     const end = i+1<items.length ? starts[i+1] : starts[i]+60;
@@ -272,8 +298,9 @@ function dayStatus(d, now){
 
 let lastToday = null;
 function updateLive(){
-  const {date, min} = madridNow();
   const first = DAYS[0].iso, last = DAYS[DAYS.length-1].iso;
+  const startDate = localNow(dayTz(DAYS[0])).date, endDate = localNow(dayTz(DAYS[DAYS.length-1])).date;
+  const t = today();
   const pill = $('livePill'), bar = $('nowbar');
   document.querySelectorAll('.chip .today').forEach(x=>x.remove());
   document.querySelectorAll('.item.done, .item.now').forEach(li=>li.classList.remove('done','now'));
@@ -281,16 +308,16 @@ function updateLive(){
   document.querySelectorAll('.mk.now').forEach(x=>x.classList.remove('now'));
   bar.hidden = true; document.body.classList.remove('has-nowbar');
 
-  if (date < first) {
-    const n = dayDiff(date, first);
-    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, faltan ${n} ${n===1?'día':'días'} para su viaje · salen el 15 de octubre`;
+  if (!t && startDate < first) {
+    const n = dayDiff(startDate, first);
+    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, faltan ${n} ${n===1?'día':'días'} para su viaje · salen el ${esc(DAYS[0].date.replace('oct','de octubre'))}`;
     return;
   }
-  if (date > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, qué bonito viaje con ${OTHER}. Gracias por cada parada.`; return; }
+  if (!t && endDate > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, qué bonito viaje con ${OTHER}. Gracias por cada parada.`; return; }
 
-  const d = DAYS.find(x=>x.iso===date);
-  if (!d) return;
-  pill.className = 'live-pill on'; pill.innerHTML = `<span class="dot"></span>${ME}, hoy es el día ${parseInt(d.n)} · ${esc(d.city)} · ${hhmm(min)}`;
+  if (!t) return;
+  const d = t.d, min = t.min;
+  pill.className = 'live-pill on'; pill.innerHTML = `<span class="dot"></span>${ME}, hoy es el día ${parseInt(d.n)} · ${esc(d.city)} · ${hhmm(min)}${dayTz(d)!==TZ?' (hora de Cancún)':''}`;
   const chip = document.querySelector(`.chip[data-nav="${d.id}"] b`); if (chip) chip.insertAdjacentHTML('beforeend','<span class="today">Hoy</span>');
   const sec = $(d.id), s = dayStatus(d, min);
   s.st.forEach((v,i)=>{
@@ -332,7 +359,7 @@ function toast(html, actions=[], {sticky=false}={}){
   t.onclick = e=>{ const b = e.target.closest('button'); if (!b) return; if (b.dataset.i!=null) actions[+b.dataset.i].run(); t.hidden = true; };
   clearTimeout(t._t); if (!sticky) t._t = setTimeout(()=>{ t.hidden = true; }, 5000);
 }
-const todayId = () => { const d = DAYS.find(x=>x.iso===madridNow().date); return d ? d.id : null; };
+const todayId = () => { const t = today(); return t ? t.d.id : null; };
 
 /* ---------- Boot ---------- */
 initMaps();
