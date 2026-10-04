@@ -1,9 +1,9 @@
 /* Offline: la app se guarda al instalar; los tiles del mapa se guardan al verlos (máx. 400). */
-const VERSION = 'viaje-v2';
+const VERSION = 'viaje-v3';
 const APP = [
   './', 'index.html', 'manifest.webmanifest',
   'css/m-design.css', 'css/app.css',
-  'js/itinerario.js', 'js/app.js',
+  'js/itinerario.js', 'js/app.js', 'js/visitas.js', 'js/ubicacion.js', 'js/sesion.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css',
   'vendor/gesture/leaflet-gesture-handling.min.js', 'vendor/gesture/leaflet-gesture-handling.min.css',
   'vendor/lucide/lucide.min.js',

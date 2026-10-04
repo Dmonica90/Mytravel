@@ -25,16 +25,18 @@
   <div class="wrap bar-inner">
     <a class="brand" href="#top">Monica <span>+</span> Nando</a>
     <nav class="days" id="dayNav" aria-label="Días del viaje"></nav>
+    <button class="md-btn md-btn--ghost loc-btn" id="locBtn" type="button" aria-pressed="false" aria-label="Usar mi ubicación"><i data-lucide="locate"></i><span class="lbl">Usar mi ubicación</span></button>
     <button class="md-btn md-btn--ghost" id="themeBtn" type="button" aria-label="Cambiar tema claro u oscuro"><i data-lucide="sun-moon"></i></button>
+    <button class="md-btn md-btn--ghost" id="logoutBtn" type="button" aria-label="Cerrar sesión" title="Cerrar sesión"><i data-lucide="log-out"></i></button>
   </div>
 </header>
 
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <p class="md-eyebrow-label muted">Monica + Nando · 15–21 octubre 2026</p>
+      <p class="md-eyebrow-label muted" id="heroEyebrow">Monica + Nando · 15–21 octubre 2026</p>
       <h1 class="md-heading">Barcelona, Madrid y Toledo, <span class="accent">sin prisa.</span></h1>
-      <p class="lead muted">Siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa.</p>
+      <p class="lead muted" id="heroLead">Siete días en tren, a pie y con museos gratis cuando se puede.</p>
       <p class="live-pill" id="livePill" aria-live="polite"><span class="dot"></span>Calculando…</p>
       <div class="stats">
         <div class="stat"><div class="stat-num">7</div><div class="stat-label">días</div></div>
@@ -53,6 +55,18 @@
   </section>
 
   <div id="days"></div>
+
+  <section class="section" id="album">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Álbum del viaje <span id="albumCount"></span></p>
+        <h2 class="md-heading">Cada parada, <span class="accent">una foto.</span></h2>
+        <p>Las fotos se guardan solo en este celular. Guárdalas en tu galería para no perderlas.</p>
+        <button class="md-btn md-btn--outline" id="albumSaveAll" type="button" hidden style="margin-top:var(--space-4)"><i data-lucide="download"></i>Guardar todas en la galería</button>
+      </div>
+      <div id="albumGrid"></div>
+    </div>
+  </section>
 
   <section class="section" id="presupuesto">
     <div class="wrap">
@@ -110,8 +124,42 @@
 <div class="nowbar" id="nowbar" hidden>
   <div class="wrap nowbar-inner">
     <div class="nowbar-text" id="nowText" aria-live="polite"></div>
+    <button class="md-btn md-btn--ghost loc-btn" id="nowLoc" type="button" aria-pressed="false" aria-label="Usar mi ubicación"><i data-lucide="locate"></i></button>
     <button class="md-btn" id="nowGo" type="button"><i data-lucide="locate-fixed"></i>Ver</button>
   </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto" hidden>
+  <div class="lightbox-panel">
+    <img id="lbImg" alt="">
+    <div class="lightbox-bar">
+      <p id="lbCaption"></p>
+      <p class="lightbox-note">La foto vive en este celular: guárdala en tu galería para no perderla.</p>
+      <div class="lightbox-actions">
+        <button class="md-btn primary" id="lbSave" type="button"><i data-lucide="download"></i>Guardar en galería</button>
+        <button class="md-btn md-btn--outline" id="lbDelete" type="button">Borrar</button>
+        <button class="md-btn md-btn--ghost" id="lbClose" type="button">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gate" id="gate" hidden>
+  <form class="gate-card" id="gateForm" autocomplete="off">
+    <p class="md-eyebrow-label gate-eyebrow">15–21 octubre 2026</p>
+    <h1 class="md-heading gate-title">Barcelona, Madrid y Toledo, <span class="accent">sin prisa.</span></h1>
+    <fieldset class="gate-who">
+      <legend>¿Quién eres?</legend>
+      <label><input type="radio" name="who" value="moni" id="whoMoni"><span>Moni</span></label>
+      <label><input type="radio" name="who" value="nando" id="whoNando"><span>Nando</span></label>
+    </fieldset>
+    <label class="md-label" for="gatePass">Contraseña</label>
+    <input class="md-input" id="gatePass" type="password" autocomplete="current-password" required>
+    <p class="gate-error" id="gateError" role="alert" hidden></p>
+    <button class="md-btn gate-btn" type="submit">Entrar</button>
+  </form>
 </div>
 
 <script src="vendor/leaflet/leaflet.js"></script>
@@ -119,5 +167,8 @@
 <script src="vendor/lucide/lucide.min.js"></script>
 <script src="js/itinerario.js"></script>
 <script src="js/app.js"></script>
+<script src="js/visitas.js"></script>
+<script src="js/ubicacion.js"></script>
+<script src="js/sesion.js"></script>
 </body>
 </html>

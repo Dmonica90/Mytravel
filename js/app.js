@@ -1,7 +1,14 @@
 /* Viaje Oct 2026 — render del itinerario, mapas (Leaflet + OSM/CARTO) y modo "Ahora".
-   Los datos viven en js/itinerario.js. */
-(function(){
+   Los datos viven en js/itinerario.js. La app arranca cuando js/sesion.js llama a
+   ViajeStart('moni' | 'nando'); los módulos de js/visitas.js y js/ubicacion.js se
+   registran en ViajeModules y reciben window.Viaje. */
+window.ViajeModules = window.ViajeModules || [];
+window.ViajeStart = function(user){
 'use strict';
+
+const NAMES = {moni:'Moni', nando:'Nando'};
+const ME = NAMES[user], OTHER = NAMES[user==='moni'?'nando':'moni'];
+const key = k => `${user}:${k}`;
 
 const TZ = 'Europe/Madrid';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -18,7 +25,7 @@ function renderItem(it, dayId, pinIndex, flatIdx){
   const pinAttr = it.pin!=null && pinIndex!=null ? ` data-pin="${pinIndex}" tabindex="0" role="button" aria-label="${esc(it.title)}: ver en el mapa"` : '';
   const idxAttr = flatIdx!=null ? ` data-idx="${flatIdx}"` : '';
   let h = `<li class="item${pinAttr?' has-pin':''}"${pinAttr}${idxAttr}>
-    <div class="item-time"><span class="time">${esc(it.t)}</span>${pinAttr?`<span class="pin-n">${pinIndex+1}</span>`:''}</div>
+    <div class="item-time"><span class="time">${esc(it.t)}</span>${pinAttr?`<span class="pin-n">${pinIndex+1}</span><span class="dist" hidden></span>`:''}</div>
     <div class="item-body">
       <div class="item-head"><div class="item-title"><i data-lucide="${it.icon||'dot'}"></i><span>${esc(it.title)}</span></div>${it.cost?`<span class="cost${isFree(it.cost)?' free':''}">${esc(it.cost)}</span>`:''}</div>
       <span class="status" hidden></span>`;
@@ -35,6 +42,7 @@ function renderItem(it, dayId, pinIndex, flatIdx){
   }
   if (it.tips) h += `<ul class="tips">${it.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`;
   if (it.q) h += `<a class="gmaps" href="${gm(it.q)}" target="_blank" rel="noopener"><i data-lucide="map-pin"></i>Abrir en Google Maps</a>`;
+  if (pinAttr) h += `<div class="visit" data-day="${dayId}" data-pin="${pinIndex}"></div>`;
   return h + `</div></li>`;
 }
 
@@ -78,14 +86,17 @@ function renderMapShell(d){
     <figcaption class="map-foot">${foot}${d.offmap?` ${esc(d.offmap)}`:''}</figcaption></figure>`;
 }
 
+/* "Monica · Articulate" → "Tú · Articulate" para quien inició sesión. */
+const youLabel = l => l.replace(user==='moni' ? /^Monica · / : /^Nando · /, 'Tú · ');
+
 function renderDay(d){
   const {items} = DAYDATA[d.id];
   let k = 0;
   const blocks = d.blocks.map(b=>{
     const lis = b.items.map(()=>{ const e = items[k++]; return renderItem(e.it, d.id, e.pin, e.idx); }).join('');
-    return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(b.label)}</p>`:''}<ol class="tl">${lis}</ol></div>`;
+    return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(youLabel(b.label))}</p>`:''}<ol class="tl">${lis}</ol></div>`;
   }).join('');
-  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(d.pre.who)}</p><ol class="tl">${d.pre.items.map(it=>renderItem(it,d.id,null,null)).join('')}</ol></div>` : '';
+  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map(it=>renderItem(it,d.id,null,null)).join('')}</ol></div>` : '';
   const why = d.why ? `<div class="md-callout md-callout--accent"><div class="md-callout-icon"><i data-lucide="castle"></i></div><div class="md-callout-body"><p class="md-callout-title">¿Por qué Toledo?</p><div class="md-callout-text"><ul>${d.why.map(w=>`<li>${esc(w)}</li>`).join('')}</ul></div></div></div>` : '';
   const post = d.post ? `<div class="md-callout md-callout--info"><div class="md-callout-icon"><i data-lucide="${d.post.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.post.title)}</p><div class="md-callout-text"><ul>${d.post.text.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div></div>` : '';
   const callout = d.callout ? `<div class="md-callout md-callout--${d.callout.tone}"><div class="md-callout-icon"><i data-lucide="${d.callout.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.callout.title)}</p><div class="md-callout-text">${d.callout.text?esc(d.callout.text):`<ul>${d.callout.list.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`}</div></div></div>` : '';
@@ -93,12 +104,14 @@ function renderDay(d){
   const cols = d.budgetCols || ['Concepto','Costo'];
   const total = d.totalRow || ['Total', d.total];
   const budget = `<div class="panel"><p class="md-eyebrow-label muted block-title"><i data-lucide="wallet"></i>Presupuesto día ${parseInt(d.n)}</p>${budgetTable(cols, d.budget, total)}${d.totalNote?`<p class="item-detail" style="margin-top:.5rem">${esc(d.totalNote)}</p>`:''}</div>`;
-  const main = `<div class="col">${why}${pre}${blocks}${post}${callout}${extra}${budget}</div>`;
+  /* Lo de quien inició sesión va primero (D2: Monica en Articulate / ruta de Nando). */
+  const mineFirst = user==='nando' ? blocks+pre : pre+blocks;
+  const main = `<div class="col">${why}${mineFirst}${post}${callout}${extra}${budget}</div>`;
   return `<section class="day t-${d.tone}" id="${d.id}" data-day="${d.id}">
     <div class="wrap">
       <div class="day-head">
         <span class="day-num" aria-hidden="true">${d.n}</span>
-        <div class="day-meta"><span class="md-eyebrow-label muted">Día ${parseInt(d.n)} · ${esc(d.date)}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div>
+        <div class="day-meta"><span class="md-eyebrow-label muted">Día ${parseInt(d.n)} · ${esc(d.date)}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span><span class="visit-progress" data-day="${d.id}"></span></div>
         <h2 class="md-heading">${esc(d.title[0])}<span class="accent">${esc(d.title[1])}</span></h2>
         <p class="day-sub">${esc(d.sub)}</p>
       </div>
@@ -107,6 +120,8 @@ function renderDay(d){
 }
 
 const $ = id => document.getElementById(id);
+$('heroEyebrow').textContent = `Hola, ${ME} · 15–21 octubre 2026`;
+$('heroLead').textContent = `Tu viaje con ${OTHER}: siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
 $('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city)}</small></a>`).join('');
 $('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(d.ov)}</p></a>`).join('');
 $('days').innerHTML = DAYS.map(renderDay).join('');
@@ -116,10 +131,11 @@ $('budgetGlobal').innerHTML = Object.values(GLOBAL).map(g=>`<div class="panel wa
 $('extrasGrid').innerHTML =
   `<div class="panel span-2"><p class="md-eyebrow-label muted block-title"><i data-lucide="smartphone"></i>Apps y reservas</p>${budgetTable(['Recurso','Uso','Costo'], APPS)}</div>`
  + `<div class="panel wash-primary"><p class="md-eyebrow-label muted block-title"><i data-lucide="backpack"></i>Qué llevar · 15–22 °C</p><ul class="tips">${PACK.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`;
-$('notesGrid').innerHTML = NOTES.map(n=>`<div class="panel wash-${n.tone}"><h3>${esc(n.title)}</h3><ul class="tips" style="margin-top:.75rem">${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('');
+const notes = NOTES.map(n=>n.title===`Para ${user==='moni'?'Monica':'Nando'}` ? {...n, title:'Para ti', mine:true} : n).sort((a,b)=>(b.mine?1:0)-(a.mine?1:0));
+$('notesGrid').innerHTML = notes.map(n=>`<div class="panel wash-${n.tone}"><h3>${esc(n.title)}</h3><ul class="tips" style="margin-top:.75rem">${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('');
 
 /* ---------- Checklist ---------- */
-const CHECK_KEY = 'viaje-bcn-mad-tol-checks';
+const CHECK_KEY = key('viaje-bcn-mad-tol-checks');
 const saved = store.get(CHECK_KEY, {});
 $('checkGrid').innerHTML = CHECKS.map((g,gi)=>`<div class="panel"><h3>${esc(g.title)}</h3><ul class="checks" style="margin-top:.6rem">${g.items.map((it,ii)=>{const id=`c${gi}-${ii}`;return `<li><label for="${id}"><input type="checkbox" id="${id}" data-k="${id}"${saved[id]?' checked':''}><span>${esc(it)}</span></label></li>`}).join('')}</ul></div>`).join('');
 if (!store.set('__probe', 1)) $('checkNote').textContent = 'Este navegador no permite guardar: las casillas se reinician al recargar.';
@@ -137,6 +153,7 @@ document.addEventListener('click', e=>{
 /* ---------- Theme ---------- */
 const root = document.documentElement;
 const savedTheme = store.get('theme', null);
+$('logoutBtn').addEventListener('click', ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} location.reload(); });
 if (savedTheme) root.dataset.theme = savedTheme;
 const isDark = () => root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
 $('themeBtn').addEventListener('click', ()=>{ root.dataset.theme = isDark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); applyTiles(); });
@@ -193,7 +210,7 @@ function activate(dayId, idx, {scroll=false, pan=false}={}){
   if (scroll){ const li = sec.querySelector(`.item[data-pin="${idx}"]`); if (li) li.scrollIntoView({block:'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
 }
 $('days').addEventListener('click', e=>{
-  if (e.target.closest('a, .opts')) return;
+  if (e.target.closest('a, .opts, .visit')) return;
   const li = e.target.closest('.item[data-pin]'); if (!li) return;
   const id = li.closest('.day').id, i = +li.dataset.pin;
   activate(id, i, {pan:true}); if (MAPS[id]) MAPS[id].markers[i].openPopup();
@@ -273,9 +290,10 @@ function updateLive(){
   const nowEntry = s.cur>=0 ? s.items[s.cur] : null, nextEntry = s.next>=0 ? s.items[s.next] : null;
   if (nowEntry && nowEntry.pin!=null && MAPS[d.id]) { const el = MAPS[d.id].markers[nowEntry.pin].getElement(); if (el) el.querySelector('.mk').classList.add('now'); }
   const parts = [];
-  if (nowEntry) parts.push(`<span><b>Ahora:</b> ${esc(nowEntry.it.title)}</span>`);
+  if (nowEntry) parts.push(`<span><b>${ME}, ahora:</b> ${esc(nowEntry.it.title)}</span>`);
   if (nextEntry) parts.push(`<span><b>Siguiente:</b> ${esc(nextEntry.it.title)} · ${inMin(s.starts[s.next]-min)} (${esc(nextEntry.it.t)})</span>`);
-  if (!parts.length) parts.push(`<span><b>Día terminado.</b> A descansar.</span>`);
+  if (nextEntry && !nowEntry) parts[0] = parts[0].replace('<b>Siguiente:</b>', `<b>${ME}, lo siguiente:</b>`);
+  if (!parts.length) parts.push(`<span><b>Día terminado, ${ME}.</b> A descansar.</span>`);
   $('nowText').innerHTML = parts.join('');
   const target = nowEntry || nextEntry;
   $('nowGo').onclick = () => {
@@ -291,12 +309,24 @@ function updateLive(){
   }
 }
 
+/* ---------- Toast (avisos de ubicación, fotos, errores) ---------- */
+function toast(html, actions=[], {sticky=false}={}){
+  const t = $('toast');
+  t.innerHTML = `<div class="toast-text">${html}</div><div class="toast-actions">${actions.map((a,i)=>`<button type="button" class="md-btn md-btn--sm${i===0?' primary':''}" data-i="${i}">${esc(a.label)}</button>`).join('')}<button type="button" class="toast-close" aria-label="Cerrar aviso">×</button></div>`;
+  t.hidden = false;
+  t.onclick = e=>{ const b = e.target.closest('button'); if (!b) return; if (b.dataset.i!=null) actions[+b.dataset.i].run(); t.hidden = true; };
+  clearTimeout(t._t); if (!sticky) t._t = setTimeout(()=>{ t.hidden = true; }, 5000);
+}
+const todayId = () => { const d = DAYS.find(x=>x.iso===madridNow().date); return d ? d.id : null; };
+
 /* ---------- Boot ---------- */
 initMaps();
 DAYS.forEach(d=>{ if (DAYDATA[d.id].pins.length) activate(d.id, 0); });
 updateLive();
 setInterval(updateLive, 60000);
 document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) updateLive(); });
+const V = window.Viaje = {user, ME, OTHER, key, store, esc, gm, DAYS, DAYDATA, MAPS, activate, toast, todayId, madridNow};
+window.ViajeModules.forEach(init=>{ try { init(V); } catch(e){ console.error(e); } });
 if (window.lucide) lucide.createIcons();
 if ('serviceWorker' in navigator && location.protocol!=='file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
-})();
+};
