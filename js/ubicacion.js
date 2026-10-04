@@ -61,7 +61,7 @@ function checkArrival(pos){
   notified.add(best.k);
   if (navigator.vibrate) { try { navigator.vibrate([120, 60, 120]); } catch(e){} }
   V.activate(best.d.id, best.i, {pan:true});
-  toast(`<b>${esc(ME)}, llegaste a ${esc(best.p.l)}</b><span>Día ${parseInt(best.d.n)} · ${esc(best.p.it.t)}</span>`, [
+  toast(`<b>${esc(ME)}, ¡llegaron a ${esc(best.p.l)}!</b><span>Día ${parseInt(best.d.n)} · ${esc(best.p.it.t)}</span>`, [
     {label:'Tomar foto', run:()=>V.visits && V.visits.openCamera(best.d.id, best.i)},
     {label:'Marcar visitada', run:()=>V.visits && V.visits.setVisited(best.d.id, best.i, true)}
   ], {sticky:true});
