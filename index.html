@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Barcelona, Madrid y Toledo</title>
+<meta name="description" content="Itinerario de Monica y Nando, 15–21 de octubre de 2026: Barcelona, Madrid y Toledo.">
+<meta name="theme-color" content="#0a0f29">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Viaje Oct 2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="vendor/gesture/leaflet-gesture-handling.min.css">
+<link rel="stylesheet" href="css/m-design.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="brand" href="#top">Monica <span>+</span> Nando</a>
+    <nav class="days" id="dayNav" aria-label="Días del viaje"></nav>
+    <button class="md-btn md-btn--ghost" id="themeBtn" type="button" aria-label="Cambiar tema claro u oscuro"><i data-lucide="sun-moon"></i></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="md-eyebrow-label muted">Monica + Nando · 15–21 octubre 2026</p>
+      <h1 class="md-heading">Barcelona, Madrid y Toledo, <span class="accent">sin prisa.</span></h1>
+      <p class="lead muted">Siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa.</p>
+      <p class="live-pill" id="livePill" aria-live="polite"><span class="dot"></span>Calculando…</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">días</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">ciudades</div></div>
+        <div class="stat"><div class="stat-num">~620 €</div><div class="stat-label">total pareja</div></div>
+        <div class="stat"><div class="stat-num">~310 €</div><div class="stat-label">por persona</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="overview" aria-labelledby="ovTitle">
+    <div class="wrap">
+      <p class="md-eyebrow-label muted" id="ovTitle">Resumen maestro</p>
+      <div class="ov-grid" id="overview"></div>
+    </div>
+  </section>
+
+  <div id="days"></div>
+
+  <section class="section" id="presupuesto">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Presupuesto global</p>
+        <h2 class="md-heading">Unos 620 € para los dos, <span class="accent">todo incluido.</span></h2>
+        <p>Trenes, hoteles, museos y comidas de los siete días.</p>
+      </div>
+      <div class="grid3" id="budgetGlobal"></div>
+    </div>
+  </section>
+
+  <section class="section" id="extras">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Antes de salir</p>
+        <h2 class="md-heading">Reservas, apps y <span class="accent">qué llevar.</span></h2>
+      </div>
+      <div class="grid3" id="extrasGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="checklist">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Checklist maestro</p>
+        <h2 class="md-heading">Marca lo que ya <span class="accent">está listo.</span></h2>
+        <p id="checkNote">Las casillas se guardan en este dispositivo.</p>
+        <div class="progress" aria-hidden="true"><span id="checkBar"></span></div>
+      </div>
+      <div class="grid3" id="checkGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="notas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Notas finales</p>
+        <h2 class="md-heading">Un viaje para dos, <span class="accent">a dos ritmos.</span></h2>
+      </div>
+      <div class="grid3" id="notesGrid"></div>
+    </div>
+  </section>
+
+  <section class="md-statement">
+    <div class="wrap">
+      <p class="md-eyebrow-label" style="color:hsl(var(--surface-deep-foreground) / .7)">Recomendación general</p>
+      <p class="statement-q" style="margin-top:var(--space-5)">Toledo vale <span>cada euro.</span></p>
+      <p style="margin-top:var(--space-5);max-width:40rem;color:hsl(var(--surface-deep-foreground) / .8)">Día épico, ciudad medieval intacta, fotos increíbles. Compren los trenes con anticipación y aprovechen las noches gratis de los museos.</p>
+    </div>
+  </section>
+  <footer class="foot wrap">Última actualización: 4 de octubre de 2026. Mapas © OpenStreetMap y CARTO.</footer>
+</main>
+
+<div class="nowbar" id="nowbar" hidden>
+  <div class="wrap nowbar-inner">
+    <div class="nowbar-text" id="nowText" aria-live="polite"></div>
+    <button class="md-btn" id="nowGo" type="button"><i data-lucide="locate-fixed"></i>Ver</button>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="vendor/gesture/leaflet-gesture-handling.min.js"></script>
+<script src="vendor/lucide/lucide.min.js"></script>
+<script src="js/itinerario.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
