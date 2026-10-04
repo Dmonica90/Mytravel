@@ -283,10 +283,10 @@ function updateLive(){
 
   if (date < first) {
     const n = dayDiff(date, first);
-    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, faltan ${n} ${n===1?'día':'días'} · salen el 15 de octubre`;
+    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, faltan ${n} ${n===1?'día':'días'} para su viaje · salen el 15 de octubre`;
     return;
   }
-  if (date > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, el viaje terminó. ¡Qué buen viaje con ${OTHER}!`; return; }
+  if (date > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, qué bonito viaje con ${OTHER}. Gracias por cada parada.`; return; }
 
   const d = DAYS.find(x=>x.iso===date);
   if (!d) return;
@@ -303,7 +303,7 @@ function updateLive(){
   const nowEntry = s.cur>=0 ? s.items[s.cur] : null, nextEntry = s.next>=0 ? s.items[s.next] : null;
   if (nowEntry && nowEntry.pin!=null && MAPS[d.id]) { const el = MAPS[d.id].markers[nowEntry.pin].getElement(); if (el) el.querySelector('.mk').classList.add('now'); }
   const parts = [];
-  if (nowEntry) parts.push(`<span><b>${ME}, ahora estás en:</b> ${esc(nowEntry.it.title)}${nextEntry?` · tienes ${durTxt(s.starts[s.next]-min)}`:''}</span>`);
+  if (nowEntry) parts.push(`<span><b>${ME}, ahora están en:</b> ${esc(nowEntry.it.title)}${nextEntry?` · tienen ${durTxt(s.starts[s.next]-min)}`:''}</span>`);
   if (nextEntry) parts.push(`<span><b>${nowEntry?'Después:':`${ME}, lo siguiente:`}</b> a las ${esc(nextEntry.it.t)} ${esc(nextEntry.it.title)} (${inMin(s.starts[s.next]-min)})</span>`);
   if (!parts.length) parts.push(`<span><b>Día terminado, ${ME}.</b> A descansar.</span>`);
   $('nowText').innerHTML = parts.join('');

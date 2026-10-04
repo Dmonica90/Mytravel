@@ -176,31 +176,6 @@ var NOTES = [
   {title:'Recomendación general', tone:'tertiary', items:['Compren los trenes con anticipación (15–20€ vs 30€+ a último momento).','Airbnb vs hotel: ahorrar 50–80€/noche.','Museos de noche gratis: Reina Sofía jueves–sábado 18–21h.','Toledo vale cada euro.']}
 ];
 
-var esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-var gm = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-var isFree = c => /^(gratis|0€)/i.test(c||'');
-
-function renderItem(it, dayId, pinIndex){
-  const pinAttr = it.pin ? ` data-pin="${pinIndex}" tabindex="0" role="button" aria-label="${esc(it.title)}: ver en el mapa"` : '';
-  let h = `<li class="item${it.pin?' has-pin':''}"${pinAttr}>
-    <div class="item-time"><span class="time">${esc(it.t)}</span>${it.pin?`<span class="pin-n">${pinIndex+1}</span>`:''}</div>
-    <div class="item-body">
-      <div class="item-head"><div class="item-title"><i data-lucide="${it.icon||'dot'}"></i><span>${esc(it.title)}</span></div>${it.cost?`<span class="cost${isFree(it.cost)?' free':''}">${esc(it.cost)}</span>`:''}</div>`;
-  if (it.why) h += `<p class="why"><b>${it.whoWhy?'¿Por qué Nando?':'¿Por qué?'}</b> ${esc(it.why)}</p>`;
-  if (it.detail) h += `<p class="item-detail">${esc(it.detail)}</p>`;
-  if (it.opts) {
-    const gid = `${dayId}-o${Math.random().toString(36).slice(2,7)}`;
-    h += `<div class="opts"><div class="opt-tabs" role="tablist">${it.opts.map((o,i)=>`<button type="button" role="tab" class="opt-tab" id="${gid}-t${i}" aria-controls="${gid}-p${i}" aria-selected="${i===0}">${esc(o.n)}</button>`).join('')}</div>
-      ${it.opts.map((o,i)=>`<div class="opt-panel" role="tabpanel" id="${gid}-p${i}" aria-labelledby="${gid}-t${i}"${i?' hidden':''}>
-        <div class="opt-name"><span>${esc(o.n.replace(/^[A-D] · /,''))}</span>${o.c?`<span class="cost${isFree(o.c)?' free':''}">${esc(o.c)}</span>`:''}</div>
-        <ul class="tips">${o.lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>
-        ${o.q?`<a class="gmaps" href="${gm(o.q)}" target="_blank" rel="noopener"><i data-lucide="map-pin"></i>Abrir en Google Maps</a>`:''}
-      </div>`).join('')}</div>`;
-  }
-  if (it.tips) h += `<ul class="tips">${it.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`;
-  if (it.q) h += `<a class="gmaps" href="${gm(it.q)}" target="_blank" rel="noopener"><i data-lucide="map-pin"></i>Abrir en Google Maps</a>`;
-  return h + `</div></li>`;
-}
 var HOTEL_BCN = {lat:41.3797, lng:2.1885, l:'Hotel'};
 var MAP_TITLES = {bcn:'Barcelona', mad:'Madrid', tol:'Toledo', trip:'Barcelona → Madrid'};
 
@@ -210,89 +185,89 @@ var MAP_TITLES = {bcn:'Barcelona', mad:'Madrid', tol:'Toledo', trip:'Barcelona �
    siguiente parada, {dur} = tiempo disponible hasta la siguiente.
    Un texto puede ser común o {moni:'…', nando:'…'} cuando cambia por persona. */
 var INTRO = {
-  d1:{moni:'{yo}, tu tren llega a Sants a las 19:00. Taxi o L4 al hotel en la Barceloneta, cena ligera en el Mercat y a descansar: mañana Articulate empieza temprano.',
-      nando:'{yo}, Moni llega a Sants a las 19:00. Para las 20:30 ya estarán en el hotel de la Barceloneta, y la cena es casual en el Mercat.'},
-  d2:{moni:'{yo}, hoy es tu día de Articulate, de 8:00 a 18:30. Mientras, Nando recorre el Born y el Gòtic; a las 18:30 se reencuentran para una cena ligera.',
-      nando:'{yo}, hoy Barcelona es toda tuya: ruta medieval + anime de 8:30 a 17:30 por el Born y el Gòtic. Moni sale de Articulate a las 18:30 y cenan juntos.'},
-  d3:'{yo}, hoy van juntos todo el día: 10 paradas por el Born, el Gòtic, la Ciutadella y el puerto. Salen a las 7:30, caminan unos 25 km y el día sale en unos 46€ con el Picasso.',
-  d4:'{yo}, último paseo por Barcelona: desayuno con calma, las fotos que faltaron y checkout a las 11:00. A las 14:00 sale tu tren y a las 16:30 ya estás en Madrid con {otro}.',
-  d5:'{yo}, hoy es Madrid completo con {otro}: Goya en el Prado por la mañana, Retiro y centro histórico a mediodía, y el Guernica en el Reina Sofía por la tarde.',
-  d6:'{yo}, hoy toca madrugar: a las 6:00 salen a Atocha y a las 8:30 ya están frente al Alcázar. Toledo medieval, El Greco y regreso a Madrid a las 19:30.',
-  d7:'{yo}, último día: a las 7:00 dejan el hotel y a las 9:00 despega tu vuelo. Pasaporte a la mano.'
+  d1:{moni:'{yo}, tu tren llega a Sants a las 19:00 y con eso empieza su viaje. Taxi o L4 al hotel en la Barceloneta, una cena tranquila en el Mercat y a descansar juntitos: mañana Articulate empieza temprano.',
+      nando:'{yo}, Moni llega a Sants a las 19:00 y por fin empieza su viaje. Para las 20:30 ya estarán en el hotel de la Barceloneta, con una cena tranquila en el Mercat para estrenar Barcelona.'},
+  d2:{moni:'{yo}, hoy es tu gran día en Articulate, de 8:00 a 18:30. Nando te espera explorando el Born y el Gòtic; a las 18:30 se reencuentran para una cena ligera y a consentirte un poco.',
+      nando:'{yo}, hoy Barcelona es toda tuya: ruta medieval + anime de 8:30 a 17:30 por el Born y el Gòtic. Disfruta tu día; a las 18:30 Moni sale de Articulate y por fin se reencuentran.'},
+  d3:'{yo}, hoy es su día juntos de principio a fin: 10 paradas por el Born, el Gòtic, la Ciutadella y el puerto. Salen a las 7:30, caminan unos 25 km de la mano y el día sale en unos 46€ con el Picasso.',
+  d4:'{yo}, último paseo por Barcelona con {otro}: desayuno sin prisa, las fotos que faltaron y checkout a las 11:00. A las 14:00 sale su tren y a las 16:30 ya están juntos en Madrid.',
+  d5:'{yo}, hoy Madrid es de ustedes dos: Goya en el Prado por la mañana, un paseo por el Retiro y el centro a mediodía, y el Guernica en el Reina Sofía por la tarde.',
+  d6:'{yo}, hoy toca madrugar, pero vale la pena: a las 6:00 salen a Atocha y a las 8:30 ya están juntos frente al Alcázar. Toledo medieval, El Greco y regreso a Madrid a las 19:30.',
+  d7:'{yo}, último día de este viaje con {otro}: a las 7:00 dejan el hotel y a las 9:00 despega tu vuelo. Pasaporte a la mano y el corazón lleno.'
 };
 var OV = {
-  d1:{moni:'Llegas a las 19:00 en tren. Descanso y cena ligera.', nando:'Moni llega a las 19:00. Descanso y cena ligera.'},
-  d2:{moni:'Tú en Articulate de 8:00 a 18:30; Nando explora solo.', nando:'Tu día libre: ruta medieval + anime. Moni en Articulate.'},
-  d3:'Juntos todo el día: 10 paradas, ~46€.',
-  d4:'Checkout a las 11:00 y tren a Madrid de 14:00 a 16:30.',
-  d5:'Madrid completo: Prado, Retiro y Reina Sofía.',
-  d6:'Excursión a Toledo de 6:00 a 20:00.',
+  d1:{moni:'Llegas a las 19:00 y empieza su viaje. Cena tranquila y a descansar.', nando:'Moni llega a las 19:00 y empieza su viaje. Cena tranquila y a descansar.'},
+  d2:{moni:'Tu día de Articulate (8:00–18:30); Nando te espera para cenar.', nando:'Tu día libre: ruta medieval + anime. Cenas con Moni a las 18:30.'},
+  d3:'Su día juntos: 10 paradas, ~46€.',
+  d4:'Checkout a las 11:00 y tren juntos a Madrid (14:00–16:30).',
+  d5:'Madrid para los dos: Prado, Retiro y Reina Sofía.',
+  d6:'Escapada juntos a Toledo, de 6:00 a 20:00.',
   d7:'Salen del hotel a las 7:00; vuelo a las 9:00.'
 };
 /* Clave: 'día|hora' para el itinerario principal y 'pre:día|hora' para el bloque de Monica del D2. */
 var VOZ = {
-  'd1|19:00':{moni:'{yo}, tu tren desde Madrid llega a Sants a las {hora}.', nando:'A las {hora} llega Moni a Sants.'},
+  'd1|19:00':{moni:'{yo}, tu tren desde Madrid llega a Sants a las {hora}. Ya estás en Barcelona.', nando:'A las {hora} llega Moni a Sants. Empieza su viaje.'},
   'd1|20:00':'En unos 30 minutos están en la Barceloneta; a las {hasta} ya es el check-in.',
-  'd1|20:30':'Deja las maletas y, si te queda energía, da una vuelta corta por la Barceloneta.',
-  'd1|21:00':{moni:'{yo}, cena ligera en el Mercat Barceloneta y a dormir temprano: mañana Articulate empieza a las 8:00.', nando:'Cena casual con Moni en el Mercat Barceloneta. Mañana tienes el día libre para explorar.'},
+  'd1|20:30':'Dejen las maletas y, si les queda energía, den una vuelta corta juntos por la Barceloneta.',
+  'd1|21:00':{moni:'{yo}, cena tranquila con Nando en el Mercat Barceloneta y a dormir temprano: mañana Articulate empieza a las 8:00.', nando:'Cena tranquila con Moni en el Mercat Barceloneta y a dormir temprano, que mañana Moni madruga. Tú tienes el día libre para explorar.'},
 
-  'pre:d2|08:00':{moni:'{yo}, desayuno y arranque de Articulate de {hora} a {hasta}.', nando:'Moni desayuna y entra a Articulate a las {hora}.'},
-  'pre:d2|10:00':{moni:'De {hora} a 18:30 estás en el evento. Será largo: guarda energía para la noche.', nando:'Moni está en el evento hasta las 18:30.'},
-  'pre:d2|18:30':{moni:'{yo}, a las {hora} sales y te reúnes con Nando. Cena ligera: hoy toca descansar.', nando:'A las {hora} Moni sale del evento: cena ligera con ella.'},
+  'pre:d2|08:00':{moni:'{yo}, desayuna rico: de {hora} a {hasta} es el arranque de Articulate.', nando:'Moni desayuna y entra a Articulate a las {hora}. Mándale buena vibra.'},
+  'pre:d2|10:00':{moni:'De {hora} a 18:30 estás en el evento. Será largo: cuídate y guarda energía para la noche con Nando.', nando:'Moni está en el evento hasta las 18:30. Un mensajito a mediodía le va a caer bien.'},
+  'pre:d2|18:30':{moni:'{yo}, a las {hora} sales y por fin te reencuentras con Nando. Cena ligera y a consentirte: hoy te lo ganaste.', nando:'A las {hora} Moni sale del evento: cena ligera juntos, que fue un día largo.'},
   'd2|08:30':{nando:'{yo}, arrancas a las {hora} con el desayuno de siempre en el Mercat; tienes {dur} antes de ir a Montcada.', moni:'Nando desayuna a las {hora} en el Mercat Barceloneta.'},
-  'd2|09:30':{nando:'A las {hora} llegas a Carrer de Montcada: palacios góticos y arcos con ambiente de RPG medieval. Saca las fotos con “castle vibes”.', moni:'Nando recorre Carrer de Montcada a las {hora}.'},
-  'd2|10:30':{nando:'{yo}, a las {hora} entras al Museu Picasso. Tienes {dur} para el cubismo; la audioguía vale la pena.', moni:'Nando entra al Museu Picasso a las {hora}.'},
-  'd2|12:15':{nando:'A las {hora} llegas a Santa Maria del Mar: entra en silencio y mira la luz vertical.', moni:'Nando visita Santa Maria del Mar a las {hora}.'},
-  'd2|13:15':{nando:'Hora de comer: a las {hora}, La Cova Fumada o el Mercat Santa Caterina. Tienes {dur}.', moni:'Nando come a las {hora}.'},
-  'd2|14:30':{nando:'{yo}, si quieres seguir con el tema gaming, a las {hora} puedes ir a CosmoCaixa; si no, sigue con la arquitectura.', moni:'Si se le antoja, Nando va a CosmoCaixa a las {hora}.'},
+  'd2|09:30':{nando:'A las {hora} llegas a Carrer de Montcada: palacios góticos y arcos con ambiente de RPG medieval. Guarda las fotos con “castle vibes” para enseñárselas a Moni.', moni:'Nando recorre Carrer de Montcada a las {hora}.'},
+  'd2|10:30':{nando:'{yo}, a las {hora} entras al Museu Picasso. Tienes {dur} para el cubismo, sin prisa; la audioguía vale la pena.', moni:'Nando entra al Museu Picasso a las {hora}.'},
+  'd2|12:15':{nando:'A las {hora} llegas a Santa Maria del Mar: entra en silencio y disfruta la luz vertical.', moni:'Nando visita Santa Maria del Mar a las {hora}.'},
+  'd2|13:15':{nando:'Hora de comer: a las {hora}, La Cova Fumada o el Mercat Santa Caterina. Tienes {dur}; date un gusto.', moni:'Nando come a las {hora}.'},
+  'd2|14:30':{nando:'{yo}, si se te antoja seguir con el tema gaming, a las {hora} puedes ir a CosmoCaixa; si no, sigue con la arquitectura. Es tu día.', moni:'Si se le antoja, Nando va a CosmoCaixa a las {hora}.'},
   'd2|16:00':{nando:'A las {hora}, paseo libre por el Barri Gòtic: Plaça Reial y la Catedral por fuera. Tienes {dur} antes de volver.', moni:'Nando pasea por el Barri Gòtic a las {hora}.'},
-  'd2|17:30':{nando:'{yo}, a las {hora} regresas al hotel, antes de que Moni salga de Articulate.', moni:'A las {hora} Nando vuelve al hotel y te espera.'},
+  'd2|17:30':{nando:'{yo}, a las {hora} regresas al hotel para recibir a Moni cuando salga de Articulate.', moni:'A las {hora} Nando vuelve al hotel y te espera.'},
 
-  'd3|07:30':'{yo}, empiezan a las {hora} en el Mercat Barceloneta, a 5 minutos del hotel: café, jamón y pan tumaca. Tienen {dur} antes de Montcada.',
-  'd3|08:30':'A las {hora} llegan a Montcada con la mejor luz y casi sin turistas. Aprovecha para las fotos.',
-  'd3|10:00':'Santa Maria del Mar a las {hora}. Después tienen tiempo libre para pasear por el Born hasta la comida de las {hasta}.',
+  'd3|07:30':'{yo}, empiezan juntos a las {hora} en el Mercat Barceloneta, a 5 minutos del hotel: café, jamón y pan tumaca. Tienen {dur} antes de Montcada.',
+  'd3|08:30':'A las {hora} llegan a Montcada con la mejor luz y casi sin turistas. Aprovechen para sus primeras fotos del día.',
+  'd3|10:00':'Santa Maria del Mar a las {hora}. Después tienen tiempo libre para pasear de la mano por el Born hasta la comida de las {hasta}.',
   'd3|12:30':'Comida a las {hora}: Mercat Santa Caterina, La Cova Fumada o Can Solé. A las {hasta} siguen a la Ciutadella.',
-  'd3|13:30':'{yo}, de {hora} a {hasta} descansan en la Ciutadella: banca, café y piernas arriba. Es el respiro largo del día.',
-  'd3|16:00':'{yo}, a las {hora} entran al Museu Picasso. Tienes {dur} para Las Meninas antes de la Catedral. Hoy es sábado: la entrada cuesta 14€.',
-  'd3|17:30':'A las {hora} llegas a la Catedral con luz naranja: la mejor foto es entre 17:30 y 18:30.',
-  'd3|18:00':'{yo}, a las {hora} estás en la Plaça Reial, la mejor foto del viaje. Busca la esquina SE antes de las 18:15.',
-  'd3|18:30':'Cena a las {hora}. Can Culleretes está a unos pasos de la plaza; tienen {dur} sin prisa.',
-  'd3|20:00':'Cierran el día a las {hora} en Moll de la Fusta: barcos iluminados y última bebida con {otro}.',
+  'd3|13:30':'{yo}, de {hora} a {hasta} descansan en la Ciutadella: una banca, un café y piernas arriba con {otro}. Es el respiro largo del día.',
+  'd3|16:00':'{yo}, a las {hora} entran juntos al Museu Picasso. Tienen {dur} para perderse en Las Meninas antes de la Catedral. Hoy es sábado: la entrada cuesta 14€.',
+  'd3|17:30':'A las {hora} llegan a la Catedral con luz naranja: la mejor foto juntos es entre 17:30 y 18:30.',
+  'd3|18:00':'{yo}, a las {hora} llegan a la Plaça Reial: tómense la foto del viaje desde la esquina SE, antes de las 18:15.',
+  'd3|18:30':'Cena a las {hora}. Can Culleretes está a unos pasos de la plaza; tienen {dur} para cenar sin prisa.',
+  'd3|20:00':'Cierran su día a las {hora} en Moll de la Fusta: barcos iluminados y una última copa con {otro}.',
 
-  'd4|09:00':'{yo}, desayuno sin prisa a las {hora}: hoy la mañana es libre.',
-  'd4|10:00':'A las {hora}, última vuelta por el Gòtic para las fotos que faltaron. Tienes {dur} antes del checkout.',
-  'd4|11:00':'Checkout a las {hora}. Tienen hasta las {hasta} para comer algo y llegar a Sants.',
-  'd4|14:00':'{yo}, tu tren sale de Sants a las {hora}. Pidan ventana y lleven snacks: son 2,5 horas.',
-  'd4|16:30':'A las {hora} llegan a Atocha: ya están en Madrid.',
+  'd4|09:00':'{yo}, desayuno sin prisa a las {hora}: hoy la mañana es para ustedes.',
+  'd4|10:00':'A las {hora}, última vuelta juntos por el Gòtic para las fotos que faltaron. Tienen {dur} antes del checkout.',
+  'd4|11:00':'Checkout a las {hora}. Tienen hasta las {hasta} para comer algo rico y llegar a Sants.',
+  'd4|14:00':'{yo}, su tren sale de Sants a las {hora}. Pidan ventana y lleven snacks: son 2,5 horas para platicar.',
+  'd4|16:30':'A las {hora} llegan a Atocha: ya están juntos en Madrid.',
   'd4|17:00':'Taxi o metro al hotel; a las {hasta} hacen check-in.',
   'd4|17:30':'Check-in a las {hora} y un rato para acomodarse.',
-  'd4|18:00':'A las {hora}, vuelta por el barrio y descanso antes de cenar.',
-  'd4|19:30':'Cena de tapas cerca del hotel a las {hora}. Mañana es Madrid completo.',
+  'd4|18:00':'A las {hora}, vuelta por el barrio y un descanso antes de cenar.',
+  'd4|19:30':'Cena de tapas cerca del hotel a las {hora}. Mañana Madrid es todo suyo.',
 
   'd5|08:00':'{yo}, desayuno a las {hora} cerca del hotel; a las {hasta} ya están en el Prado.',
-  'd5|09:00':{nando:'{yo}, a las {hora} entran al Prado: tienes {dur} y Goya, con su lado más oscuro, es para ti. No te pierdas Las Meninas.', moni:'{yo}, a las {hora} entran al Prado y tienen {dur}. Nando va directo a Goya; Las Meninas son parada obligada.'},
-  'd5|11:30':'A las {hora} cruzan al Retiro, caminando desde el Prado: lago y paseo de {dur}.',
+  'd5|09:00':{nando:'{yo}, a las {hora} entran al Prado y tienen {dur}. Goya, con su lado más oscuro, es para ti; y Las Meninas, para verlas juntos.', moni:'{yo}, a las {hora} entran al Prado y tienen {dur}. Deja que Nando te lleve a su Goya; Las Meninas, para verlas juntos.'},
+  'd5|11:30':'A las {hora} cruzan al Retiro caminando desde el Prado: lago y paseo de {dur} para los dos.',
   'd5|13:00':'Comida a las {hora}: Mercado San Miguel, Taberna La Bola o el restaurante del Prado.',
-  'd5|14:15':'{yo}, de {hora} a {hasta} eligen: Plaza Mayor, Malasaña, Templo de Debod o el barrio de América Latina.',
-  'd5|16:30':'Café a las {hora} en una terraza del centro: {dur} para recargar.',
-  'd5|17:15':{nando:'{yo}, a las {hora} llegas al Reina Sofía y al Guernica. Si quieren la hora gratis, entren a las 19:00.', moni:'{yo}, a las {hora} van al Reina Sofía; el Guernica es la parada de Nando. Si quieren la hora gratis, entren a las 19:00.'},
-  'd5|18:45':'Atardecer a las {hora}: Templo de Debod para la vista de 360°, o el Retiro si prefieren algo romántico.',
-  'd5|20:00':'Cena a las {hora}: Café Gijón, Taberna El Sur, Casa Botín o, si se dan el gusto, El Club Allard.',
-  'd5|21:30':'Si les queda energía, a las {hora} paseo de noche por el Retiro, la Plaza Mayor o Malasaña.',
+  'd5|14:15':'{yo}, de {hora} a {hasta} eligen juntos: Plaza Mayor, Malasaña, Templo de Debod o el barrio de América Latina.',
+  'd5|16:30':'Café a las {hora} en una terraza del centro: {dur} para recargar y platicar.',
+  'd5|17:15':{nando:'{yo}, a las {hora} llegas al Reina Sofía y al Guernica. Si quieren la hora gratis, entren a las 19:00.', moni:'{yo}, a las {hora} van al Reina Sofía; el Guernica es la ilusión de Nando. Si quieren la hora gratis, entren a las 19:00.'},
+  'd5|18:45':'Atardecer a las {hora}: el Templo de Debod para la vista de 360°, o el Retiro si se les antoja algo romántico.',
+  'd5|20:00':'Cena a las {hora}: Café Gijón, Taberna El Sur, Casa Botín o, si se quieren consentir, El Club Allard.',
+  'd5|21:30':'Si les queda energía, a las {hora} un paseo de noche por el Retiro, la Plaza Mayor o Malasaña.',
 
-  'd6|05:30':'{yo}, despertador a las {hora}: café rápido y a las 6:00 salen hacia Atocha.',
-  'd6|07:00':'A las {hora} sale tu tren a Toledo; llegas como a las 8:00.',
-  'd6|08:30':'{yo}, a las {hora} empiezas por lo alto: {dur} en el Alcázar antes de bajar a la Catedral.',
-  'd6|09:45':'A las {hora} entran a la Catedral: gótico puro y la “Asunción” de El Greco. Tienes {dur}.',
-  'd6|11:15':{nando:'{yo}, a las {hora} llegas al Museo El Greco: busca la “Vista de Toledo”. Es justo tu tipo de pintura.', moni:'A las {hora}, Museo El Greco: busquen la “Vista de Toledo”, la favorita de Nando.'},
-  'd6|13:00':'Comida a las {hora}: carcamusa en Casa Aurelio o terraza con vistas en Venta del Alma.',
-  'd6|14:30':'De {hora} a {hasta}, Toledo libre: San Juan de los Reyes, los callejones, la Sinagoga del Tránsito o el mirador.',
-  'd6|16:15':'{yo}, a las {hora} café en el mirador del puente: la foto del Alcázar y la Catedral con el atardecer.',
+  'd6|05:30':'{yo}, despertador a las {hora}: café rápido, un abrazo y a las 6:00 salen hacia Atocha.',
+  'd6|07:00':'A las {hora} sale su tren a Toledo; llegan como a las 8:00.',
+  'd6|08:30':'{yo}, a las {hora} empiezan por lo alto: {dur} en el Alcázar antes de bajar a la Catedral.',
+  'd6|09:45':'A las {hora} entran a la Catedral: gótico puro y la “Asunción” de El Greco. Tienen {dur}.',
+  'd6|11:15':{nando:'{yo}, a las {hora} llegas al Museo El Greco: busca la “Vista de Toledo”. Es justo tu tipo de pintura.', moni:'A las {hora}, Museo El Greco: busquen juntos la “Vista de Toledo”, la favorita de Nando.'},
+  'd6|13:00':'Comida a las {hora}: carcamusa en Casa Aurelio o una terraza con vistas en Venta del Alma.',
+  'd6|14:30':'De {hora} a {hasta}, Toledo es suyo: San Juan de los Reyes, los callejones, la Sinagoga del Tránsito o el mirador.',
+  'd6|16:15':'{yo}, a las {hora} café en el mirador del puente: su foto con el Alcázar y la Catedral al atardecer.',
   'd6|18:00':'A las {hora} sale el tren de regreso; a las 19:30 ya están en Madrid.',
   'd6|19:45':'Cena ligera y a dormir temprano, {yo}: mañana el vuelo es a las 9:00.',
 
-  'd7|06:30':'{yo}, despertador a las {hora} y desayuno rápido.',
+  'd7|06:30':'{yo}, despertador a las {hora} y desayuno rápido juntos.',
   'd7|07:00':'Checkout a las {hora}. Revisa que el pasaporte vaya a la mano.',
   'd7|07:30':'A las {hora} sale el taxi al aeropuerto.',
-  'd7|09:00':'Tu vuelo sale a las {hora}. Buen regreso, {yo}.'
+  'd7|09:00':'Tu vuelo sale a las {hora}. Gracias por este viaje juntos, {yo}: buen regreso.'
 };
