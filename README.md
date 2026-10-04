@@ -7,6 +7,8 @@ Web app del itinerario de Monica y Nando, hecha con el sistema de diseño **M-De
 - Botón **"Ver ruta en Google Maps"** que abre la ruta completa del día con todas las paradas.
 - **Modo "Ahora"**: con la hora local de cada día (Cancún o España) marca la parada actual y la siguiente, y cuánto falta. Antes del viaje muestra la cuenta regresiva.
 - **Funciona como app**: en el celular, "Agregar a pantalla de inicio". Abre sin internet una vez visitada; los mapas offline solo incluyen las zonas que ya se vieron.
+- **Antes de viajar**: checklist con porcentaje (0–100 %), grupos (documentos, vuelos, trenes y reservas, dinero, celular, maleta), "Ver solo lo que falta" y la opción de agregar cosas propias. Con Supabase lo ven los dos.
+- **Vuelos**: tarjetas con horarios, terminales y escalas, y botón "Estado" para ver retrasos o puerta en vivo. Los códigos de reserva no se guardan en el repo (es público).
 - Checklist y tema claro/oscuro guardados en cada dispositivo.
 
 ## Entrar
@@ -67,6 +69,7 @@ js/sesion.js          entrada Moni / Nando
 js/config.js          URL y clave pública de Supabase
 js/nube.js            conexión con Supabase
 js/editar.js          cambiar hora / nota de una parada
+js/previaje.js        checklist "Antes de viajar"
 supabase/schema.sql   tablas, bucket y reglas de seguridad
 sw.js                 modo offline
 vendor/               Leaflet 1.9.4, leaflet-gesture-handling, Lucide (licencias incluidas)

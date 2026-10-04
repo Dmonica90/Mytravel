@@ -224,7 +224,7 @@ var BUDGET_NOTES = ['Hoteles: buscar Airbnb u hostal para ahorrar (50–80€/no
 var APPS = [['Google Maps','Rutas, metros','Gratis'],['Citymapper','Mejor que Google para metro','Gratis'],['TMB','Comprar T-casual en Barcelona','Gratis'],['Renfe.com','Comprar trenes','~15–50€/billete'],['Airbnb / Booking','Hoteles económicos','50–100€/noche'],['Timeout Barcelona/Madrid','Guía de lugares','Gratis'],['Museos.es','Horarios + promos','Gratis']];
 var PACK = ['Chaqueta ligera (mañanas frescas).','Zapatillas cómodas (25 km de caminata).','Protector solar y gafas de sol.','Botella reutilizable (fuentes públicas).','Trapo pequeño (humedad del puerto).','Cargador portátil (días largos).','Efectivo: 35–40€ mínimo; tarjeta de débito de respaldo.'];
 var CHECKS = [
-  {title:'Antes del viaje', items:['Check-in Viva Aerobus VB 1380 (11 oct, AICM T1)','Check-in Aeroméxico AM 527 (14 oct, CUN T4)','Check-in Aeroméxico AM 20 (21 oct, MAD T1)','Pasaportes vigentes','Seguros de viaje','Reservar trenes (Renfe.com)','Reservar hoteles Barcelona (2 noches) + Madrid (2 noches)','Cambiar dinero a EUR si es necesario','Notificar al banco del viaje']},
+  {title:'Antes del viaje', moved:true, items:['Check-in Viva Aerobus VB 1380 (11 oct, AICM T1)','Check-in Aeroméxico AM 527 (14 oct, CUN T4)','Check-in Aeroméxico AM 20 (21 oct, MAD T1)','Pasaportes vigentes','Seguros de viaje','Reservar trenes (Renfe.com)','Reservar hoteles Barcelona (2 noches) + Madrid (2 noches)','Cambiar dinero a EUR si es necesario','Notificar al banco del viaje']},
   {title:'Barcelona (15–18 oct)', items:['Llegar 19:00, taxi al hotel','16 oct: Nando ruta medieval (Picasso, Montcada, iglesias)','17 oct: Ruta compartida 10 paradas (7:30–20:00)','18 oct: Salida 14:00 a Madrid']},
   {title:'Madrid y Toledo (18–21 oct)', items:['Check-in ~17:00','19 oct: Prado + Retiro + Reina Sofía noche (gratis)','20 oct: Toledo madrugada (6:00–20:00)','20 oct: Alcázar + Catedral + Museo El Greco','20 oct: Comida en Toledo','20 oct: Fotos de atardecer desde el puente','21 oct: Vuelo 9:00 (salir del hotel 7:00)']},
   {title:'Pendientes por confirmar', items:['Articulate (16 oct): confirmar horario exacto','Park Güell (18 oct): ¿incluir en la mañana antes del tren?','Tren a Madrid (18 oct): verificar hora de salida','Destino del vuelo del 21 oct']}
@@ -366,3 +366,34 @@ var VUELOS = [
   {airline:'Aeroméxico', legs:['AM527','AM1'], code:'AM 527 + AM 1', date:'Miércoles 14 oct → jueves 15 oct', from:'Cancún', fromAp:'CUN T4', dep:'12:40', to:'Madrid', toAp:'MAD T2', arr:'12:35', arrNote:'+1 día', dur:'16 h 55 min', stops:'1 escala · CDMX', day:'c4'},
   {airline:'Aeroméxico', legs:['AM20','AM536'], code:'AM 20 + AM 536', date:'Miércoles 21 oct', from:'Madrid', fromAp:'MAD T1', dep:'9:00', to:'Cancún', toAp:'CUN T2', arr:'18:48', dur:'16 h 48 min', stops:'1 escala · CDMX', day:'d7'}
 ];
+
+/* Checklist "Antes de viajar": lo que deben tener listo antes de salir.
+   Cada cosa tiene un id fijo (no lo cambies: así se guarda lo marcado). */
+var PREVIAJE = [
+  {g:'Documentos', items:[
+    {id:'pas-moni', t:'Pasaporte de Moni vigente'},
+    {id:'pas-nando', t:'Pasaporte de Nando vigente'},
+    {id:'ine', t:'INE o identificación para el vuelo nacional (11 oct)'},
+    {id:'seguro', t:'Seguro de viaje'},
+    {id:'copias', t:'Copias digitales de los pasaportes'}]},
+  {g:'Vuelos', items:[
+    {id:'ci-vb1380', t:'Check-in Viva Aerobus VB 1380 (11 oct)'},
+    {id:'ci-am527', t:'Check-in Aeroméxico AM 527 + AM 1 (14 oct)'},
+    {id:'ci-am20', t:'Check-in Aeroméxico AM 20 + AM 536 (21 oct)'},
+    {id:'asientos', t:'Asientos juntos elegidos'}]},
+  {g:'Trenes y reservas', items:[
+    {id:'tren-madbcn', t:'Tren Madrid → Barcelona (15 oct, tarde)'},
+    {id:'tren-bcnmad', t:'Tren Barcelona → Madrid (18 oct, 14:00)'},
+    {id:'tren-toledo', t:'Trenes Madrid ↔ Toledo (20 oct)'},
+    {id:'hotel-bcn', t:'Hotel en Barcelona (15–18 oct)'},
+    {id:'hotel-mad', t:'Hotel en Madrid (18–21 oct)'},
+    {id:'picasso', t:'Entrada al Museu Picasso (17 oct, 14 € online)'}]},
+  {g:'Dinero', items:[
+    {id:'banco', t:'Avisar al banco del viaje'},
+    {id:'tarjeta', t:'Tarjeta sin comisión en el extranjero'}]},
+  {g:'Celular', items:[
+    {id:'datos', t:'Plan de datos o eSIM para Europa'},
+    {id:'app', t:'App del viaje instalada en la pantalla de inicio'}]},
+  {g:'Maleta', items: PACK.map((t,i)=>({id:'maleta-'+i, t:t.replace(/\.$/,'')}))}
+];
+

@@ -47,6 +47,26 @@
     </div>
   </section>
 
+  <section class="section pre-sec" id="antes" aria-labelledby="preTitle">
+    <div class="wrap">
+      <div class="pre-top">
+        <div class="pre-ring" id="preRing" role="img"></div>
+        <div class="pre-info">
+          <p class="md-eyebrow-label muted">Antes de viajar</p>
+          <h2 class="md-heading" id="preTitle">¿Qué les <span class="accent">falta?</span></h2>
+          <p class="pre-status" id="preStatus"></p>
+          <p class="pre-sub" id="preSub"></p>
+          <button class="md-btn md-btn--outline" id="preFilter" type="button" aria-pressed="false"><i data-lucide="list-filter"></i><span>Ver solo lo que falta</span></button>
+        </div>
+      </div>
+      <div class="grid3 pre-grid" id="preGrid"></div>
+      <form class="pre-add" id="preAdd">
+        <label class="md-label" for="preAddText">Agregar algo que les falte</label>
+        <div class="pre-add-row"><input class="md-input" id="preAddText" type="text" maxlength="80" placeholder="Ej.: adaptador de enchufe europeo"><button class="md-btn primary" type="submit">Agregar</button></div>
+      </form>
+    </div>
+  </section>
+
   <section class="flights-sec" id="vuelos" aria-labelledby="flTitle">
     <div class="wrap">
       <p class="md-eyebrow-label muted" id="flTitle">Vuelos</p>
@@ -205,6 +225,7 @@
 <script src="js/visitas.js"></script>
 <script src="js/ubicacion.js"></script>
 <script src="js/editar.js"></script>
+<script src="js/previaje.js"></script>
 <script src="js/sesion.js"></script>
 </body>
 </html>

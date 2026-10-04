@@ -327,3 +327,32 @@ body.has-nowbar .toast{bottom:calc(4.5rem + env(safe-area-inset-bottom,0px))}
 .sheet-sub:empty{display:none}
 .sheet-sub{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
 .sheet .md-label{margin-top:var(--space-2);margin-bottom:0}
+
+/* --- Antes de viajar ----------------------------------------------------- */
+.pre-sec{border-top:0;padding-block:var(--space-10)}
+.pre-top{display:flex;align-items:center;gap:var(--space-8);flex-wrap:wrap;margin-bottom:var(--space-8)}
+.pre-ring{position:relative;width:132px;height:132px;flex-shrink:0}
+.pre-ring svg{width:100%;height:100%}
+.ring-bg{fill:none;stroke:hsl(var(--muted));stroke-width:12}
+.ring-fg{fill:none;stroke:hsl(var(--secondary));stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 400ms var(--ease-out)}
+.ring-num{position:absolute;inset:0;display:grid;place-content:center;font-size:var(--text-4xl);font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-tight);font-variant-numeric:tabular-nums}
+.ring-num small{font-size:.45em;margin-left:.1rem}
+.pre-info{display:flex;flex-direction:column;gap:var(--space-2);align-items:flex-start;min-width:0;flex:1}
+.pre-info h2{font-size:clamp(1.75rem,4vw,2.5rem)}
+.pre-status{font-size:var(--text-lg);font-weight:var(--weight-semibold)}
+.pre-sub{font-size:var(--text-sm);color:hsl(var(--muted-foreground));margin-bottom:var(--space-2)}
+#preFilter[aria-pressed="true"]{background:hsl(var(--secondary) / .1);border-color:hsl(var(--secondary));color:hsl(var(--foreground))}
+.pre-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3)}
+.pre-count{font-size:var(--text-sm);font-weight:var(--weight-bold);color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.pre-group.complete .pre-count{color:hsl(var(--tertiary))}
+.pre-group .checks{margin-top:.6rem}
+.pre-group .checks li{display:flex;align-items:flex-start}
+.pre-group .checks label{flex:1;min-width:0}
+.pre-who{font-style:normal;color:hsl(var(--muted-foreground));font-size:var(--text-xs)}
+.pre-del{border:0;background:transparent;color:hsl(var(--muted-foreground));font-size:1.1rem;line-height:1;padding:.4rem .5rem;border-radius:var(--radius-sm);cursor:pointer}
+.pre-del:hover{color:hsl(var(--destructive));background:hsl(var(--accent))}
+.pre-done{margin-top:.6rem;font-size:var(--text-sm);color:hsl(var(--tertiary));font-weight:var(--weight-semibold)}
+.pre-add{margin-top:var(--space-6);max-width:36rem}
+.pre-add-row{display:flex;gap:var(--space-2)}
+.pre-add-row .md-input{flex:1;min-width:0}
+.pre-add-row .md-btn{height:2.75rem}

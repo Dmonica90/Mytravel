@@ -186,7 +186,7 @@ $('notesGrid').innerHTML = notes.map(n=>`<div class="panel wash-${n.tone}"><h3>$
 /* ---------- Checklist ---------- */
 const CHECK_KEY = key('viaje-bcn-mad-tol-checks');
 const saved = store.get(CHECK_KEY, {});
-$('checkGrid').innerHTML = CHECKS.map((g,gi)=>`<div class="panel"><h3>${esc(g.title)}</h3><ul class="checks" style="margin-top:.6rem">${g.items.map((it,ii)=>{const id=`c${gi}-${ii}`;return `<li><label for="${id}"><input type="checkbox" id="${id}" data-k="${id}"${saved[id]?' checked':''}><span>${esc(it)}</span></label></li>`}).join('')}</ul></div>`).join('');
+$('checkGrid').innerHTML = CHECKS.map((g,gi)=>g.moved ? '' : `<div class="panel"><h3>${esc(g.title)}</h3><ul class="checks" style="margin-top:.6rem">${g.items.map((it,ii)=>{const id=`c${gi}-${ii}`;return `<li><label for="${id}"><input type="checkbox" id="${id}" data-k="${id}"${saved[id]?' checked':''}><span>${esc(it)}</span></label></li>`}).join('')}</ul></div>`).join('');
 if (!store.set('__probe', 1)) $('checkNote').textContent = 'Este navegador no permite guardar: las casillas se reinician al recargar.';
 function updateProgress(){ const all=[...document.querySelectorAll('.checks input')]; const done=all.filter(i=>i.checked).length; $('checkBar').style.width = (all.length?done/all.length*100:0)+'%'; }
 $('checkGrid').addEventListener('change', e=>{ const k = e.target.dataset.k; if (!k) return; saved[k] = e.target.checked; store.set(CHECK_KEY, saved); updateProgress(); });
