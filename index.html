@@ -61,7 +61,7 @@
       <div class="section-head">
         <p class="md-eyebrow-label muted">Álbum del viaje <span id="albumCount"></span></p>
         <h2 class="md-heading">Cada parada, <span class="accent">una foto.</span></h2>
-        <p>Las fotos se guardan solo en este celular. Guárdalas en tu galería para no perderlas.</p>
+        <p id="albumIntro">Las fotos se guardan solo en este celular. Guárdalas en tu galería para no perderlas.</p>
         <button class="md-btn md-btn--outline" id="albumSaveAll" type="button" hidden style="margin-top:var(--space-4)"><i data-lucide="download"></i>Guardar todas en la galería</button>
       </div>
       <div id="albumGrid"></div>
@@ -136,7 +136,7 @@
     <img id="lbImg" alt="">
     <div class="lightbox-bar">
       <p id="lbCaption"></p>
-      <p class="lightbox-note">La foto vive en este celular: guárdala en tu galería para no perderla.</p>
+      <p class="lightbox-note" id="lbNote">La foto vive en este celular: guárdala en tu galería para no perderla.</p>
       <div class="lightbox-actions">
         <button class="md-btn primary" id="lbSave" type="button"><i data-lucide="download"></i>Guardar en galería</button>
         <button class="md-btn md-btn--outline" id="lbDelete" type="button">Borrar</button>
@@ -155,6 +155,11 @@
       <label><input type="radio" name="who" value="moni" id="whoMoni"><span>Moni</span></label>
       <label><input type="radio" name="who" value="nando" id="whoNando"><span>Nando</span></label>
     </fieldset>
+    <p class="gate-hint" id="gateHint"></p>
+    <div id="gateEmailWrap" hidden>
+      <label class="md-label" for="gateEmail">Correo</label>
+      <input class="md-input" id="gateEmail" type="email" autocomplete="username" inputmode="email">
+    </div>
     <label class="md-label" for="gatePass">Contraseña</label>
     <input class="md-input" id="gatePass" type="password" autocomplete="current-password" required>
     <p class="gate-error" id="gateError" role="alert" hidden></p>
@@ -162,13 +167,36 @@
   </form>
 </div>
 
+<div class="lightbox sheet" id="editSheet" role="dialog" aria-modal="true" aria-labelledby="editTitle" hidden>
+  <form class="sheet-panel" id="editForm">
+    <p class="md-eyebrow-label muted">Personalizar parada</p>
+    <h2 class="sheet-title" id="editTitle"></h2>
+    <p class="sheet-sub" id="editOriginal"></p>
+    <label class="md-label" for="editHora">Hora</label>
+    <input class="md-input" id="editHora" type="time" required>
+    <label class="md-label" for="editNota">Nota (opcional)</label>
+    <input class="md-input" id="editNota" type="text" maxlength="140" placeholder="Ej.: llevamos reserva a nombre de Moni">
+    <p class="sheet-sub" id="editShared"></p>
+    <p class="gate-error" id="editError" role="alert" hidden></p>
+    <div class="lightbox-actions">
+      <button class="md-btn primary" type="submit">Guardar</button>
+      <button class="md-btn md-btn--outline" type="button" id="editRestore">Restaurar original</button>
+      <button class="md-btn md-btn--ghost" type="button" id="editCancel">Cancelar</button>
+    </div>
+  </form>
+</div>
+
 <script src="vendor/leaflet/leaflet.js"></script>
 <script src="vendor/gesture/leaflet-gesture-handling.min.js"></script>
 <script src="vendor/lucide/lucide.min.js"></script>
+<script src="vendor/supabase/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/nube.js"></script>
 <script src="js/itinerario.js"></script>
 <script src="js/app.js"></script>
 <script src="js/visitas.js"></script>
 <script src="js/ubicacion.js"></script>
+<script src="js/editar.js"></script>
 <script src="js/sesion.js"></script>
 </body>
 </html>
