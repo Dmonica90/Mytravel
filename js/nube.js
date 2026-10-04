@@ -64,6 +64,13 @@ N.saveEdit = async (day, item_t, hora, nota) => {
 };
 N.clearEdit = async (day, item_t) => { ok(await sb.from('edits').delete().eq('day', day).eq('item_t', item_t)); };
 
+/* Checklist "Antes de viajar" */
+N.listPrechecks = async () => ok(await sb.from('prechecks').select('*')) || [];
+N.setPrecheck = async (item_id, done, label) => {
+  ok(await sb.from('prechecks').upsert({item_id, done, ...(label ? {label, custom:true} : {}), who, updated_at:new Date().toISOString()}, {onConflict:'item_id'}));
+};
+N.delPrecheck = async (item_id) => { ok(await sb.from('prechecks').delete().eq('item_id', item_id)); };
+
 /* Avisos en vivo: cada cambio llega como evento "nube:change" con {table, type, row}. */
 N.subscribe = () => {
   const emit = (table) => (p) => {
@@ -74,6 +81,7 @@ N.subscribe = () => {
     .on('postgres_changes', {event:'*', schema:'public', table:'visits'}, emit('visits'))
     .on('postgres_changes', {event:'*', schema:'public', table:'photos'}, emit('photos'))
     .on('postgres_changes', {event:'*', schema:'public', table:'edits'}, emit('edits'))
+    .on('postgres_changes', {event:'*', schema:'public', table:'prechecks'}, emit('prechecks'))
     .subscribe();
 };
 })();

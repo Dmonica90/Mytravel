@@ -161,6 +161,17 @@ const $ = id => document.getElementById(id);
 $('heroEyebrow').textContent = `Hola, ${ME} · 11–21 octubre 2026`;
 $('heroLead').textContent = `Tu viaje con ${OTHER}: siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
 $('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city)}</small></a>`).join('');
+/* Vuelos: tarjetas con estado en vivo (búsqueda de Google por número de vuelo). */
+const legUrl = l => `https://www.google.com/search?q=${encodeURIComponent(l.replace(/^([A-Z]+)(\d+)$/, '$1 $2')+' vuelo')}`;
+$('flights').innerHTML = (window.VUELOS||[]).map(f=>`<article class="flight">
+  <div class="flight-top"><span class="flight-air">${esc(f.airline)} · <b>${esc(f.code)}</b></span><a class="flight-day" href="#${f.day}">${esc(f.date)}</a></div>
+  <div class="flight-route">
+    <div class="fl-end"><span class="fl-time">${esc(f.dep)}</span><span class="fl-city">${esc(f.from)}</span><span class="fl-ap">${esc(f.fromAp)}</span></div>
+    <div class="fl-mid"><span class="fl-dur">${esc(f.dur)}</span><span class="fl-line" aria-hidden="true"></span><span class="fl-stops">${esc(f.stops)}</span></div>
+    <div class="fl-end fl-to"><span class="fl-time">${esc(f.arr)}${f.arrNote?`<sup>${esc(f.arrNote)}</sup>`:''}</span><span class="fl-city">${esc(f.to)}</span><span class="fl-ap">${esc(f.toAp)}</span></div>
+  </div>
+  <div class="flight-links">${f.legs.map(l=>`<a class="md-btn md-btn--outline md-btn--sm" href="${legUrl(l)}" target="_blank" rel="noopener"><i data-lucide="radar"></i>Estado ${esc(l.replace(/^([A-Z]+)(\d+)$/, '$1 $2'))}</a>`).join('')}</div>
+</article>`).join('');
 $('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(voice((window.OV||{})[d.id]) || d.ov)}</p></a>`).join('');
 $('days').innerHTML = DAYS.map(renderDay).join('');
 
@@ -175,7 +186,7 @@ $('notesGrid').innerHTML = notes.map(n=>`<div class="panel wash-${n.tone}"><h3>$
 /* ---------- Checklist ---------- */
 const CHECK_KEY = key('viaje-bcn-mad-tol-checks');
 const saved = store.get(CHECK_KEY, {});
-$('checkGrid').innerHTML = CHECKS.map((g,gi)=>`<div class="panel"><h3>${esc(g.title)}</h3><ul class="checks" style="margin-top:.6rem">${g.items.map((it,ii)=>{const id=`c${gi}-${ii}`;return `<li><label for="${id}"><input type="checkbox" id="${id}" data-k="${id}"${saved[id]?' checked':''}><span>${esc(it)}</span></label></li>`}).join('')}</ul></div>`).join('');
+$('checkGrid').innerHTML = CHECKS.map((g,gi)=>g.moved ? '' : `<div class="panel"><h3>${esc(g.title)}</h3><ul class="checks" style="margin-top:.6rem">${g.items.map((it,ii)=>{const id=`c${gi}-${ii}`;return `<li><label for="${id}"><input type="checkbox" id="${id}" data-k="${id}"${saved[id]?' checked':''}><span>${esc(it)}</span></label></li>`}).join('')}</ul></div>`).join('');
 if (!store.set('__probe', 1)) $('checkNote').textContent = 'Este navegador no permite guardar: las casillas se reinician al recargar.';
 function updateProgress(){ const all=[...document.querySelectorAll('.checks input')]; const done=all.filter(i=>i.checked).length; $('checkBar').style.width = (all.length?done/all.length*100:0)+'%'; }
 $('checkGrid').addEventListener('change', e=>{ const k = e.target.dataset.k; if (!k) return; saved[k] = e.target.checked; store.set(CHECK_KEY, saved); updateProgress(); });

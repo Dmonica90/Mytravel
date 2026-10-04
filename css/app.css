@@ -286,6 +286,27 @@ body.has-nowbar .toast{bottom:calc(4.5rem + env(safe-area-inset-bottom,0px))}
 .me-acc{fill:#2b7fff;fill-opacity:.12;stroke:#2b7fff;stroke-opacity:.4;stroke-width:1}
 .voz{font-size:var(--text-sm);line-height:1.55;color:hsl(var(--foreground));font-weight:var(--weight-medium)}
 
+/* --- Vuelos ------------------------------------------------------------ */
+.flights-sec{padding-block:var(--space-10) 0}
+.flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:var(--space-4);margin-top:var(--space-4)}
+.flight{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-5);border-radius:var(--radius);background:hsl(var(--card));border:var(--border-width) solid hsl(var(--border))}
+.flight-top{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);flex-wrap:wrap;font-size:var(--text-sm)}
+.flight-air b{font-weight:var(--weight-bold)}
+.flight-day{font-size:var(--text-xs);font-weight:var(--weight-semibold);color:hsl(var(--secondary))}
+.flight-route{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--space-3)}
+.fl-end{display:flex;flex-direction:column;gap:.1rem;min-width:0}
+.fl-to{text-align:right;align-items:flex-end}
+.fl-time{font-size:var(--text-2xl);font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-tight);line-height:1.1;font-variant-numeric:tabular-nums}
+.fl-time sup{font-size:.55em;margin-left:.15rem;color:hsl(var(--secondary));font-weight:var(--weight-bold)}
+.fl-city{font-size:var(--text-sm);font-weight:var(--weight-semibold)}
+.fl-ap{font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+.fl-mid{display:flex;flex-direction:column;align-items:center;gap:.25rem;text-align:center;min-width:0}
+.fl-dur,.fl-stops{font-size:var(--text-xs);color:hsl(var(--muted-foreground));white-space:nowrap}
+.fl-line{display:block;width:100%;height:2px;background:linear-gradient(90deg,hsl(var(--primary)),hsl(var(--secondary)));border-radius:2px;position:relative}
+.fl-line::after{content:"";position:absolute;right:-2px;top:-3px;width:8px;height:8px;border-radius:50%;background:hsl(var(--secondary))}
+.flight-links{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.flights-note{margin-top:var(--space-3);font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+.status{align-self:flex-start}
 /* --- Compartido (Supabase) y edición ----------------------------------- */
 .gate-hint:not(:empty){font-size:var(--text-sm);color:hsl(var(--muted-foreground));margin-top:calc(-1 * var(--space-2))}
 #gateEmailWrap{display:flex;flex-direction:column}
@@ -306,3 +327,32 @@ body.has-nowbar .toast{bottom:calc(4.5rem + env(safe-area-inset-bottom,0px))}
 .sheet-sub:empty{display:none}
 .sheet-sub{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
 .sheet .md-label{margin-top:var(--space-2);margin-bottom:0}
+
+/* --- Antes de viajar ----------------------------------------------------- */
+.pre-sec{border-top:0;padding-block:var(--space-10)}
+.pre-top{display:flex;align-items:center;gap:var(--space-8);flex-wrap:wrap;margin-bottom:var(--space-8)}
+.pre-ring{position:relative;width:132px;height:132px;flex-shrink:0}
+.pre-ring svg{width:100%;height:100%}
+.ring-bg{fill:none;stroke:hsl(var(--muted));stroke-width:12}
+.ring-fg{fill:none;stroke:hsl(var(--secondary));stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 400ms var(--ease-out)}
+.ring-num{position:absolute;inset:0;display:grid;place-content:center;font-size:var(--text-4xl);font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-tight);font-variant-numeric:tabular-nums}
+.ring-num small{font-size:.45em;margin-left:.1rem}
+.pre-info{display:flex;flex-direction:column;gap:var(--space-2);align-items:flex-start;min-width:0;flex:1}
+.pre-info h2{font-size:clamp(1.75rem,4vw,2.5rem)}
+.pre-status{font-size:var(--text-lg);font-weight:var(--weight-semibold)}
+.pre-sub{font-size:var(--text-sm);color:hsl(var(--muted-foreground));margin-bottom:var(--space-2)}
+#preFilter[aria-pressed="true"]{background:hsl(var(--secondary) / .1);border-color:hsl(var(--secondary));color:hsl(var(--foreground))}
+.pre-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3)}
+.pre-count{font-size:var(--text-sm);font-weight:var(--weight-bold);color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.pre-group.complete .pre-count{color:hsl(var(--tertiary))}
+.pre-group .checks{margin-top:.6rem}
+.pre-group .checks li{display:flex;align-items:flex-start}
+.pre-group .checks label{flex:1;min-width:0}
+.pre-who{font-style:normal;color:hsl(var(--muted-foreground));font-size:var(--text-xs)}
+.pre-del{border:0;background:transparent;color:hsl(var(--muted-foreground));font-size:1.1rem;line-height:1;padding:.4rem .5rem;border-radius:var(--radius-sm);cursor:pointer}
+.pre-del:hover{color:hsl(var(--destructive));background:hsl(var(--accent))}
+.pre-done{margin-top:.6rem;font-size:var(--text-sm);color:hsl(var(--tertiary));font-weight:var(--weight-semibold)}
+.pre-add{margin-top:var(--space-6);max-width:36rem}
+.pre-add-row{display:flex;gap:var(--space-2)}
+.pre-add-row .md-input{flex:1;min-width:0}
+.pre-add-row .md-btn{height:2.75rem}

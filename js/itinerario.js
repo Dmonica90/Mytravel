@@ -49,21 +49,21 @@ var DAYS = [
   callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Es una propuesta: cámbienla con sus amigos.'},
   budget:[['Hospedaje','Con sus amigos'],['Paseo y comidas','Por definir']], total:'Por definir'},
 
- {id:'c4', iso:'2026-10-14', tz:'America/Cancun', travel:'driving', n:'04', date:'14 oct', city:'Cancún → Madrid', tone:'secondary', map:'cun',
-  title:['Última mañana de playa ', 'y a Madrid.'], sub:'Desayuno de despedida, última playa y vuelo a Madrid por la tarde (hora por confirmar).',
-  ov:'Despedida y vuelo a Madrid por la tarde.',
+ {id:'c4', iso:'2026-10-14', tz:'America/Cancun', travel:'flight', n:'04', date:'14 oct', city:'Cancún → Madrid', tone:'secondary', map:'cun',
+  title:['Despedida y ', 'vuelo a Madrid.'], sub:'Desayuno de despedida con sus amigos y vuelo Aeroméxico AM 527 + AM 1 a Madrid a las 12:40, con escala en CDMX.',
+  ov:'Despedida y vuelo a Madrid a las 12:40.',
   blocks:[{type:'tl', items:[
-    {t:'09:00', icon:'coffee', title:'Desayuno de despedida', detail:'Con sus amigos.'},
-    {t:'10:30', icon:'sun', title:'Última mañana de playa'},
-    {t:'14:00', icon:'luggage', title:'Salida al aeropuerto', detail:'Hora tentativa: ajústenla cuando tengan el vuelo.', q:'Aeropuerto Internacional de Cancún', pin:{lat:21.0365,lng:-86.8770,l:'CUN'}},
-    {t:'17:00', icon:'plane', title:'Vuelo Cancún → Madrid', detail:'Hora por confirmar. Llegan a Madrid el 15 de octubre.'}
+    {t:'08:00', icon:'coffee', title:'Desayuno de despedida', detail:'Con sus amigos.'},
+    {t:'09:30', icon:'luggage', title:'Salida al aeropuerto', detail:'Aeropuerto de Cancún · Terminal 4. Vuelo internacional: lleguen unas 3 h antes.', q:'Aeropuerto Internacional de Cancún Terminal 4'},
+    {t:'12:40', icon:'plane', title:'Vuelo AM 527 + AM 1 · Cancún → Madrid', detail:'Aeroméxico · CUN T4 → escala en CDMX → Madrid T2 · 16 h 55 min. Llegan el jueves 15 a las 12:35 (hora de Madrid).', q:'Aeropuerto Internacional de Cancún Terminal 4', pin:{lat:21.0410,lng:-86.8740,l:'CUN T4'}}
   ]}],
-  callout:{tone:'muted', icon:'info', title:'Por confirmar', text:'Faltan los datos del vuelo a Madrid. Las horas de la tarde son tentativas.'},
-  budget:[['Vuelo Cancún → Madrid','Por confirmar'],['Comidas','Por definir']], total:'Por definir'},
- {id:'d1', iso:'2026-10-15', travel:'transit', n:'05', date:'15 oct', city:'Barcelona', tone:'primary', map:'bcn',
+  callout:{tone:'info', icon:'plane', title:'Vuelos confirmados', text:'Viaje redondo Aeroméxico (Main + Básica). Los detalles y el estado en vivo están en la sección Vuelos.'},
+  budget:[['Vuelo Cancún → Madrid (redondo Aeroméxico)','Ya comprado'],['Comidas','Por definir']], total:'Por definir'},
+ {id:'d1', iso:'2026-10-15', travel:'transit', n:'05', date:'15 oct', city:'Madrid → Barcelona', tone:'primary', map:'madbcn',
   title:['Llegada y ', 'asentamiento.'], sub:'Monica llega a las 19:00 en tren. Descanso y cena cerca del hotel.',
   ov:'Llega Monica 19:00 (tren). Descanso, cena hotel.',
   blocks:[{type:'tl', items:[
+    {t:'12:35', icon:'plane-landing', title:'Llegada a Madrid · Terminal 2', detail:'Aterrizan del vuelo AM 1 desde CDMX. Después, traslado a la estación para el tren a Barcelona.', q:'Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 2', pin:{lat:40.4697,lng:-3.5700,l:'MAD T2'}},
     {t:'19:00', icon:'train-front', title:'Tren Madrid → Barcelona', detail:'Llegada a Estación Sants · 19:00–20:00', q:'Estació de Sants Barcelona', pin:{lat:41.3791,lng:2.1400,l:'Sants'}},
     {t:'20:00', icon:'car-taxi-front', title:'Taxi o Metro L4 al hotel', detail:'Hotel en la Barceloneta · 20:00–20:30', cost:'8€', q:'Barceloneta, Barcelona', pin:{lat:41.3797,lng:2.1885,l:'Hotel',hotel:true}},
     {t:'20:30', icon:'bed-double', title:'Check-in y descanso', detail:'Exploración del barrio Barceloneta si tienen energía.'},
@@ -201,20 +201,21 @@ var DAYS = [
   callout:{tone:'tip', icon:'lightbulb', title:'Tips Toledo', list:['Ir pronto (8:00) = menos turistas.','Llevar botella de agua (subidas).','Cámara preparada (vistas épicas).','2 horas es el mínimo, mejor 3–4.']},
   budget:[['Tren Madrid → Toledo','15€'],['Alcázar (exterior/interior)','5€'],['Catedral','12€'],['Museo El Greco','3€'],['Comida Toledo','14€'],['Café','4€'],['Tren Toledo → Madrid','15€'],['Metro/transporte','4€']], total:'72€'},
 
- {id:'d7', iso:'2026-10-21', travel:'driving', n:'11', date:'21 oct', city:'Madrid', tone:'tertiary', map:'mad',
-  title:['Vuelo y ', 'regreso.'], sub:'Madrugada: salida del hotel a las 7:00 para el vuelo de las 9:00.',
-  ov:'Madrugada. Vuelo 9:00 (salida hotel 7:00).',
+ {id:'d7', iso:'2026-10-21', travel:'flight', n:'11', date:'21 oct', city:'Madrid → Cancún', tone:'tertiary', map:'madcun',
+  title:['Vuelo de regreso ', 'a Cancún.'], sub:'Salida del hotel a las 7:00 y vuelo Aeroméxico AM 20 + AM 536 a las 9:00 desde Madrid T1; llegan a Cancún a las 18:48.',
+  ov:'Vuelo 9:00 (salida del hotel 7:00); llegan a Cancún 18:48.',
   blocks:[{type:'tl', items:[
     {t:'06:30', icon:'alarm-clock', title:'Despertar y desayuno rápido', cost:'3€'},
     {t:'07:00', icon:'luggage', title:'Checkout del hotel'},
-    {t:'07:30', icon:'car-taxi-front', title:'Taxi al aeropuerto', cost:'15€'},
-    {t:'09:00', icon:'plane', title:'Salida del avión', detail:'Destino: por confirmar. Pasaporte listo.', q:'Aeropuerto Adolfo Suárez Madrid-Barajas', pin:{lat:40.4936,lng:-3.5668,l:'Barajas'}}
+    {t:'07:30', icon:'car-taxi-front', title:'Taxi al aeropuerto · Terminal 1', cost:'15€', q:'Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 1'},
+    {t:'09:00', icon:'plane', title:'Vuelo AM 20 + AM 536 · Madrid → Cancún', detail:'Aeroméxico · MAD T1 → escala en CDMX → Cancún T2 · 16 h 48 min. Pasaporte listo.', q:'Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 1', pin:{lat:40.4697,lng:-3.5700,l:'MAD T1'}},
+    {t:'18:48', tz:'America/Cancun', icon:'plane-landing', title:'Llegada a Cancún · Terminal 2', detail:'Hora de Cancún. Fin del viaje.', q:'Aeropuerto Internacional de Cancún Terminal 2', pin:{lat:21.0365,lng:-86.8770,l:'CUN T2'}}
   ]}],
   budget:[['Desayuno','3€'],['Taxi hotel → aeropuerto','15€']], total:'18€'}
 ];
 
 var GLOBAL = {
-  cun:{title:'Cancún · 11–14 oct', tone:'secondary', rows:[['Hospedaje','Con sus amigos'],['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Vuelo Cancún → Madrid','Por confirmar'],['Comidas y paseos','Por definir']], total:['Subtotal Cancún','Por definir']},
+  cun:{title:'Cancún · 11–14 oct', tone:'secondary', rows:[['Hospedaje','Con sus amigos'],['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Vuelos Cancún ↔ Madrid (redondo Aeroméxico)','Ya comprado'],['Comidas y paseos','Por definir']], total:['Subtotal Cancún','Por definir']},
   bcn:{title:'Barcelona · 15–18 oct', tone:'primary', rows:[['15 oct · Tren + taxi + cena','68€'],['16 oct · Exploración de Nando','45€'],['16 oct · Cena Monica + Nando','16€'],['17 oct · Ruta compartida','46€'],['18 oct · Checkout + tren + hotel + cena','177€']], total:['Subtotal Barcelona','352€']},
   mad:{title:'Madrid · 18–21 oct', tone:'tertiary', rows:[['19 oct · Madrid completo','56€'],['20 oct · Excursión Toledo','72€'],['21 oct · Vuelo + desayuno','18€']], total:['Subtotal Madrid','146€']},
   all:{title:'Total viaje (ambas personas)', tone:'secondary', rows:[['Transporte (trenes, metro, taxi)','200€'],['Hoteles (2 noches BCN + 2 noches MAD)','160€'],['Museos + entradas','74€'],['Comidas + cenas','150€'],['Cafés + descansos','30€'],['Misceláneos','20€']], total:['Total general','~634€'], note:'Por persona: ~317€'}
@@ -223,7 +224,7 @@ var BUDGET_NOTES = ['Hoteles: buscar Airbnb u hostal para ahorrar (50–80€/no
 var APPS = [['Google Maps','Rutas, metros','Gratis'],['Citymapper','Mejor que Google para metro','Gratis'],['TMB','Comprar T-casual en Barcelona','Gratis'],['Renfe.com','Comprar trenes','~15–50€/billete'],['Airbnb / Booking','Hoteles económicos','50–100€/noche'],['Timeout Barcelona/Madrid','Guía de lugares','Gratis'],['Museos.es','Horarios + promos','Gratis']];
 var PACK = ['Chaqueta ligera (mañanas frescas).','Zapatillas cómodas (25 km de caminata).','Protector solar y gafas de sol.','Botella reutilizable (fuentes públicas).','Trapo pequeño (humedad del puerto).','Cargador portátil (días largos).','Efectivo: 35–40€ mínimo; tarjeta de débito de respaldo.'];
 var CHECKS = [
-  {title:'Antes del viaje', items:['Check-in Viva Aerobus VB 1380 (11 oct, AICM T1)','Confirmar vuelo Cancún → Madrid (14 oct)','Pasaportes vigentes','Seguros de viaje','Reservar trenes (Renfe.com)','Reservar hoteles Barcelona (2 noches) + Madrid (2 noches)','Cambiar dinero a EUR si es necesario','Notificar al banco del viaje']},
+  {title:'Antes del viaje', moved:true, items:['Check-in Viva Aerobus VB 1380 (11 oct, AICM T1)','Check-in Aeroméxico AM 527 (14 oct, CUN T4)','Check-in Aeroméxico AM 20 (21 oct, MAD T1)','Pasaportes vigentes','Seguros de viaje','Reservar trenes (Renfe.com)','Reservar hoteles Barcelona (2 noches) + Madrid (2 noches)','Cambiar dinero a EUR si es necesario','Notificar al banco del viaje']},
   {title:'Barcelona (15–18 oct)', items:['Llegar 19:00, taxi al hotel','16 oct: Nando ruta medieval (Picasso, Montcada, iglesias)','17 oct: Ruta compartida 10 paradas (7:30–20:00)','18 oct: Salida 14:00 a Madrid']},
   {title:'Madrid y Toledo (18–21 oct)', items:['Check-in ~17:00','19 oct: Prado + Retiro + Reina Sofía noche (gratis)','20 oct: Toledo madrugada (6:00–20:00)','20 oct: Alcázar + Catedral + Museo El Greco','20 oct: Comida en Toledo','20 oct: Fotos de atardecer desde el puente','21 oct: Vuelo 9:00 (salir del hotel 7:00)']},
   {title:'Pendientes por confirmar', items:['Articulate (16 oct): confirmar horario exacto','Park Güell (18 oct): ¿incluir en la mañana antes del tren?','Tren a Madrid (18 oct): verificar hora de salida','Destino del vuelo del 21 oct']}
@@ -235,7 +236,7 @@ var NOTES = [
 ];
 
 var HOTEL_BCN = {lat:41.3797, lng:2.1885, l:'Hotel'};
-var MAP_TITLES = {mxcun:'CDMX → Cancún', cun:'Cancún', bcn:'Barcelona', mad:'Madrid', tol:'Toledo', trip:'Barcelona → Madrid'};
+var MAP_TITLES = {mxcun:'CDMX → Cancún', madbcn:'Madrid → Barcelona', madcun:'Madrid → Cancún', cun:'Cancún', bcn:'Barcelona', mad:'Madrid', tol:'Toledo', trip:'Barcelona → Madrid'};
 
 /* ---------- Redacción personal ----------
    Textos que le hablan a quien inició sesión. Marcadores: {yo} = quien entra,
@@ -246,29 +247,29 @@ var INTRO = {
   c1:'{yo}, aquí empieza su viaje: a las 8:25 despega su vuelo VB 1380 desde el AICM y a las 11:45 ya están en Cancún. Comida con sus amigos, una tarde de playa y la primera cena juntos.',
   c2:'{yo}, hoy no hay prisa: desayuno con calma, playa todo el día con {otro} y sus amigos, una caminata al atardecer y cena juntos.',
   c3:'{yo}, último día completo en Cancún: si se les antoja, un paseo a Isla Mujeres o Playa del Carmen, una caminata y la cena de despedida con sus amigos.',
-  c4:'{yo}, último desayuno con sus amigos y una mañana más de playa. Por la tarde sale su vuelo a Madrid: mañana amanecen en España.',
-  d1:{moni:'{yo}, después del vuelo nocturno desde Cancún, su tren llega a Sants a las 19:00. Taxi o L4 al hotel en la Barceloneta, una cena tranquila en el Mercat y a descansar juntitos: mañana Articulate empieza temprano.',
-      nando:'{yo}, después del vuelo nocturno desde Cancún, su tren llega a Sants a las 19:00. Para las 20:30 ya estarán en el hotel de la Barceloneta, con una cena tranquila en el Mercat para estrenar Barcelona.'},
+  c4:'{yo}, último desayuno con sus amigos y a las 9:30 al aeropuerto. A las 12:40 despega su vuelo a Madrid con escala en CDMX: mañana a mediodía ya están en España.',
+  d1:{moni:'{yo}, a las 12:35 aterrizan en Madrid y por la tarde toman el tren: a las 19:00 llegan a Sants. Taxi o L4 al hotel en la Barceloneta, una cena tranquila en el Mercat y a descansar juntitos: mañana Articulate empieza temprano.',
+      nando:'{yo}, a las 12:35 aterrizan en Madrid y por la tarde toman el tren: a las 19:00 llegan a Sants. Para las 20:30 ya estarán en el hotel de la Barceloneta, con una cena tranquila en el Mercat para estrenar Barcelona.'},
   d2:{moni:'{yo}, hoy es tu gran día en Articulate, de 8:00 a 18:30. Nando te espera explorando el Born y el Gòtic; a las 18:30 se reencuentran para una cena ligera y a consentirte un poco.',
       nando:'{yo}, hoy Barcelona es toda tuya: ruta medieval + anime de 8:30 a 17:30 por el Born y el Gòtic. Disfruta tu día; a las 18:30 Moni sale de Articulate y por fin se reencuentran.'},
   d3:'{yo}, hoy es su día juntos de principio a fin: 10 paradas por el Born, el Gòtic, la Ciutadella y el puerto. Salen a las 7:30, caminan unos 25 km de la mano y el día sale en unos 46€ con el Picasso.',
   d4:'{yo}, último paseo por Barcelona con {otro}: desayuno sin prisa, las fotos que faltaron y checkout a las 11:00. A las 14:00 sale su tren y a las 16:30 ya están juntos en Madrid.',
   d5:'{yo}, hoy Madrid es de ustedes dos: Goya en el Prado por la mañana, un paseo por el Retiro y el centro a mediodía, y el Guernica en el Reina Sofía por la tarde.',
   d6:'{yo}, hoy toca madrugar, pero vale la pena: a las 6:00 salen a Atocha y a las 8:30 ya están juntos frente al Alcázar. Toledo medieval, El Greco y regreso a Madrid a las 19:30.',
-  d7:'{yo}, último día de este viaje con {otro}: a las 7:00 dejan el hotel y a las 9:00 despega tu vuelo. Pasaporte a la mano y el corazón lleno.'
+  d7:'{yo}, último día de este viaje con {otro}: a las 7:00 dejan el hotel, a las 9:00 despega su vuelo y a las 18:48 ya están de vuelta en Cancún. Pasaporte a la mano y el corazón lleno.'
 };
 var OV = {
   c1:'Vuelo a Cancún a las 8:25; playa y cena con sus amigos.',
   c2:'Día de playa y cena con sus amigos.',
   c3:'Paseo opcional y cena de despedida.',
-  c4:'Última playa y vuelo a Madrid por la tarde.',
-  d1:'Llegan a Barcelona a las 19:00. Cena tranquila y a descansar.',
+  c4:'Despedida y vuelo a Madrid a las 12:40.',
+  d1:'Aterrizan en Madrid a las 12:35; tren y llegada a Barcelona a las 19:00.',
   d2:{moni:'Tu día de Articulate (8:00–18:30); Nando te espera para cenar.', nando:'Tu día libre: ruta medieval + anime. Cenas con Moni a las 18:30.'},
   d3:'Su día juntos: 10 paradas, ~46€.',
   d4:'Checkout a las 11:00 y tren juntos a Madrid (14:00–16:30).',
   d5:'Madrid para los dos: Prado, Retiro y Reina Sofía.',
   d6:'Escapada juntos a Toledo, de 6:00 a 20:00.',
-  d7:'Salen del hotel a las 7:00; vuelo a las 9:00.'
+  d7:'Vuelo a las 9:00; de vuelta en Cancún a las 18:48.'
 };
 /* Clave: 'día|hora' para el itinerario principal y 'pre:día|hora' para el bloque de Monica del D2. */
 var VOZ = {
@@ -288,11 +289,11 @@ var VOZ = {
   'c3|14:00':'Comida a las {hora} donde los encuentre el paseo.',
   'c3|17:30':'{yo}, a las {hora} una última caminata con calma con {otro}.',
   'c3|20:00':'Cena de despedida a las {hora}: denles las gracias a sus amigos por recibirlos.',
-  'c4|09:00':'{yo}, último desayuno con sus amigos a las {hora}. Tómense una foto todos juntos.',
-  'c4|10:30':'A las {hora}, una mañana más de playa con {otro} antes de las maletas.',
-  'c4|14:00':'Salida al aeropuerto a las {hora} (tentativa). Revisen pasaportes y que no se quede nada.',
-  'c4|17:00':'{yo}, a las {hora} (por confirmar) sale su vuelo a Madrid. Mañana amanecen en España.',
-  'd1|19:00':'{yo}, después del vuelo desde Cancún y el tren desde Madrid, a las {hora} llegan a Sants. Ya están en Barcelona.',
+  'c4|08:00':'{yo}, último desayuno con sus amigos a las {hora}. Tómense una foto todos juntos y denles un abrazo largo.',
+  'c4|09:30':'A las {hora} salen a la Terminal 4. Revisen pasaportes y que no se quede nada en casa de sus amigos.',
+  'c4|12:40':'{yo}, a las {hora} despega su vuelo AM 527 a CDMX y de ahí el AM 1 a Madrid. Duerman lo que puedan en el avión: mañana empieza Europa.',
+  'd1|12:35':'{yo}, a las {hora} aterrizan en Madrid, Terminal 2. Tómense un café, estiren las piernas y al tren: Barcelona los espera.',
+  'd1|19:00':'{yo}, a las {hora} llegan a Sants en el tren desde Madrid. Ya están en Barcelona.',
   'd1|20:00':'En unos 30 minutos están en la Barceloneta; a las {hasta} ya es el check-in.',
   'd1|20:30':'Dejen las maletas y, si les queda energía, den una vuelta corta juntos por la Barceloneta.',
   'd1|21:00':{moni:'{yo}, cena tranquila con Nando en el Mercat Barceloneta y a dormir temprano: mañana Articulate empieza a las 8:00.', nando:'Cena tranquila con Moni en el Mercat Barceloneta y a dormir temprano, que mañana Moni madruga. Tú tienes el día libre para explorar.'},
@@ -354,6 +355,45 @@ var VOZ = {
 
   'd7|06:30':'{yo}, despertador a las {hora} y desayuno rápido juntos.',
   'd7|07:00':'Checkout a las {hora}. Revisa que el pasaporte vaya a la mano.',
-  'd7|07:30':'A las {hora} sale el taxi al aeropuerto.',
-  'd7|09:00':'Tu vuelo sale a las {hora}. Gracias por este viaje juntos, {yo}: buen regreso.'
+  'd7|07:30':'A las {hora} sale el taxi a Barajas, Terminal 1.',
+  'd7|09:00':'{yo}, su vuelo AM 20 sale a las {hora}, con escala en CDMX. Gracias por este viaje juntos.',
+  'd7|18:48':'A las {hora} (hora de Cancún) aterrizan en casa de nuevo. Buen regreso, {yo}.'
 };
+
+/* Vuelos del viaje (sin códigos de reserva: el repositorio es público). */
+var VUELOS = [
+  {airline:'Viva Aerobus', legs:['VB1380'], code:'VB 1380', date:'Domingo 11 oct', from:'Ciudad de México', fromAp:'MEX · AICM T1', dep:'8:25', to:'Cancún', toAp:'CUN', arr:'11:45', dur:'2 h 20 min', stops:'Directo', day:'c1'},
+  {airline:'Aeroméxico', legs:['AM527','AM1'], code:'AM 527 + AM 1', date:'Miércoles 14 oct → jueves 15 oct', from:'Cancún', fromAp:'CUN T4', dep:'12:40', to:'Madrid', toAp:'MAD T2', arr:'12:35', arrNote:'+1 día', dur:'16 h 55 min', stops:'1 escala · CDMX', day:'c4'},
+  {airline:'Aeroméxico', legs:['AM20','AM536'], code:'AM 20 + AM 536', date:'Miércoles 21 oct', from:'Madrid', fromAp:'MAD T1', dep:'9:00', to:'Cancún', toAp:'CUN T2', arr:'18:48', dur:'16 h 48 min', stops:'1 escala · CDMX', day:'d7'}
+];
+
+/* Checklist "Antes de viajar": lo que deben tener listo antes de salir.
+   Cada cosa tiene un id fijo (no lo cambies: así se guarda lo marcado). */
+var PREVIAJE = [
+  {g:'Documentos', items:[
+    {id:'pas-moni', t:'Pasaporte de Moni vigente'},
+    {id:'pas-nando', t:'Pasaporte de Nando vigente'},
+    {id:'ine', t:'INE o identificación para el vuelo nacional (11 oct)'},
+    {id:'seguro', t:'Seguro de viaje'},
+    {id:'copias', t:'Copias digitales de los pasaportes'}]},
+  {g:'Vuelos', items:[
+    {id:'ci-vb1380', t:'Check-in Viva Aerobus VB 1380 (11 oct)'},
+    {id:'ci-am527', t:'Check-in Aeroméxico AM 527 + AM 1 (14 oct)'},
+    {id:'ci-am20', t:'Check-in Aeroméxico AM 20 + AM 536 (21 oct)'},
+    {id:'asientos', t:'Asientos juntos elegidos'}]},
+  {g:'Trenes y reservas', items:[
+    {id:'tren-madbcn', t:'Tren Madrid → Barcelona (15 oct, tarde)'},
+    {id:'tren-bcnmad', t:'Tren Barcelona → Madrid (18 oct, 14:00)'},
+    {id:'tren-toledo', t:'Trenes Madrid ↔ Toledo (20 oct)'},
+    {id:'hotel-bcn', t:'Hotel en Barcelona (15–18 oct)'},
+    {id:'hotel-mad', t:'Hotel en Madrid (18–21 oct)'},
+    {id:'picasso', t:'Entrada al Museu Picasso (17 oct, 14 € online)'}]},
+  {g:'Dinero', items:[
+    {id:'banco', t:'Avisar al banco del viaje'},
+    {id:'tarjeta', t:'Tarjeta sin comisión en el extranjero'}]},
+  {g:'Celular', items:[
+    {id:'datos', t:'Plan de datos o eSIM para Europa'},
+    {id:'app', t:'App del viaje instalada en la pantalla de inicio'}]},
+  {g:'Maleta', items: PACK.map((t,i)=>({id:'maleta-'+i, t:t.replace(/\.$/,'')}))}
+];
+
