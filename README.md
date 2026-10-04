@@ -1,11 +1,11 @@
-# Mytravel · Barcelona, Madrid y Toledo (15–21 oct 2026)
+# Mytravel · Cancún, Barcelona, Madrid y Toledo (11–21 oct 2026)
 
 Web app del itinerario de Monica y Nando, hecha con el sistema de diseño **M-Design**.
 
-- Itinerario día por día (D1–D7) con horarios, opciones de comida y cena, tips y presupuesto.
+- Itinerario día por día (11 días, del 11 al 21 de octubre) con horarios, opciones de comida y cena, tips y presupuesto.
 - **Mapa real** (OpenStreetMap + CARTO, con Leaflet) en cada día. Las paradas están numeradas y sincronizadas con el itinerario.
 - Botón **"Ver ruta en Google Maps"** que abre la ruta completa del día con todas las paradas.
-- **Modo "Ahora"**: con la hora de España marca la parada actual y la siguiente, y cuánto falta. Antes del viaje muestra la cuenta regresiva.
+- **Modo "Ahora"**: con la hora local de cada día (Cancún o España) marca la parada actual y la siguiente, y cuánto falta. Antes del viaje muestra la cuenta regresiva.
 - **Funciona como app**: en el celular, "Agregar a pantalla de inicio". Abre sin internet una vez visitada; los mapas offline solo incluyen las zonas que ya se vieron.
 - Checklist y tema claro/oscuro guardados en cada dispositivo.
 
@@ -31,7 +31,7 @@ La app pide **quién eres (Moni o Nando)** y una **contraseña compartida** (no 
 
 Todo el contenido está en [`js/itinerario.js`](js/itinerario.js):
 
-- `t: '12:30'` es la hora de inicio de la parada, en hora de España. El modo "Ahora" la usa: cada parada dura hasta que empieza la siguiente.
+- `t: '12:30'` es la hora de inicio de la parada, en la hora local del día (`tz` del día; Cancún usa `America/Cancun`). Una parada puede llevar su propia `tz` (por ejemplo, la salida desde CDMX). El modo "Ahora" la usa: cada parada dura hasta que empieza la siguiente.
 - `pin: {lat, lng, l}` pone la parada en el mapa (`l` es la etiqueta).
 - `q` es lo que se busca en Google Maps.
 - `cost`, `detail`, `tips` y `opts` (opciones en pestañas) son el texto que se ve.
