@@ -21,6 +21,21 @@ La app pide **quién eres (Moni o Nando)** y una **contraseña compartida** (no 
 - Las fotos se guardan **solo en ese celular** (y por persona). Toca una miniatura → **Guardar en galería** para pasarla a tus fotos; en el **Álbum del viaje** está "Guardar todas".
 - **Usar mi ubicación** (arriba o en la barra "Ahora") muestra tu punto en el mapa, la distancia a cada parada y avisa al llegar a menos de 150 m de una parada pendiente. Solo funciona **con la app abierta** y en la dirección `https://`.
 
+## Conectar Supabase (álbum y checks compartidos, avisos en vivo)
+
+Sin esto la app funciona en **modo local**: cada celular guarda sus fotos y checks por separado. Con Supabase, Moni y Nando comparten el álbum, los checks y los cambios de horario, y cuando uno marca una parada o sube una foto, al otro le aparece el aviso al momento (con la app abierta).
+
+1. **Base de datos:** en Supabase → **SQL Editor** → *New query*, pega todo [`supabase/schema.sql`](supabase/schema.sql) y dale **Run**. Crea las tablas, el bucket privado `fotos`, las reglas de seguridad y el tiempo real.
+2. **Cerrar registros:** en **Authentication → Sign In / Providers**, desactiva **Allow new users to sign up**. Así nadie más puede crear una cuenta y ver sus fotos.
+3. **Usuarios:** en **Authentication → Users → Add user → Create new user**, crea uno para Moni y otro para Nando (correo + contraseña; marca *Auto Confirm User*).
+4. **Clave pública:** en **Project Settings → API** copia la clave **anon public** (o *Publishable key*) y pégala en [`js/config.js`](js/config.js) en lugar de `PEGA_AQUI_LA_ANON_KEY`. Esa clave es pública; **nunca** pongas ahí la `service_role` / *secret*.
+5. Al entrar, cada uno elige **Moni o Nando** y usa su correo y contraseña. Las fotos y checks que ya tenían en el celular se suben solos la primera vez.
+
+Detalles:
+- Sin internet, las fotos quedan como **pendientes** en el celular y se suben solas al volver la conexión.
+- **Personalizar el día:** el lápiz de cada parada permite cambiar la hora (entre la parada anterior y la siguiente) y dejar una nota. El otro lo ve con un aviso.
+- Cada quien solo puede borrar sus propias fotos.
+
 ## Publicarla con GitHub Pages
 
 1. Settings → Pages → *Build and deployment* → Source: **Deploy from a branch**.
@@ -49,6 +64,10 @@ js/app.js             render, mapas, modo "Ahora"
 js/visitas.js         checklist, cámara y álbum
 js/ubicacion.js       "estoy cerca"
 js/sesion.js          entrada Moni / Nando
+js/config.js          URL y clave pública de Supabase
+js/nube.js            conexión con Supabase
+js/editar.js          cambiar hora / nota de una parada
+supabase/schema.sql   tablas, bucket y reglas de seguridad
 sw.js                 modo offline
 vendor/               Leaflet 1.9.4, leaflet-gesture-handling, Lucide (licencias incluidas)
 ```

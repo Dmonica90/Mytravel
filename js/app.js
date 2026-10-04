@@ -65,6 +65,8 @@ function renderItem(it, dayId, pinIndex, flatIdx, voz){
       <div class="item-head"><div class="item-title"><i data-lucide="${it.icon||'dot'}"></i><span>${esc(it.title)}</span></div>${it.cost?`<span class="cost${isFree(it.cost)?' free':''}">${esc(it.cost)}</span>`:''}</div>
       <span class="status" hidden></span>`;
   if (voz) h += `<p class="voz">${esc(voz)}</p>`;
+  if (it.t0 && it.t!==it.t0) h += `<p class="edited">Hora cambiada (antes ${esc(it.t0)})</p>`;
+  if (it.nota) h += `<p class="nota"><b>Nota de ${esc(NAMES[it.notaWho]||'')}:</b> ${esc(it.nota)}</p>`;
   if (it.why) h += `<p class="why"><b>${it.whoWhy?'¿Por qué Nando?':'¿Por qué?'}</b> ${esc(it.why)}</p>`;
   if (it.detail) h += `<p class="item-detail">${esc(it.detail)}</p>`;
   if (it.opts) {
@@ -129,7 +131,7 @@ function renderDay(d){
   const {items} = DAYDATA[d.id];
   let k = 0;
   const blocks = d.blocks.map(b=>{
-    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t}`, e.it, nx && nx.it, d)); }).join('');
+    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t0||e.it.t}`, e.it, nx && nx.it, d)); }).join('');
     return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(youLabel(b.label))}</p>`:''}<ol class="tl">${lis}</ol></div>`;
   }).join('');
   const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map((it,i,a)=>renderItem(it,d.id,null,null,vozFor(`pre:${d.id}|${it.t}`, it, a[i+1], d))).join('')}</ol></div>` : '';
@@ -200,7 +202,7 @@ document.addEventListener('click', e=>{
 /* ---------- Theme ---------- */
 const root = document.documentElement;
 const savedTheme = store.get('theme', null);
-$('logoutBtn').addEventListener('click', ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} location.reload(); });
+$('logoutBtn').addEventListener('click', async ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} if (window.Nube && Nube.enabled) await Nube.logout(); location.reload(); });
 if (savedTheme) root.dataset.theme = savedTheme;
 const isDark = () => root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
 $('themeBtn').addEventListener('click', ()=>{ root.dataset.theme = isDark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); applyTiles(); });
@@ -257,7 +259,7 @@ function activate(dayId, idx, {scroll=false, pan=false}={}){
   if (scroll){ const li = sec.querySelector(`.item[data-pin="${idx}"]`); if (li) li.scrollIntoView({block:'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
 }
 $('days').addEventListener('click', e=>{
-  if (e.target.closest('a, .opts, .visit')) return;
+  if (e.target.closest('a, .opts, .visit, .edit-btn')) return;
   const li = e.target.closest('.item[data-pin]'); if (!li) return;
   const id = li.closest('.day').id, i = +li.dataset.pin;
   activate(id, i, {pan:true}); if (MAPS[id]) MAPS[id].markers[i].openPopup();
