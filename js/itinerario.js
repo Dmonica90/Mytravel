@@ -42,8 +42,8 @@ var DAYS = [
   budget:[['Desayuno','2,50€'],['Metro (3–4 viajes)','6€'],['Museu Picasso','14€'],['Comida','10€'],['CosmoCaixa (opcional)','10€'],['Café/misceláneos','3€']], total:'45€', totalNote:'Sin CosmoCaixa: 35€'},
 
  {id:'d3', iso:'2026-10-17', travel:'walking', n:'03', date:'17 oct', city:'Barcelona', tone:'primary', map:'bcn',
-  title:['La ruta compartida, ', 'diez paradas.'], sub:'Día completo juntos: Born, Barrio Gótico, Ciutadella y Puerto. 14 horas, ~25 km a pie, 32–40€.',
-  ov:'Ambos libres. Ruta compartida: 10 paradas, 32€.',
+  title:['La ruta compartida, ', 'diez paradas.'], sub:'Día completo juntos: Born, Barrio Gótico, Ciutadella y Puerto. 14 horas, ~25 km a pie, unos 46€ con la entrada al Museu Picasso.',
+  ov:'Ambos libres. Ruta compartida: 10 paradas, ~46€.',
   blocks:[{type:'tl', items:[
     {t:'07:30', icon:'coffee', title:'Desayuno · Mercat Barceloneta', detail:'A 5 min del hotel · café con jamón ibérico, pan tumaca, churros · 45 min.', cost:'2,50€', tips:['Llegar temprano, es muy concurrido.'], q:'Mercat de la Barceloneta', pin:{lat:41.3807,lng:2.1893,l:'Mercat Barceloneta'}},
     {t:'08:30', icon:'landmark', title:'Carrer de Montcada', detail:'Palacios medievales, arcos góticos, patios interiores · 30 min (fotos incluidas).', cost:'Gratis', tips:['Mejor luz matutina, sin turistas aún.'], q:'Carrer de Montcada Barcelona', pin:{lat:41.3846,lng:2.1812,l:'Montcada'}},
@@ -53,7 +53,7 @@ var DAYS = [
            {n:'B · La Cova Fumada', c:'8–10€', lines:['Carrer Baluard, 56 (Barceloneta) · 12:00–15:30.','Sin reservas: llegar antes de las 12:00.','Montaditos, croquetas, pa amb tomàquet.'], q:'La Cova Fumada Barcelona'},
            {n:'C · Can Solé', c:'12–15€', lines:['En la Barceloneta, muy cerca del hotel.','Cerrado lunes: verificar.'], q:'Can Solé Barcelona'}]},
     {t:'13:30', icon:'trees', title:'Descanso · Parc de la Ciutadella', detail:'Passeig de Picasso · Cascada Monumental, lago, gente local · 1,5 horas.', cost:'3–5€', tips:['Picar algo ligero si hace falta, no comer de nuevo.'], q:'Parc de la Ciutadella', pin:{lat:41.3897,lng:2.1866,l:'Ciutadella'}},
-    {t:'16:00', icon:'palette', title:'Museu Picasso', detail:'Carrer de Montcada, 15–23 · Las Meninas (4 versiones), obras cubistas, azulejos · 1,5 horas.', cost:'0€', tips:['Entrada gratis jueves 16–19h: no reservar online.','Horario: viernes–domingo 10–20h, jueves 10–21h.','Audioguía 5€ (muy recomendada).','Posible fila a las 18h: ir a las 16:00.'], q:'Museu Picasso Barcelona', pin:{lat:41.3852,lng:2.1808,l:'Picasso'}},
+    {t:'16:00', icon:'palette', title:'Museu Picasso', detail:'Carrer de Montcada, 15–23 · Las Meninas (4 versiones), obras cubistas, azulejos · 1,5 horas.', cost:'14€', tips:['Sábado: entrada normal 14€, mejor reservar online. La entrada gratis es solo los jueves por la tarde.','Horario: viernes–domingo 10–20h, jueves 10–21h.','Audioguía 5€ (muy recomendada).','Posible fila a las 18h: ir a las 16:00.'], q:'Museu Picasso Barcelona', pin:{lat:41.3852,lng:2.1808,l:'Picasso'}},
     {t:'17:30', icon:'church', title:'Catedral (exterior)', detail:'Plaça de la Seu · fachada frontal, luz de atardecer, gárgolas · 30 min.', cost:'Gratis', tips:['Interior + subida: 16€, menos importante que el exterior.','Mejor foto entre 17:30 y 18:30 con luz naranja.'], q:'Catedral de Barcelona', pin:{lat:41.384,lng:2.1762,l:'Catedral'}},
     {t:'18:00', icon:'camera', title:'Plaça Reial · mejor foto del día', detail:'Arcadas, dos farolas de Gaudí, palmeras, atardecer en azul · 45 min.', cost:'Gratis', tips:['Mejor foto desde la esquina SE.','Esperar la luz azul después del atardecer.','Evitar turistas: ir antes de 18:15.'], q:'Plaça Reial Barcelona', pin:{lat:41.3801,lng:2.1754,l:'Plaça Reial'}},
     {t:'18:30', icon:'wine', title:'Cena', detail:'1,5 horas (comer + esperar).', cost:'8€', pin:{lat:41.3816,lng:2.1745,l:'Can Culleretes'},
@@ -67,8 +67,8 @@ var DAYS = [
     {title:'Cosas a evitar', icon:'triangle-alert', ol:['No comer en cadenas turísticas.','No llevar mucho efectivo, pero tampoco ir sin él.','No entrar a la catedral si llueve.','No salir de ruta después de las 21h.','No olvidar el móvil o la cámara en un café.']}
   ],
   budgetCols:['Concepto','Mín.','Máx.','Típico'],
-  budget:[['Desayuno (Mercat)','2€','4€','2,50€'],['Metro (3 viajes)','3€','10€','6€'],['Comida (mercado)','8€','12€','10€'],['Café Ciutadella','2€','5€','3€'],['Museu Picasso','0€','5€','0€'],['Catedral exterior','0€','16€','0€'],['Cena','7€','15€','9€'],['Bebida nocturna','2€','5€','3€']],
-  totalRow:['Total','24€','72€','32€'], totalNote:'Llevar 40€ en efectivo (margen de error).'},
+  budget:[['Desayuno (Mercat)','2€','4€','2,50€'],['Metro (3 viajes)','3€','10€','6€'],['Comida (mercado)','8€','12€','10€'],['Café Ciutadella','2€','5€','3€'],['Museu Picasso','14€','19€','14€'],['Catedral exterior','0€','16€','0€'],['Cena','7€','15€','9€'],['Bebida nocturna','2€','5€','3€']],
+  totalRow:['Total','38€','86€','46€'], totalNote:'Llevar 40€ en efectivo; la entrada de Picasso se paga online con tarjeta.'},
 
  {id:'d4', iso:'2026-10-18', travel:'transit', n:'04', date:'18 oct', city:'Barcelona → Madrid', tone:'tertiary', map:'trip',
   title:['Último paseo y ', 'tren a Madrid.'], sub:'Mañana flexible en Barcelona, checkout a las 11:00 y tren de 14:00 a 16:30.',
@@ -157,9 +157,9 @@ var DAYS = [
 ];
 
 var GLOBAL = {
-  bcn:{title:'Barcelona · 15–18 oct', tone:'primary', rows:[['D1 · Tren + taxi + cena','68€'],['D2 · Exploración de Nando','45€'],['D2 · Cena Monica + Nando','16€'],['D3 · Ruta compartida','32€'],['D4 · Checkout + tren + hotel + cena','177€']], total:['Subtotal Barcelona','338€']},
+  bcn:{title:'Barcelona · 15–18 oct', tone:'primary', rows:[['D1 · Tren + taxi + cena','68€'],['D2 · Exploración de Nando','45€'],['D2 · Cena Monica + Nando','16€'],['D3 · Ruta compartida','46€'],['D4 · Checkout + tren + hotel + cena','177€']], total:['Subtotal Barcelona','352€']},
   mad:{title:'Madrid · 18–21 oct', tone:'tertiary', rows:[['D5 · Madrid completo','56€'],['D6 · Excursión Toledo','72€'],['D7 · Vuelo + desayuno','18€']], total:['Subtotal Madrid','146€']},
-  all:{title:'Total viaje (ambas personas)', tone:'secondary', rows:[['Transporte (trenes, metro, taxi)','200€'],['Hoteles (2 noches BCN + 2 noches MAD)','160€'],['Museos + entradas','60€'],['Comidas + cenas','150€'],['Cafés + descansos','30€'],['Misceláneos','20€']], total:['Total general','~620€'], note:'Por persona: ~310€'}
+  all:{title:'Total viaje (ambas personas)', tone:'secondary', rows:[['Transporte (trenes, metro, taxi)','200€'],['Hoteles (2 noches BCN + 2 noches MAD)','160€'],['Museos + entradas','74€'],['Comidas + cenas','150€'],['Cafés + descansos','30€'],['Misceláneos','20€']], total:['Total general','~634€'], note:'Por persona: ~317€'}
 };
 var BUDGET_NOTES = ['Hoteles: buscar Airbnb u hostal para ahorrar (50–80€/noche vs 60–100€).','Museos: muchos son gratis en horarios específicos (Reina Sofía, Prado de noche).','Transporte: T-casual en Barcelona (13€, 10 viajes) en vez de billetes sencillos (2,90€).'];
 var APPS = [['Google Maps','Rutas, metros','Gratis'],['Citymapper','Mejor que Google para metro','Gratis'],['TMB','Comprar T-casual en Barcelona','Gratis'],['Renfe.com','Comprar trenes','~15–50€/billete'],['Airbnb / Booking','Hoteles económicos','50–100€/noche'],['Timeout Barcelona/Madrid','Guía de lugares','Gratis'],['Museos.es','Horarios + promos','Gratis']];
@@ -171,7 +171,7 @@ var CHECKS = [
   {title:'Pendientes por confirmar', items:['Articulate (16 oct): confirmar horario exacto','Park Güell (18 oct): ¿incluir en la mañana antes del tren?','Tren a Madrid (18 oct): verificar hora de salida','Destino del vuelo del 21 oct']}
 ];
 var NOTES = [
-  {title:'Para Monica', tone:'primary', items:['D2 agotador (Articulate 8:00–18:30): descanso después, cena ligera.','D3 compartido: ruta ya planificada, 32€, económica.','D5 flexible: Madrid según energía (puede saltarse museos si está cansada).']},
+  {title:'Para Monica', tone:'primary', items:['D2 agotador (Articulate 8:00–18:30): descanso después, cena ligera.','D3 compartido: ruta ya planificada, ~46€ con Picasso.','D5 flexible: Madrid según energía (puede saltarse museos si está cansada).']},
   {title:'Para Nando', tone:'secondary', items:['D2 exploración: medieval + anime (Picasso cubismo, iglesias góticas).','D5 Madrid: Prado (Goya dark) + Reina Sofía (Guernica).','D6 Toledo: épico, arquitectura medieval pura (Alcázar, catedral, callejones).']},
   {title:'Recomendación general', tone:'tertiary', items:['Compren los trenes con anticipación (15–20€ vs 30€+ a último momento).','Airbnb vs hotel: ahorrar 50–80€/noche.','Museos de noche gratis: Reina Sofía jueves–sábado 18–21h.','Toledo vale cada euro.']}
 ];
