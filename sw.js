@@ -1,5 +1,5 @@
 /* Offline: la app se guarda al instalar; los tiles del mapa se guardan al verlos (máx. 400). */
-const VERSION = 'viaje-v3';
+const VERSION = 'viaje-v4';
 const APP = [
   './', 'index.html', 'manifest.webmanifest',
   'css/m-design.css', 'css/app.css',

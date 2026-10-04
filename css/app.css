@@ -284,3 +284,4 @@ body.has-nowbar .toast{bottom:calc(4.5rem + env(safe-area-inset-bottom,0px))}
 .nowbar .loc-btn.on{color:hsl(var(--primary))}
 .me-dot{display:block;width:18px;height:18px;border-radius:50%;background:#2b7fff;border:3px solid #fff;box-shadow:0 0 0 2px rgb(43 127 255 / .35),0 2px 6px rgb(0 0 0 / .3)}
 .me-acc{fill:#2b7fff;fill-opacity:.12;stroke:#2b7fff;stroke-opacity:.4;stroke-width:1}
+.voz{font-size:var(--text-sm);line-height:1.55;color:hsl(var(--foreground));font-weight:var(--weight-medium)}

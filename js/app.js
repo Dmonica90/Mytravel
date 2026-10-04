@@ -9,6 +9,18 @@ window.ViajeStart = function(user){
 const NAMES = {moni:'Moni', nando:'Nando'};
 const ME = NAMES[user], OTHER = NAMES[user==='moni'?'nando':'moni'];
 const key = k => `${user}:${k}`;
+/* Redacción personal: elige la versión de quien entra y completa los marcadores. */
+const pick = v => v==null ? '' : (typeof v==='object' ? (v[user]||'') : v);
+const durTxt = m => m<60 ? `${m} min` : `${Math.floor(m/60)} h${m%60?` ${m%60} min`:''}`;
+function voice(v, ctx={}){
+  const t = pick(v); if (!t) return '';
+  const toM = x => { const [h,m] = x.split(':').map(Number); return h*60+m; };
+  const nice = x => (x||'').replace(/^0(\d)/, '$1');
+  return t.replace(/\{yo\}/g, ME).replace(/\{otro\}/g, OTHER)
+    .replace(/\{hora\}/g, nice(ctx.hora)).replace(/\{hasta\}/g, nice(ctx.hasta))
+    .replace(/\{dur\}/g, ctx.hora && ctx.hasta ? durTxt(toM(ctx.hasta)-toM(ctx.hora)) : '');
+}
+const vozFor = (k, it, next) => voice((window.VOZ||{})[k], {hora:it.t, hasta: next ? next.t : ''});
 
 const TZ = 'Europe/Madrid';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -21,7 +33,7 @@ const store = {
 };
 
 /* ---------- Render: items and days ---------- */
-function renderItem(it, dayId, pinIndex, flatIdx){
+function renderItem(it, dayId, pinIndex, flatIdx, voz){
   const pinAttr = it.pin!=null && pinIndex!=null ? ` data-pin="${pinIndex}" tabindex="0" role="button" aria-label="${esc(it.title)}: ver en el mapa"` : '';
   const idxAttr = flatIdx!=null ? ` data-idx="${flatIdx}"` : '';
   let h = `<li class="item${pinAttr?' has-pin':''}"${pinAttr}${idxAttr}>
@@ -29,6 +41,7 @@ function renderItem(it, dayId, pinIndex, flatIdx){
     <div class="item-body">
       <div class="item-head"><div class="item-title"><i data-lucide="${it.icon||'dot'}"></i><span>${esc(it.title)}</span></div>${it.cost?`<span class="cost${isFree(it.cost)?' free':''}">${esc(it.cost)}</span>`:''}</div>
       <span class="status" hidden></span>`;
+  if (voz) h += `<p class="voz">${esc(voz)}</p>`;
   if (it.why) h += `<p class="why"><b>${it.whoWhy?'¿Por qué Nando?':'¿Por qué?'}</b> ${esc(it.why)}</p>`;
   if (it.detail) h += `<p class="item-detail">${esc(it.detail)}</p>`;
   if (it.opts) {
@@ -93,10 +106,10 @@ function renderDay(d){
   const {items} = DAYDATA[d.id];
   let k = 0;
   const blocks = d.blocks.map(b=>{
-    const lis = b.items.map(()=>{ const e = items[k++]; return renderItem(e.it, d.id, e.pin, e.idx); }).join('');
+    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t}`, e.it, nx && nx.it)); }).join('');
     return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(youLabel(b.label))}</p>`:''}<ol class="tl">${lis}</ol></div>`;
   }).join('');
-  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map(it=>renderItem(it,d.id,null,null)).join('')}</ol></div>` : '';
+  const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map((it,i,a)=>renderItem(it,d.id,null,null,vozFor(`pre:${d.id}|${it.t}`, it, a[i+1]))).join('')}</ol></div>` : '';
   const why = d.why ? `<div class="md-callout md-callout--accent"><div class="md-callout-icon"><i data-lucide="castle"></i></div><div class="md-callout-body"><p class="md-callout-title">¿Por qué Toledo?</p><div class="md-callout-text"><ul>${d.why.map(w=>`<li>${esc(w)}</li>`).join('')}</ul></div></div></div>` : '';
   const post = d.post ? `<div class="md-callout md-callout--info"><div class="md-callout-icon"><i data-lucide="${d.post.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.post.title)}</p><div class="md-callout-text"><ul>${d.post.text.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div></div>` : '';
   const callout = d.callout ? `<div class="md-callout md-callout--${d.callout.tone}"><div class="md-callout-icon"><i data-lucide="${d.callout.icon}"></i></div><div class="md-callout-body"><p class="md-callout-title">${esc(d.callout.title)}</p><div class="md-callout-text">${d.callout.text?esc(d.callout.text):`<ul>${d.callout.list.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`}</div></div></div>` : '';
@@ -113,7 +126,7 @@ function renderDay(d){
         <span class="day-num" aria-hidden="true">${d.n}</span>
         <div class="day-meta"><span class="md-eyebrow-label muted">Día ${parseInt(d.n)} · ${esc(d.date)}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span><span class="visit-progress" data-day="${d.id}"></span></div>
         <h2 class="md-heading">${esc(d.title[0])}<span class="accent">${esc(d.title[1])}</span></h2>
-        <p class="day-sub">${esc(d.sub)}</p>
+        <p class="day-sub">${esc(voice((window.INTRO||{})[d.id]) || d.sub)}</p>
       </div>
       <div class="day-grid"><div class="map-col">${renderMapShell(d)}</div>${main}</div>
     </div></section>`;
@@ -123,7 +136,7 @@ const $ = id => document.getElementById(id);
 $('heroEyebrow').textContent = `Hola, ${ME} · 15–21 octubre 2026`;
 $('heroLead').textContent = `Tu viaje con ${OTHER}: siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
 $('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city)}</small></a>`).join('');
-$('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(d.ov)}</p></a>`).join('');
+$('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(voice((window.OV||{})[d.id]) || d.ov)}</p></a>`).join('');
 $('days').innerHTML = DAYS.map(renderDay).join('');
 
 $('budgetGlobal').innerHTML = Object.values(GLOBAL).map(g=>`<div class="panel wash-${g.tone}"><h3>${esc(g.title)}</h3><div style="margin-top:.75rem">${budgetTable(['Concepto','Costo'], g.rows, g.total)}</div>${g.note?`<p class="item-detail" style="margin-top:.5rem">${esc(g.note)}</p>`:''}</div>`).join('')
@@ -270,14 +283,14 @@ function updateLive(){
 
   if (date < first) {
     const n = dayDiff(date, first);
-    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>Faltan ${n} ${n===1?'día':'días'} · salen el 15 de octubre`;
+    pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, faltan ${n} ${n===1?'día':'días'} · salen el 15 de octubre`;
     return;
   }
-  if (date > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>Viaje terminado. ¡Qué buen viaje!`; return; }
+  if (date > last) { pill.className = 'live-pill'; pill.innerHTML = `<span class="dot"></span>${ME}, el viaje terminó. ¡Qué buen viaje con ${OTHER}!`; return; }
 
   const d = DAYS.find(x=>x.iso===date);
   if (!d) return;
-  pill.className = 'live-pill on'; pill.innerHTML = `<span class="dot"></span>Hoy es el día ${parseInt(d.n)} · ${esc(d.city)} · ${hhmm(min)}`;
+  pill.className = 'live-pill on'; pill.innerHTML = `<span class="dot"></span>${ME}, hoy es el día ${parseInt(d.n)} · ${esc(d.city)} · ${hhmm(min)}`;
   const chip = document.querySelector(`.chip[data-nav="${d.id}"] b`); if (chip) chip.insertAdjacentHTML('beforeend','<span class="today">Hoy</span>');
   const sec = $(d.id), s = dayStatus(d, min);
   s.st.forEach((v,i)=>{
@@ -290,9 +303,8 @@ function updateLive(){
   const nowEntry = s.cur>=0 ? s.items[s.cur] : null, nextEntry = s.next>=0 ? s.items[s.next] : null;
   if (nowEntry && nowEntry.pin!=null && MAPS[d.id]) { const el = MAPS[d.id].markers[nowEntry.pin].getElement(); if (el) el.querySelector('.mk').classList.add('now'); }
   const parts = [];
-  if (nowEntry) parts.push(`<span><b>${ME}, ahora:</b> ${esc(nowEntry.it.title)}</span>`);
-  if (nextEntry) parts.push(`<span><b>Siguiente:</b> ${esc(nextEntry.it.title)} · ${inMin(s.starts[s.next]-min)} (${esc(nextEntry.it.t)})</span>`);
-  if (nextEntry && !nowEntry) parts[0] = parts[0].replace('<b>Siguiente:</b>', `<b>${ME}, lo siguiente:</b>`);
+  if (nowEntry) parts.push(`<span><b>${ME}, ahora estás en:</b> ${esc(nowEntry.it.title)}${nextEntry?` · tienes ${durTxt(s.starts[s.next]-min)}`:''}</span>`);
+  if (nextEntry) parts.push(`<span><b>${nowEntry?'Después:':`${ME}, lo siguiente:`}</b> a las ${esc(nextEntry.it.t)} ${esc(nextEntry.it.title)} (${inMin(s.starts[s.next]-min)})</span>`);
   if (!parts.length) parts.push(`<span><b>Día terminado, ${ME}.</b> A descansar.</span>`);
   $('nowText').innerHTML = parts.join('');
   const target = nowEntry || nextEntry;
@@ -304,7 +316,10 @@ function updateLive(){
   bar.hidden = false; document.body.classList.add('has-nowbar');
   if (lastToday!==d.id && !location.hash) {
     lastToday = d.id;
-    requestAnimationFrame(()=>window.scrollTo({top: sec.getBoundingClientRect().top + scrollY - 72, behavior:'instant'}));
+    /* Esperar a que la página termine de cargar: si no, la restauración de scroll del navegador nos devuelve arriba. */
+    const jump = () => requestAnimationFrame(()=>window.scrollTo({top: sec.getBoundingClientRect().top + scrollY - 72, behavior:'instant'}));
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (document.readyState==='complete') jump(); else window.addEventListener('load', jump, {once:true});
     if (target && target.pin!=null) activate(d.id, target.pin, {pan:true});
   }
 }
