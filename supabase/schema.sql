@@ -43,6 +43,8 @@ create table if not exists public.photos (
   thumb_path text not null,
   created_at timestamptz not null default now()
 );
+-- Nota de la foto (pie de foto del diario); solo la edita quien tomó la foto.
+alter table public.photos add column if not exists nota text;
 alter table public.photos enable row level security;
 drop policy if exists photos_read on public.photos;
 drop policy if exists photos_write on public.photos;
@@ -80,17 +82,32 @@ drop policy if exists prechecks_write on public.prechecks;
 create policy prechecks_read  on public.prechecks for select to authenticated using (true);
 create policy prechecks_write on public.prechecks for all    to authenticated using (true) with check (true);
 
+-- ---------- Diario: "Nuestro día", una nota por día que escriben los dos ----------
+create table if not exists public.diario (
+  day text primary key,
+  texto text not null default '',
+  who text not null check (who in ('moni','nando')),
+  updated_at timestamptz not null default now()
+);
+alter table public.diario enable row level security;
+drop policy if exists diario_read on public.diario;
+drop policy if exists diario_write on public.diario;
+create policy diario_read  on public.diario for select to authenticated using (true);
+create policy diario_write on public.diario for all    to authenticated using (true) with check (true);
+
 -- ---------- Avisos en vivo (Realtime) ----------
 alter table public.visits replica identity full;
 alter table public.photos replica identity full;
 alter table public.edits  replica identity full;
 alter table public.prechecks replica identity full;
+alter table public.diario replica identity full;
 do $$
 begin
   begin alter publication supabase_realtime add table public.visits; exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.photos; exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.edits;  exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.prechecks; exception when duplicate_object then null; end;
+  begin alter publication supabase_realtime add table public.diario; exception when duplicate_object then null; end;
 end $$;
 
 -- ---------- Storage: bucket privado "fotos" ----------

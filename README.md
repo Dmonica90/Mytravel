@@ -13,14 +13,25 @@ Web app del itinerario de Monica y Nando, hecha con el sistema de diseño **M-De
 
 ## Entrar
 
-La app pide **quién eres (Moni o Nando)** y una **contraseña compartida** (no está escrita en el repo; el código solo guarda su huella SHA-256). Según quién entra, los textos le hablan a esa persona ("Hola, Moni", "Tú · Articulate", "Para ti"…). Para cambiar de persona: botón de salida arriba a la derecha.
+La app pide **quién eres (Moni o Nando)** y una **contraseña compartida** (no está escrita en el repo; el código solo guarda su huella SHA-256). Según quién entra, los textos le hablan a esa persona ("Hola, Moni", "Tú · Articulate", "Para ti"…). Para cambiar de persona: **Más → Ajustes → Cerrar sesión**.
 
 > Ojo: como el repositorio es público, la contraseña evita miradas casuales, no es seguridad real. Quien lea el código puede ver el itinerario.
+
+## Pestañas
+
+Abajo (arriba en la computadora) hay cuatro pestañas: **Viaje** (días, mapas y modo "Ahora"), **Álbum** (diario del viaje), **Pendientes** ("Antes de viajar" con % y checklist maestro) y **Más** (vuelos, resumen, presupuesto, qué llevar, notas y ajustes). La pestaña queda en la dirección (`#album`, `#pendientes`…), así que el botón "atrás" funciona.
+
+## Instalar en el celular
+
+- **iPhone:** abrir la dirección en Safari → Compartir (cuadrito con flecha) → **Agregar a inicio** → Agregar.
+- **Android:** abrir en Chrome → menú ⋮ → **Instalar app** (o "Agregar a la pantalla principal").
+- También está el botón **Más → Ajustes → Instalar en el celular**, que abre el instalador o muestra los pasos.
 
 ## Checklist, fotos y ubicación
 
 - Cada parada tiene **Visitada** y **Tomar foto**. "Tomar foto" abre la cámara del celular; la foto queda guardada en la app y la parada se marca como visitada.
-- Las fotos se guardan **solo en ese celular** (y por persona). Toca una miniatura → **Guardar en galería** para pasarla a tus fotos; en el **Álbum del viaje** está "Guardar todas".
+- Las fotos se guardan **solo en ese celular** (y por persona). Toca una miniatura → **Guardar en galería** para pasarla a tus fotos; en la pestaña **Álbum** está "Guardar todas".
+- **Álbum = diario:** una página por día con **Nuestro día** (lo que escriban de ese día, cualquiera de los dos) y las fotos en polaroid. Quien tomó la foto le puede poner una **nota**, que también aparece debajo de la actividad.
 - **Usar mi ubicación** (arriba o en la barra "Ahora") muestra tu punto en el mapa, la distancia a cada parada y avisa al llegar a menos de 150 m de una parada pendiente. Solo funciona **con la app abierta** y en la dirección `https://`.
 
 ## Conectar Supabase (álbum y checks compartidos, avisos en vivo)
@@ -63,7 +74,9 @@ css/m-design.css      tokens y componentes de M-Design
 css/app.css           estilos de la app
 js/itinerario.js      datos del viaje
 js/app.js             render, mapas, modo "Ahora"
-js/visitas.js         checklist, cámara y álbum
+js/tabs.js            pestañas e "Instalar en el celular"
+js/visitas.js         checklist, cámara, notas de fotos y visor
+js/diario.js          pestaña Álbum (diario del viaje)
 js/ubicacion.js       "estoy cerca"
 js/sesion.js          entrada Moni / Nando
 js/config.js          URL y clave pública de Supabase

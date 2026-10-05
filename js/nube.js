@@ -1,4 +1,4 @@
-/* Nube: envoltorio sobre Supabase (login, visitas, fotos, cambios al itinerario y avisos en vivo).
+/* Nube: envoltorio sobre Supabase (login, visitas, fotos y sus notas, cambios al itinerario, diario y avisos en vivo).
    Si no hay clave en js/config.js, Nube.enabled es false y la app sigue en modo local. */
 (function(){
 'use strict';
@@ -45,13 +45,15 @@ N.listPhotos = async () => {
   return rows.map(r => ({...r, url:m[r.path], thumbUrl:m[r.thumb_path]}));
 };
 N.thumbUrl = async (path) => (ok(await sb.storage.from('fotos').createSignedUrls([path], 60*60)) || [])[0]?.signedUrl;
-N.uploadPhoto = async ({day, pin, full, thumb, ts}) => {
+N.uploadPhoto = async ({day, pin, full, thumb, ts, nota}) => {
   const base = `${uid}/${day}-${pin}-${ts}`;
   const st = sb.storage.from('fotos');
   ok(await st.upload(`${base}.jpg`, full, {contentType:'image/jpeg', upsert:true}));
   ok(await st.upload(`${base}-t.jpg`, thumb, {contentType:'image/jpeg', upsert:true}));
-  ok(await sb.from('photos').insert({owner:uid, who, day, pin, path:`${base}.jpg`, thumb_path:`${base}-t.jpg`, created_at:new Date(ts).toISOString()}));
+  /* "nota" solo se envía si hay: así sigue funcionando aunque aún no corran el SQL nuevo. */
+  ok(await sb.from('photos').insert({owner:uid, who, day, pin, path:`${base}.jpg`, thumb_path:`${base}-t.jpg`, created_at:new Date(ts).toISOString(), ...(nota ? {nota} : {})}));
 };
+N.setPhotoNote = async (id, nota) => { ok(await sb.from('photos').update({nota:nota||null}).eq('id', id)); };
 N.deletePhoto = async (row) => {
   ok(await sb.storage.from('fotos').remove([row.path, row.thumb_path]));
   ok(await sb.from('photos').delete().eq('id', row.id));
@@ -71,6 +73,12 @@ N.setPrecheck = async (item_id, done, label) => {
 };
 N.delPrecheck = async (item_id) => { ok(await sb.from('prechecks').delete().eq('item_id', item_id)); };
 
+/* Diario: "Nuestro día", una nota compartida por día */
+N.listDiario = async () => ok(await sb.from('diario').select('*')) || [];
+N.saveDiario = async (day, texto) => {
+  ok(await sb.from('diario').upsert({day, texto:texto||'', who, updated_at:new Date().toISOString()}, {onConflict:'day'}));
+};
+
 /* Avisos en vivo: cada cambio llega como evento "nube:change" con {table, type, row}. */
 N.subscribe = () => {
   const emit = (table) => (p) => {
@@ -82,6 +90,7 @@ N.subscribe = () => {
     .on('postgres_changes', {event:'*', schema:'public', table:'photos'}, emit('photos'))
     .on('postgres_changes', {event:'*', schema:'public', table:'edits'}, emit('edits'))
     .on('postgres_changes', {event:'*', schema:'public', table:'prechecks'}, emit('prechecks'))
+    .on('postgres_changes', {event:'*', schema:'public', table:'diario'}, emit('diario'))
     .subscribe();
 };
 })();

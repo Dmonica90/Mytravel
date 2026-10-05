@@ -159,8 +159,9 @@ function renderDay(d){
 
 const $ = id => document.getElementById(id);
 $('heroEyebrow').textContent = `Hola, ${ME} · 11–21 octubre 2026`;
-$('heroLead').textContent = `Tu viaje con ${OTHER}: siete días en tren, a pie y con museos gratis cuando se puede. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
-$('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city)}</small></a>`).join('');
+$('heroLead').textContent = `Tu viaje con ${OTHER}: once días, de la playa con Emilio y Didi en Cancún a Barcelona, Madrid y Toledo. Toca una parada para verla en el mapa, márcala como visitada y tómale una foto.`;
+$('dayNav').innerHTML = DAYS.map(d=>`<a class="chip t-${d.tone}" href="#${d.id}" data-nav="${d.id}"><b><i>D${parseInt(d.n)}</i> ${esc(d.date)}</b><small>${esc(d.city.replace(/ → .*/, ''))}</small></a>`).join('');
+if ($('setWho')) $('setWho').innerHTML = `Conectado como <b>${esc(ME)}</b>${window.Nube && Nube.enabled ? ' · lo que hagan se comparte entre los dos' : ' · modo local, cada celular por su lado'}.`;
 /* Vuelos: tarjetas con estado en vivo (búsqueda de Google por número de vuelo). */
 const legUrl = l => `https://www.google.com/search?q=${encodeURIComponent(l.replace(/^([A-Z]+)(\d+)$/, '$1 $2')+' vuelo')}`;
 $('flights').innerHTML = (window.VUELOS||[]).map(f=>`<article class="flight">
@@ -205,8 +206,10 @@ const savedTheme = store.get('theme', null);
 $('logoutBtn').addEventListener('click', async ()=>{ try { localStorage.removeItem('viaje-user'); } catch(e){} if (window.Nube && Nube.enabled) await Nube.logout(); location.reload(); });
 if (savedTheme) root.dataset.theme = savedTheme;
 const isDark = () => root.dataset.theme ? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-$('themeBtn').addEventListener('click', ()=>{ root.dataset.theme = isDark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); applyTiles(); });
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTiles);
+const themeLbl = () => { if ($('themeLbl')) $('themeLbl').textContent = isDark() ? 'Ahora: oscuro' : 'Ahora: claro'; };
+$('themeBtn').addEventListener('click', ()=>{ root.dataset.theme = isDark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); applyTiles(); themeLbl(); });
+themeLbl();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ applyTiles(); themeLbl(); });
 
 /* ---------- Maps ---------- */
 const MAPS = {};
@@ -236,7 +239,8 @@ function initMaps(){
       m.on('click', ()=>activate(d.id, i, {scroll:true}));
       return m;
     });
-    MAPS[d.id] = {map, tiles, markers, segs, pins};
+    /* Si el mapa nace en una pestaña oculta no tiene tamaño: se ajusta al mostrar Viaje. */
+    MAPS[d.id] = {map, tiles, markers, segs, pins, needsFit: !el.offsetWidth};
     fitDay(d.id);
   });
 }
@@ -245,6 +249,11 @@ function fitDay(id){
   if (m.pins.length===1) m.map.setView([m.pins[0].lat, m.pins[0].lng], 13);
   else m.map.fitBounds(m.pins.map(p=>[p.lat,p.lng]), {padding:[28,28], maxZoom:16});
 }
+
+if (window.ViajeTabs) ViajeTabs.on('viaje', ()=>requestAnimationFrame(()=>Object.entries(MAPS).forEach(([id,m])=>{
+  m.map.invalidateSize();
+  if (m.needsFit && m.map.getContainer().offsetWidth) { m.needsFit = false; fitDay(id); }
+})));
 
 /* ---------- Map ↔ timeline sync ---------- */
 function activate(dayId, idx, {scroll=false, pan=false}={}){
@@ -273,9 +282,10 @@ $('days').addEventListener('keydown', e=>{
 /* ---------- Day nav highlight ---------- */
 const chips = [...document.querySelectorAll('[data-nav]')];
 /* Scroll only the chip strip sideways; scrollIntoView would also move the page. */
-function revealChip(c){
+function revealChip(c, center){
   const nav = $('dayNav'), l = c.offsetLeft - nav.offsetLeft, r = l + c.offsetWidth;
-  if (l < nav.scrollLeft) nav.scrollTo({left:l - 8}); else if (r > nav.scrollLeft + nav.clientWidth) nav.scrollTo({left:r - nav.clientWidth + 8});
+  if (center) nav.scrollTo({left:l - (nav.clientWidth - c.offsetWidth)/2});
+  else if (l < nav.scrollLeft) nav.scrollTo({left:l - 8}); else if (r > nav.scrollLeft + nav.clientWidth) nav.scrollTo({left:r - nav.clientWidth + 8});
 }
 const io = new IntersectionObserver(entries=>{
   entries.forEach(en=>{ if (en.isIntersecting){ chips.forEach(c=>{ const on = c.dataset.nav===en.target.id; c.setAttribute('aria-current', on); if (on) revealChip(c); }); } });
@@ -330,6 +340,7 @@ function updateLive(){
   const d = t.d, min = t.min;
   pill.className = 'live-pill on'; pill.innerHTML = `<span class="dot"></span>${ME}, hoy es el día ${parseInt(d.n)} · ${esc(d.city)} · ${hhmm(min)}${dayTz(d)!==TZ?' (hora de Cancún)':''}`;
   const chip = document.querySelector(`.chip[data-nav="${d.id}"] b`); if (chip) chip.insertAdjacentHTML('beforeend','<span class="today">Hoy</span>');
+  if (chip && lastToday!==d.id) revealChip(chip.parentElement, true);
   const sec = $(d.id), s = dayStatus(d, min);
   s.st.forEach((v,i)=>{
     const li = sec.querySelector(`.item[data-idx="${i}"]`); if (!li) return;
@@ -347,15 +358,18 @@ function updateLive(){
   $('nowText').innerHTML = parts.join('');
   const target = nowEntry || nextEntry;
   $('nowGo').onclick = () => {
+    if (window.ViajeTabs && ViajeTabs.current()!=='viaje') ViajeTabs.go('#viaje');
     const li = target ? sec.querySelector(`.item[data-idx="${target.idx}"]`) : sec;
     li.scrollIntoView({block:'center', behavior:'smooth'});
     if (target && target.pin!=null) activate(d.id, target.pin, {pan:true});
   };
   bar.hidden = false; document.body.classList.add('has-nowbar');
-  if (lastToday!==d.id && !location.hash) {
+  const onViaje = !window.ViajeTabs || ViajeTabs.current()==='viaje';
+  if (lastToday!==d.id && (!location.hash || location.hash==='#viaje') && onViaje) {
     lastToday = d.id;
     /* Esperar a que la página termine de cargar: si no, la restauración de scroll del navegador nos devuelve arriba. */
-    const jump = () => requestAnimationFrame(()=>window.scrollTo({top: sec.getBoundingClientRect().top + scrollY - 72, behavior:'instant'}));
+    const top = () => window.ViajeTabs ? ViajeTabs.offset('viaje') : 72;
+    const jump = () => requestAnimationFrame(()=>window.scrollTo({top: sec.getBoundingClientRect().top + scrollY - top(), behavior:'instant'}));
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     if (document.readyState==='complete') jump(); else window.addEventListener('load', jump, {once:true});
     if (target && target.pin!=null) activate(d.id, target.pin, {pan:true});
@@ -371,6 +385,14 @@ function toast(html, actions=[], {sticky=false}={}){
   clearTimeout(t._t); if (!sticky) t._t = setTimeout(()=>{ t.hidden = true; }, 5000);
 }
 const todayId = () => { const t = today(); return t ? t.d.id : null; };
+/* Parada actual para la cámara del álbum: la de "Ahora", si no la última que ya pasó, si no la siguiente. */
+function currentStop(){
+  const t = today(); if (!t) return null;
+  const s = dayStatus(t.d, t.min), withPin = i => s.items[i] && s.items[i].pin!=null;
+  for (let i = s.cur>=0 ? s.cur : s.items.length-1; i>=0; i--) if (s.st[i]!=='later' && withPin(i)) return {day:t.d.id, pin:s.items[i].pin};
+  const n = s.items.findIndex(e=>e.pin!=null);
+  return n>=0 ? {day:t.d.id, pin:s.items[n].pin} : null;
+}
 
 /* ---------- Boot ---------- */
 initMaps();
@@ -378,8 +400,9 @@ DAYS.forEach(d=>{ if (DAYDATA[d.id].pins.length) activate(d.id, 0); });
 updateLive();
 setInterval(updateLive, 60000);
 document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) updateLive(); });
-const V = window.Viaje = {user, ME, OTHER, key, store, esc, gm, DAYS, DAYDATA, MAPS, activate, toast, todayId, madridNow};
+const V = window.Viaje = {user, ME, OTHER, key, store, esc, gm, DAYS, DAYDATA, MAPS, activate, toast, todayId, madridNow, currentStop, voice};
 window.ViajeModules.forEach(init=>{ try { init(V); } catch(e){ console.error(e); } });
 if (window.lucide) lucide.createIcons();
+if (window.ViajeTabs) ViajeTabs.refresh();
 if ('serviceWorker' in navigator && location.protocol!=='file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 };
