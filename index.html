@@ -6,7 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Viaje Oct 2026</title>
 <meta name="description" content="Itinerario de Monica y Nando, 11–21 de octubre de 2026: Cancún, Barcelona, Madrid y Toledo.">
-<meta name="theme-color" content="#0a0f29">
+<meta name="theme-color" content="#f7f7f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0f29" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -23,16 +24,21 @@
 <body>
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="brand" href="#top">Monica <span>+</span> Nando</a>
-    <nav class="days" id="dayNav" aria-label="Días del viaje"></nav>
+    <a class="brand" href="#viaje">Monica <span>+</span> Nando</a>
+    <div class="bar-tabs" id="barTabs"></div>
     <button class="md-btn md-btn--ghost loc-btn" id="locBtn" type="button" aria-pressed="false" aria-label="Usar mi ubicación"><i data-lucide="locate"></i><span class="lbl">Usar mi ubicación</span></button>
-    <button class="md-btn md-btn--ghost" id="themeBtn" type="button" aria-label="Cambiar tema claro u oscuro"><i data-lucide="sun-moon"></i></button>
-    <button class="md-btn md-btn--ghost" id="logoutBtn" type="button" aria-label="Cerrar sesión" title="Cerrar sesión"><i data-lucide="log-out"></i></button>
   </div>
 </header>
 
+<nav class="tabbar" id="tabbar" aria-label="Secciones">
+  <a class="tab" href="#viaje" data-tab-link="viaje"><i data-lucide="map"></i><span>Viaje</span></a>
+  <a class="tab" href="#album" data-tab-link="album"><i data-lucide="images"></i><span>Álbum</span><b class="tab-dot" id="dotAlbum" hidden></b></a>
+  <a class="tab" href="#pendientes" data-tab-link="pendientes"><i data-lucide="list-checks"></i><span>Pendientes</span><b class="tab-badge" id="badgePend" hidden></b></a>
+  <a class="tab" href="#mas" data-tab-link="mas"><i data-lucide="menu"></i><span>Más</span></a>
+</nav>
+
 <main id="top">
-  <section class="hero">
+  <section class="hero" data-tab="viaje">
     <div class="wrap">
       <p class="md-eyebrow-label muted" id="heroEyebrow">Monica + Nando · 11–21 octubre 2026</p>
       <h1 class="md-heading">Cancún, Barcelona, Madrid y Toledo, <span class="accent">sin prisa.</span></h1>
@@ -47,7 +53,9 @@
     </div>
   </section>
 
-  <section class="section pre-sec" id="antes" aria-labelledby="preTitle">
+  <div class="daybar" data-tab="viaje"><nav class="days wrap" id="dayNav" aria-label="Días del viaje"></nav></div>
+
+  <section class="section pre-sec" id="antes" data-tab="pendientes" aria-labelledby="preTitle">
     <div class="wrap">
       <div class="pre-top">
         <div class="pre-ring" id="preRing" role="img"></div>
@@ -67,7 +75,16 @@
     </div>
   </section>
 
-  <section class="flights-sec" id="vuelos" aria-labelledby="flTitle">
+  <nav class="mas-nav wrap" data-tab="mas" aria-label="Más secciones">
+    <a href="#vuelos"><i data-lucide="plane"></i>Vuelos</a>
+    <a href="#resumen"><i data-lucide="calendar-days"></i>Resumen</a>
+    <a href="#presupuesto"><i data-lucide="wallet"></i>Presupuesto</a>
+    <a href="#extras"><i data-lucide="backpack"></i>Qué llevar</a>
+    <a href="#notas"><i data-lucide="notebook-pen"></i>Notas</a>
+    <a href="#ajustes"><i data-lucide="settings"></i>Ajustes</a>
+  </nav>
+
+  <section class="flights-sec" id="vuelos" data-tab="mas" aria-labelledby="flTitle">
     <div class="wrap">
       <p class="md-eyebrow-label muted" id="flTitle">Vuelos</p>
       <div class="flights" id="flights"></div>
@@ -75,39 +92,47 @@
     </div>
   </section>
 
-  <section class="overview" aria-labelledby="ovTitle">
+  <section class="overview" id="resumen" data-tab="mas" aria-labelledby="ovTitle">
     <div class="wrap">
       <p class="md-eyebrow-label muted" id="ovTitle">Resumen maestro</p>
       <div class="ov-grid" id="overview"></div>
     </div>
   </section>
 
-  <div id="days"></div>
+  <div id="days" data-tab="viaje"></div>
 
-  <section class="section" id="album">
+  <section class="section album-sec" id="album" data-tab="album">
     <div class="wrap">
       <div class="section-head">
-        <p class="md-eyebrow-label muted">Álbum del viaje <span id="albumCount"></span></p>
-        <h2 class="md-heading">Cada parada, <span class="accent">una foto.</span></h2>
+        <p class="md-eyebrow-label muted">Diario del viaje <span id="albumCount"></span></p>
+        <h2 class="md-heading">Nuestro álbum, <span class="accent">día a día.</span></h2>
         <p id="albumIntro">Las fotos se guardan solo en este celular. Guárdalas en tu galería para no perderlas.</p>
-        <button class="md-btn md-btn--outline" id="albumSaveAll" type="button" hidden style="margin-top:var(--space-4)"><i data-lucide="download"></i>Guardar todas en la galería</button>
+      </div>
+      <div class="album-tools">
+        <div class="album-filter" id="albumFilter" role="group" aria-label="Fotos de" hidden>
+          <button type="button" class="fchip" data-f="all" aria-pressed="true">Todos</button>
+          <button type="button" class="fchip" data-f="moni" aria-pressed="false">Moni</button>
+          <button type="button" class="fchip" data-f="nando" aria-pressed="false">Nando</button>
+        </div>
+        <button class="md-btn md-btn--outline md-btn--sm" id="albumSaveAll" type="button" hidden><i data-lucide="download"></i>Guardar todas</button>
       </div>
       <div id="albumGrid"></div>
     </div>
+    <button class="fab" id="albumCam" type="button" aria-label="Tomar foto"><i data-lucide="camera"></i><span>Tomar foto</span></button>
   </section>
 
-  <section class="section" id="presupuesto">
+  <section class="section" id="presupuesto" data-tab="mas">
     <div class="wrap">
       <div class="section-head">
         <p class="md-eyebrow-label muted">Presupuesto global</p>
         <h2 class="md-heading">Unos 634 € para los dos, <span class="accent">todo incluido.</span></h2>
-        <p>Trenes, hoteles, museos y comidas en Europa. Cancún va con sus amigos y aún no tiene cifras.</p>
+        <p>Trenes, hoteles, museos y comidas en Europa. Cancún va con Emilio y Didi y aún no tiene cifras.</p>
       </div>
       <div class="grid3" id="budgetGlobal"></div>
     </div>
   </section>
 
-  <section class="section" id="extras">
+  <section class="section" id="extras" data-tab="mas">
     <div class="wrap">
       <div class="section-head">
         <p class="md-eyebrow-label muted">Antes de salir</p>
@@ -117,7 +142,7 @@
     </div>
   </section>
 
-  <section class="section" id="checklist">
+  <section class="section" id="checklist" data-tab="pendientes">
     <div class="wrap">
       <div class="section-head">
         <p class="md-eyebrow-label muted">Checklist maestro</p>
@@ -129,7 +154,7 @@
     </div>
   </section>
 
-  <section class="section" id="notas">
+  <section class="section" id="notas" data-tab="mas">
     <div class="wrap">
       <div class="section-head">
         <p class="md-eyebrow-label muted">Notas finales</p>
@@ -139,14 +164,30 @@
     </div>
   </section>
 
-  <section class="md-statement">
+  <section class="section ajustes-sec" id="ajustes" data-tab="mas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Ajustes</p>
+        <h2 class="md-heading">La app, <span class="accent">a su gusto.</span></h2>
+      </div>
+      <div class="settings">
+        <p class="set-who" id="setWho"></p>
+        <button class="set-row loc-btn" id="setLoc" type="button" aria-pressed="false"><i data-lucide="locate"></i><span class="lbl">Usar mi ubicación</span><small>Distancia a cada parada y aviso al llegar</small></button>
+        <button class="set-row" id="themeBtn" type="button"><i data-lucide="sun-moon"></i><span>Tema claro u oscuro</span><small id="themeLbl"></small></button>
+        <button class="set-row" id="installBtn" type="button"><i data-lucide="smartphone"></i><span>Instalar en el celular</span><small id="installLbl">Como app, en la pantalla de inicio</small></button>
+        <button class="set-row danger" id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Cerrar sesión</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="md-statement" data-tab="mas">
     <div class="wrap">
       <p class="md-eyebrow-label" style="color:hsl(var(--surface-deep-foreground) / .7)">Recomendación general</p>
       <p class="statement-q" style="margin-top:var(--space-5)">Toledo vale <span>cada euro.</span></p>
       <p style="margin-top:var(--space-5);max-width:40rem;color:hsl(var(--surface-deep-foreground) / .8)">Día épico, ciudad medieval intacta, fotos increíbles. Compren los trenes con anticipación y aprovechen las noches gratis de los museos.</p>
     </div>
   </section>
-  <footer class="foot wrap">Última actualización: 4 de octubre de 2026. Mapas © OpenStreetMap y CARTO.</footer>
+  <footer class="foot wrap" data-tab="mas">Última actualización: 4 de octubre de 2026. Mapas © OpenStreetMap y CARTO.</footer>
 </main>
 
 <div class="nowbar" id="nowbar" hidden>
@@ -161,9 +202,19 @@
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto" hidden>
   <div class="lightbox-panel">
-    <img id="lbImg" alt="">
+    <div class="lb-stage">
+      <img id="lbImg" alt="">
+      <button class="lb-nav prev" id="lbPrev" type="button" aria-label="Foto anterior"><i data-lucide="chevron-left"></i></button>
+      <button class="lb-nav next" id="lbNext" type="button" aria-label="Foto siguiente"><i data-lucide="chevron-right"></i></button>
+    </div>
     <div class="lightbox-bar">
       <p id="lbCaption"></p>
+      <p class="lb-nota" id="lbNota" hidden></p>
+      <form class="lb-nota-form" id="lbNotaForm" hidden>
+        <label class="md-label" for="lbNotaInput">Nota de la foto</label>
+        <textarea class="md-input" id="lbNotaInput" rows="2" maxlength="280" placeholder="Ej.: el mejor churro de la vida"></textarea>
+        <button class="md-btn md-btn--sm primary" type="submit">Guardar nota</button>
+      </form>
       <p class="lightbox-note" id="lbNote">La foto vive en este celular: guárdala en tu galería para no perderla.</p>
       <div class="lightbox-actions">
         <button class="md-btn primary" id="lbSave" type="button"><i data-lucide="download"></i>Guardar en galería</button>
@@ -214,6 +265,28 @@
   </form>
 </div>
 
+<div class="lightbox sheet" id="pickSheet" role="dialog" aria-modal="true" aria-labelledby="pickTitle" hidden>
+  <form class="sheet-panel" id="pickForm">
+    <p class="md-eyebrow-label muted">Nueva foto</p>
+    <h2 class="sheet-title" id="pickTitle">¿Dónde la toman?</h2>
+    <label class="md-label" for="pickStop">Parada</label>
+    <select class="md-input" id="pickStop"></select>
+    <div class="lightbox-actions">
+      <button class="md-btn primary" type="submit"><i data-lucide="camera"></i>Abrir cámara</button>
+      <button class="md-btn md-btn--ghost" type="button" id="pickCancel">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<div class="lightbox sheet" id="installSheet" role="dialog" aria-modal="true" aria-labelledby="installTitle" hidden>
+  <div class="sheet-panel">
+    <p class="md-eyebrow-label muted">Instalar en el celular</p>
+    <h2 class="sheet-title" id="installTitle">Tenerla como app</h2>
+    <div id="installSteps"></div>
+    <div class="lightbox-actions"><button class="md-btn primary" type="button" id="installClose">Listo</button></div>
+  </div>
+</div>
+
 <script src="vendor/leaflet/leaflet.js"></script>
 <script src="vendor/gesture/leaflet-gesture-handling.min.js"></script>
 <script src="vendor/lucide/lucide.min.js"></script>
@@ -221,11 +294,13 @@
 <script src="js/config.js"></script>
 <script src="js/nube.js"></script>
 <script src="js/itinerario.js"></script>
+<script src="js/tabs.js"></script>
 <script src="js/app.js"></script>
 <script src="js/visitas.js"></script>
 <script src="js/ubicacion.js"></script>
 <script src="js/editar.js"></script>
 <script src="js/previaje.js"></script>
+<script src="js/diario.js"></script>
 <script src="js/sesion.js"></script>
 </body>
 </html>

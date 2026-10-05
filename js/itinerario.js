@@ -4,38 +4,38 @@
    (lat/lng reales) y `t` (HH:MM, hora de España) alimenta el modo "Ahora". */
 var DAYS = [
  {id:'c1', iso:'2026-10-11', tz:'America/Cancun', travel:'flight', n:'01', date:'11 oct', city:'Cancún', tone:'secondary', map:'mxcun',
-  title:['Rumbo a Cancún, ', 'con los amigos.'], sub:'Vuelo Viva Aerobus VB 1380 de CDMX a Cancún, comida con sus amigos, playa y cena.',
-  ov:'Vuelo CDMX → Cancún 8:25–11:45. Playa y cena con amigos.',
+  title:['Rumbo a Cancún, ', 'con Emilio y Didi.'], sub:'Vuelo Viva Aerobus VB 1380 de CDMX a Cancún, comida con Emilio y Didi, playa y cena.',
+  ov:'Vuelo CDMX → Cancún 8:25–11:45. Playa y cena con Emilio y Didi.',
   blocks:[{type:'tl', items:[
     {t:'06:30', tz:'America/Mexico_City', icon:'car-taxi-front', title:'Salida al aeropuerto', detail:'AICM · Terminal 1 (hora de CDMX).', tips:['Lleguen con al menos 1,5 h de anticipación.'], q:'Aeropuerto Internacional de la Ciudad de México Terminal 1'},
     {t:'08:25', tz:'America/Mexico_City', icon:'plane', title:'Vuelo VB 1380 · CDMX → Cancún', detail:'Viva Aerobus · AICM Terminal 1 → Cancún · 2 h 20 min (hora de CDMX).', q:'Aeropuerto Internacional de la Ciudad de México Terminal 1', pin:{lat:19.4361,lng:-99.0719,l:'AICM T1'}},
     {t:'11:45', icon:'plane-landing', title:'Llegada a Cancún', detail:'Aeropuerto Internacional de Cancún (hora de Cancún).', tips:['Cancún va una hora adelante de CDMX: ajusten el reloj.'], q:'Aeropuerto Internacional de Cancún', pin:{lat:21.0365,lng:-86.8770,l:'CUN'}},
-    {t:'13:30', icon:'utensils', title:'Comida con sus amigos', detail:'Bienvenida y a ponerse al día.'},
-    {t:'16:00', icon:'sun', title:'Tarde de playa', detail:'La playa que recomienden sus amigos.'},
-    {t:'20:00', icon:'wine', title:'Cena con amigos', detail:'Primera noche juntos en Cancún.'}
+    {t:'13:30', icon:'utensils', title:'Comida con Emilio y Didi', detail:'Bienvenida y a ponerse al día.'},
+    {t:'16:00', icon:'sun', title:'Tarde de playa', detail:'La playa que recomienden Emilio y Didi.'},
+    {t:'20:00', icon:'wine', title:'Cena con Emilio y Didi', detail:'Primera noche juntos en Cancún.'}
   ]}],
-  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Solo el vuelo VB 1380 está confirmado. Ajusten el resto con sus amigos.'},
+  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Solo el vuelo VB 1380 está confirmado. Ajusten el resto con Emilio y Didi.'},
   budget:[['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Comidas y salidas','Por definir']], total:'Por definir'},
 
  {id:'c2', iso:'2026-10-12', tz:'America/Cancun', travel:'driving', n:'02', date:'12 oct', city:'Cancún', tone:'secondary', map:'cun',
-  title:['Día de playa ', 'sin reloj.'], sub:'Desayuno con calma, playa, comida, caminata al atardecer y cena con sus amigos.',
-  ov:'Playa, caminata y cena con amigos.',
+  title:['Día de playa ', 'sin reloj.'], sub:'Desayuno con calma, playa, comida, caminata al atardecer y cena con Emilio y Didi.',
+  ov:'Playa, caminata y cena con Emilio y Didi.',
   blocks:[{type:'tl', items:[
-    {t:'09:30', icon:'coffee', title:'Desayuno con calma', detail:'Con sus amigos, sin prisa.'},
+    {t:'09:30', icon:'coffee', title:'Desayuno con calma', detail:'Con Emilio y Didi, sin prisa.'},
     {t:'11:00', icon:'sun', title:'Día de playa', detail:'Toallas, bloqueador y agua.', pin:{lat:21.0606,lng:-86.7799,l:'Playa Delfines'},
      opts:[{n:'A · Playa Delfines', lines:['Zona Hotelera, mirador con el letrero de Cancún.'], q:'Playa Delfines Cancún'},
            {n:'B · Playa Gaviota Azul', lines:['Zona Hotelera, agua tranquila.'], q:'Playa Gaviota Azul Cancún'},
-           {n:'C · La de sus amigos', lines:['La que ellos prefieran.']}]},
+           {n:'C · La de Emilio y Didi', lines:['La que ellos prefieran.']}]},
     {t:'15:00', icon:'utensils', title:'Comida', detail:'Algo fresco cerca de la playa.'},
-    {t:'18:00', icon:'footprints', title:'Caminata al atardecer', detail:'Paseo tranquilo con sus amigos.'},
-    {t:'20:30', icon:'wine', title:'Cena con amigos', detail:'Cena en casa o salir, lo que prefieran.'}
+    {t:'18:00', icon:'footprints', title:'Caminata al atardecer', detail:'Paseo tranquilo con Emilio y Didi.'},
+    {t:'20:30', icon:'wine', title:'Cena con Emilio y Didi', detail:'Cena en casa o salir, lo que prefieran.'}
   ]}],
-  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Es una propuesta: cámbienla con sus amigos.'},
-  budget:[['Hospedaje','Con sus amigos'],['Comidas y salidas','Por definir']], total:'Por definir'},
+  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Es una propuesta: cámbienla con Emilio y Didi.'},
+  budget:[['Hospedaje','Con Emilio y Didi'],['Comidas y salidas','Por definir']], total:'Por definir'},
 
  {id:'c3', iso:'2026-10-13', tz:'America/Cancun', travel:'transit', n:'03', date:'13 oct', city:'Cancún', tone:'secondary', map:'cun',
-  title:['Paseo, caminata y ', 'cena de despedida.'], sub:'Paseo opcional (Isla Mujeres, Playa del Carmen o más playa), caminata y cena de despedida con sus amigos.',
-  ov:'Paseo opcional y cena de despedida con amigos.',
+  title:['Paseo, caminata y ', 'cena de despedida.'], sub:'Paseo opcional (Isla Mujeres, Playa del Carmen o más playa), caminata y cena de despedida con Emilio y Didi.',
+  ov:'Paseo opcional y cena de despedida con Emilio y Didi.',
   blocks:[{type:'tl', items:[
     {t:'09:00', icon:'coffee', title:'Desayuno'},
     {t:'10:00', icon:'compass', title:'Paseo opcional', pin:{lat:21.1827,lng:-86.8053,l:'Puerto Juárez'},
@@ -44,16 +44,16 @@ var DAYS = [
            {n:'C · Más playa', lines:['Quedarse en Cancún y descansar.']}]},
     {t:'14:00', icon:'utensils', title:'Comida'},
     {t:'17:30', icon:'footprints', title:'Caminata', detail:'Último paseo con calma.'},
-    {t:'20:00', icon:'wine', title:'Cena de despedida con amigos', detail:'Para agradecerles la hospitalidad.'}
+    {t:'20:00', icon:'wine', title:'Cena de despedida con Emilio y Didi', detail:'Para agradecerles la hospitalidad.'}
   ]}],
-  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Es una propuesta: cámbienla con sus amigos.'},
-  budget:[['Hospedaje','Con sus amigos'],['Paseo y comidas','Por definir']], total:'Por definir'},
+  callout:{tone:'muted', icon:'info', title:'Plan tentativo', text:'Es una propuesta: cámbienla con Emilio y Didi.'},
+  budget:[['Hospedaje','Con Emilio y Didi'],['Paseo y comidas','Por definir']], total:'Por definir'},
 
  {id:'c4', iso:'2026-10-14', tz:'America/Cancun', travel:'flight', n:'04', date:'14 oct', city:'Cancún → Madrid', tone:'secondary', map:'cun',
-  title:['Despedida y ', 'vuelo a Madrid.'], sub:'Desayuno de despedida con sus amigos y vuelo Aeroméxico AM 527 + AM 1 a Madrid a las 12:40, con escala en CDMX.',
+  title:['Despedida y ', 'vuelo a Madrid.'], sub:'Desayuno de despedida con Emilio y Didi y vuelo Aeroméxico AM 527 + AM 1 a Madrid a las 12:40, con escala en CDMX.',
   ov:'Despedida y vuelo a Madrid a las 12:40.',
   blocks:[{type:'tl', items:[
-    {t:'08:00', icon:'coffee', title:'Desayuno de despedida', detail:'Con sus amigos.'},
+    {t:'08:00', icon:'coffee', title:'Desayuno de despedida', detail:'Con Emilio y Didi.'},
     {t:'09:30', icon:'luggage', title:'Salida al aeropuerto', detail:'Aeropuerto de Cancún · Terminal 4. Vuelo internacional: lleguen unas 3 h antes.', q:'Aeropuerto Internacional de Cancún Terminal 4'},
     {t:'12:40', icon:'plane', title:'Vuelo AM 527 + AM 1 · Cancún → Madrid', detail:'Aeroméxico · CUN T4 → escala en CDMX → Madrid T2 · 16 h 55 min. Llegan el jueves 15 a las 12:35 (hora de Madrid).', q:'Aeropuerto Internacional de Cancún Terminal 4', pin:{lat:21.0410,lng:-86.8740,l:'CUN T4'}}
   ]}],
@@ -215,7 +215,7 @@ var DAYS = [
 ];
 
 var GLOBAL = {
-  cun:{title:'Cancún · 11–14 oct', tone:'secondary', rows:[['Hospedaje','Con sus amigos'],['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Vuelos Cancún ↔ Madrid (redondo Aeroméxico)','Ya comprado'],['Comidas y paseos','Por definir']], total:['Subtotal Cancún','Por definir']},
+  cun:{title:'Cancún · 11–14 oct', tone:'secondary', rows:[['Hospedaje','Con Emilio y Didi'],['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Vuelos Cancún ↔ Madrid (redondo Aeroméxico)','Ya comprado'],['Comidas y paseos','Por definir']], total:['Subtotal Cancún','Por definir']},
   bcn:{title:'Barcelona · 15–18 oct', tone:'primary', rows:[['15 oct · Tren + taxi + cena','68€'],['16 oct · Exploración de Nando','45€'],['16 oct · Cena Monica + Nando','16€'],['17 oct · Ruta compartida','46€'],['18 oct · Checkout + tren + hotel + cena','177€']], total:['Subtotal Barcelona','352€']},
   mad:{title:'Madrid · 18–21 oct', tone:'tertiary', rows:[['19 oct · Madrid completo','56€'],['20 oct · Excursión Toledo','72€'],['21 oct · Vuelo + desayuno','18€']], total:['Subtotal Madrid','146€']},
   all:{title:'Total viaje (ambas personas)', tone:'secondary', rows:[['Transporte (trenes, metro, taxi)','200€'],['Hoteles (2 noches BCN + 2 noches MAD)','160€'],['Museos + entradas','74€'],['Comidas + cenas','150€'],['Cafés + descansos','30€'],['Misceláneos','20€']], total:['Total general','~634€'], note:'Por persona: ~317€'}
@@ -244,10 +244,10 @@ var MAP_TITLES = {mxcun:'CDMX → Cancún', madbcn:'Madrid → Barcelona', madcu
    siguiente parada, {dur} = tiempo disponible hasta la siguiente.
    Un texto puede ser común o {moni:'…', nando:'…'} cuando cambia por persona. */
 var INTRO = {
-  c1:'{yo}, aquí empieza su viaje: a las 8:25 despega su vuelo VB 1380 desde el AICM y a las 11:45 ya están en Cancún. Comida con sus amigos, una tarde de playa y la primera cena juntos.',
-  c2:'{yo}, hoy no hay prisa: desayuno con calma, playa todo el día con {otro} y sus amigos, una caminata al atardecer y cena juntos.',
-  c3:'{yo}, último día completo en Cancún: si se les antoja, un paseo a Isla Mujeres o Playa del Carmen, una caminata y la cena de despedida con sus amigos.',
-  c4:'{yo}, último desayuno con sus amigos y a las 9:30 al aeropuerto. A las 12:40 despega su vuelo a Madrid con escala en CDMX: mañana a mediodía ya están en España.',
+  c1:'{yo}, aquí empieza su viaje: a las 8:25 despega su vuelo VB 1380 desde el AICM y a las 11:45 ya están en Cancún. Comida con Emilio y Didi, una tarde de playa y la primera cena juntos.',
+  c2:'{yo}, hoy no hay prisa: desayuno con calma, playa todo el día con {otro}, Emilio y Didi, una caminata al atardecer y cena juntos.',
+  c3:'{yo}, último día completo en Cancún: si se les antoja, un paseo a Isla Mujeres o Playa del Carmen, una caminata y la cena de despedida con Emilio y Didi.',
+  c4:'{yo}, último desayuno con Emilio y Didi y a las 9:30 al aeropuerto. A las 12:40 despega su vuelo a Madrid con escala en CDMX: mañana a mediodía ya están en España.',
   d1:{moni:'{yo}, a las 12:35 aterrizan en Madrid y por la tarde toman el tren: a las 19:00 llegan a Sants. Taxi o L4 al hotel en la Barceloneta, una cena tranquila en el Mercat y a descansar juntitos: mañana Articulate empieza temprano.',
       nando:'{yo}, a las 12:35 aterrizan en Madrid y por la tarde toman el tren: a las 19:00 llegan a Sants. Para las 20:30 ya estarán en el hotel de la Barceloneta, con una cena tranquila en el Mercat para estrenar Barcelona.'},
   d2:{moni:'{yo}, hoy es tu gran día en Articulate, de 8:00 a 18:30. Nando te espera explorando el Born y el Gòtic; a las 18:30 se reencuentran para una cena ligera y a consentirte un poco.',
@@ -259,8 +259,8 @@ var INTRO = {
   d7:'{yo}, último día de este viaje con {otro}: a las 7:00 dejan el hotel, a las 9:00 despega su vuelo y a las 18:48 ya están de vuelta en Cancún. Pasaporte a la mano y el corazón lleno.'
 };
 var OV = {
-  c1:'Vuelo a Cancún a las 8:25; playa y cena con sus amigos.',
-  c2:'Día de playa y cena con sus amigos.',
+  c1:'Vuelo a Cancún a las 8:25; playa y cena con Emilio y Didi.',
+  c2:'Día de playa y cena con Emilio y Didi.',
   c3:'Paseo opcional y cena de despedida.',
   c4:'Despedida y vuelo a Madrid a las 12:40.',
   d1:'Aterrizan en Madrid a las 12:35; tren y llegada a Barcelona a las 19:00.',
@@ -276,21 +276,21 @@ var VOZ = {
   'c1|06:30':'{yo}, a las {hora} (hora de CDMX) salen juntos al AICM, Terminal 1. Revisen boletos e identificaciones antes de cerrar la puerta.',
   'c1|08:25':'A las {hora} despega su vuelo VB 1380 a Cancún: {dur} de vuelo para empezar el viaje juntos.',
   'c1|11:45':'{yo}, a las {hora} aterrizan en Cancún. Ajusten el reloj una hora: aquí empieza la playa.',
-  'c1|13:30':'Comida con sus amigos a las {hora}: abrazos, ponerse al día y planear los próximos días.',
+  'c1|13:30':'Comida con Emilio y Didi a las {hora}: abrazos, ponerse al día y planear los próximos días.',
   'c1|16:00':'{yo}, a las {hora} primera tarde de playa con {otro}: tienen {dur} para no hacer nada.',
-  'c1|20:00':'Cena con sus amigos a las {hora}. Disfruten la primera noche juntos en Cancún.',
+  'c1|20:00':'Cena con Emilio y Didi a las {hora}. Disfruten la primera noche juntos en Cancún.',
   'c2|09:30':'{yo}, desayuno a las {hora} sin despertador: hoy el día es lento.',
   'c2|11:00':'A las {hora} a la playa con {otro}: {dur} de sol, mar y pies en la arena.',
   'c2|15:00':'Comida a las {hora}, algo fresco y rico cerca del mar.',
-  'c2|18:00':'{yo}, a las {hora} caminata al atardecer con {otro} y sus amigos.',
-  'c2|20:30':'Cena con sus amigos a las {hora}. Una noche tranquila para platicar.',
+  'c2|18:00':'{yo}, a las {hora} caminata al atardecer con {otro}, Emilio y Didi.',
+  'c2|20:30':'Cena con Emilio y Didi a las {hora}. Una noche tranquila para platicar.',
   'c3|09:00':'{yo}, desayuno a las {hora} y deciden juntos el paseo del día.',
   'c3|10:00':'A las {hora}, paseo opcional: Isla Mujeres en ferry, Playa del Carmen o más playa. Tienen {dur} antes de comer.',
   'c3|14:00':'Comida a las {hora} donde los encuentre el paseo.',
   'c3|17:30':'{yo}, a las {hora} una última caminata con calma con {otro}.',
-  'c3|20:00':'Cena de despedida a las {hora}: denles las gracias a sus amigos por recibirlos.',
-  'c4|08:00':'{yo}, último desayuno con sus amigos a las {hora}. Tómense una foto todos juntos y denles un abrazo largo.',
-  'c4|09:30':'A las {hora} salen a la Terminal 4. Revisen pasaportes y que no se quede nada en casa de sus amigos.',
+  'c3|20:00':'Cena de despedida a las {hora}: denles las gracias a Emilio y Didi por recibirlos.',
+  'c4|08:00':'{yo}, último desayuno con Emilio y Didi a las {hora}. Tómense una foto todos juntos y denles un abrazo largo.',
+  'c4|09:30':'A las {hora} salen a la Terminal 4. Revisen pasaportes y que no se quede nada en casa de Emilio y Didi.',
   'c4|12:40':'{yo}, a las {hora} despega su vuelo AM 527 a CDMX y de ahí el AM 1 a Madrid. Duerman lo que puedan en el avión: mañana empieza Europa.',
   'd1|12:35':'{yo}, a las {hora} aterrizan en Madrid, Terminal 2. Tómense un café, estiren las piernas y al tren: Barcelona los espera.',
   'd1|19:00':'{yo}, a las {hora} llegan a Sants en el tren desde Madrid. Ya están en Barcelona.',

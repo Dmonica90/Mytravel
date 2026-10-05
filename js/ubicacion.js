@@ -8,7 +8,7 @@ const {esc, store, key, DAYS, DAYDATA, MAPS, toast, todayId, ME} = V;
 const $ = id => document.getElementById(id);
 const PREF = key('viaje-ubicacion');
 const ARRIVE_M = 150;
-const btns = [$('locBtn'), $('nowLoc')].filter(Boolean);
+const btns = [$('locBtn'), $('nowLoc'), $('setLoc')].filter(Boolean);
 let watchId = null, me = null, centered = false;
 const notified = new Set();
 

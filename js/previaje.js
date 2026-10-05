@@ -24,6 +24,7 @@ function render(){
   const C = 2*Math.PI*52;
   $('preRing').innerHTML = `<svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="52"/><circle class="ring-fg" cx="60" cy="60" r="52" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C*(1-pct/100)).toFixed(1)}" transform="rotate(-90 60 60)"/></svg><span class="ring-num">${pct}<small>%</small></span>`;
   $('preRing').setAttribute('aria-label', `${pct} % listo`);
+  if (window.ViajeTabs) ViajeTabs.badge(total-done);
   $('preStatus').textContent = pct===100 ? 'Todo listo para el viaje.' : `Llevan ${done} de ${total} · ${total-done===1 ? 'falta 1' : `faltan ${total-done}`}`;
   $('preSub').textContent = N ? 'Lo que marca uno lo ve el otro.' : 'Se guarda en este celular.';
   $('preFilter').setAttribute('aria-pressed', onlyMissing);
@@ -74,8 +75,9 @@ if (N) {
     saveLocal(); render();
     if (row.who===user || type==='DELETE') return;
     const item = allItems().find(i=>i.id===row.item_id);
-    if (type==='INSERT' && row.custom) toast(`<b>${esc(NAMES[row.who])}</b> agregó: ${esc(row.label||'')}`);
-    else if (row.done && item) toast(`<b>${esc(NAMES[row.who])}</b> marcó: ${esc(item.t)}`);
+    const ver = [{label:'Ver', run:()=>window.ViajeTabs && ViajeTabs.go('#antes')}];
+    if (type==='INSERT' && row.custom) toast(`<b>${esc(NAMES[row.who])}</b> agregó: ${esc(row.label||'')}`, ver);
+    else if (row.done && item) toast(`<b>${esc(NAMES[row.who])}</b> marcó: ${esc(item.t)}`, ver);
   });
 }
 });
