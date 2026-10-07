@@ -531,3 +531,5 @@ textarea.md-input{height:auto;min-height:5.5rem;padding-block:.6rem;line-height:
 .ga-txt small{font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
 .ga-amt{font-weight:var(--weight-bold);white-space:nowrap;font-variant-numeric:tabular-nums}
 @media (min-width:900px) and (max-width:1100px){.bar .loc-btn .lbl{display:none}.bar-tabs .tab{padding:0 .7rem}.bar-tabs .tabbar{gap:0}}
+.train-paid{display:inline-flex;align-items:center;gap:.35rem;font-size:var(--text-sm);font-weight:var(--weight-semibold);color:hsl(var(--tertiary-foreground));background:hsl(var(--tertiary));padding:.3rem .7rem;border-radius:var(--radius-full)}
+.train-paid svg{width:1rem;height:1rem}

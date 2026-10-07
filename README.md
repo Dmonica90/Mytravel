@@ -29,7 +29,7 @@ Abajo (arriba en la computadora) hay cinco pestañas: **Viaje** (días, mapas y 
 
 ## Gastos
 
-Pestaña **Gastos**: cada quien agrega lo que paga (monto, EUR o MXN, concepto, categoría, quién pagó, para quién y día). Arriba se ve el total por moneda, Europa contra el presupuesto (~634 €), los gastos por categoría y **cuentas claras** (quién le debe a quién: lo de "los dos" se divide a la mitad). Tocar un gasto lo edita o borra. "Descargar CSV" lo abre en Excel o Numbers. Con Supabase se comparte en vivo.
+Pestaña **Gastos**: cada quien agrega lo que paga (monto, EUR o MXN, concepto, categoría, quién pagó, para quién y día). Arriba se ve el total por moneda, Europa contra el presupuesto (~771 €), los gastos por categoría y **cuentas claras** (quién le debe a quién: lo de "los dos" se divide a la mitad). Tocar un gasto lo edita o borra. "Descargar CSV" lo abre en Excel o Numbers. Con Supabase se comparte en vivo.
 
 ## Calendario y notificaciones
 

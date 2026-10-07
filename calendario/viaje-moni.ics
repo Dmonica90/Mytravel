@@ -256,58 +256,88 @@ BEGIN:VEVENT
 UID:d1-12-35-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261015T103500Z
-DTEND:20261015T133500Z
+DTEND:20261015T114500Z
 SUMMARY:Llegada a Madrid · Terminal 2
-DESCRIPTION:Moni\, a las 12:35 aterrizan en Madrid\, Terminal 2. Tómense
-  un café\, estiren las piernas y al tren: Barcelona los espera.\n\nAter
- rizan del vuelo AM 1 desde CDMX. Después\, traslado a la estación para
-  el tren a Barcelona.\n\nDía 5 en la app: https://dmonica90.github.io/M
- ytravel/#d1
+DESCRIPTION:Moni\, a las 12:35 aterrizan en Madrid\, Terminal 2. Migraci
+ ón\, maletas y a Atocha: tienen 1 h 10 min antes del traslado.\n\nAterr
+ izan del vuelo AM 1 desde CDMX. Migración y maletas\, y luego a Atocha.
+ \n\nDía 5 en la app: https://dmonica90.github.io/Mytravel/#d1
 LOCATION:Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 2
 GEO:40.4697;-3.57
 URL:https://dmonica90.github.io/Mytravel/#d1
 END:VEVENT
 BEGIN:VEVENT
-UID:d1-19-00-moni@viaje-oct-2026
+UID:d1-13-45-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261015T170000Z
-DTEND:20261015T180000Z
-SUMMARY:Tren Madrid → Barcelona
-DESCRIPTION:Moni\, a las 19:00 llegan a Sants en el tren desde Madrid. Ya
-  están en Barcelona.\n\nLlegada a Estación Sants · 19:00–20:00\n\nD
+DTSTART:20261015T114500Z
+DTEND:20261015T135200Z
+SUMMARY:Traslado a Atocha y comida
+DESCRIPTION:Traslado a Atocha a las 13:45: en taxi son unos 30 min. Coman
+  algo tranquilos\; a las 15:15 ya conviene estar en la estación.\n\nTax
+ i con tarifa fija aeropuerto–centro (~33 €\, unos 30 min) o metro L8
+  + L1 (~5 €\, unos 50 min). Coman algo en la estación.\n\nLleguen a A
+ tocha hacia las 15:15: el embarque cierra 2 min antes de la salida.\n\nD
  ía 5 en la app: https://dmonica90.github.io/Mytravel/#d1
-LOCATION:Estació de Sants Barcelona
-GEO:41.3791;2.14
+LOCATION:Estación de Madrid Puerta de Atocha
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-15-52-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T135200Z
+DTEND:20261015T165200Z
+SUMMARY:Tren iryo 06151 · Madrid → Barcelona
+DESCRIPTION:Moni\, a las 15:52 sale su tren iryo 06151 desde Atocha. Son 
+ 3 horas juntos rumbo a Barcelona: ventana\, snacks y platicar.\n\nMadrid
+ -Puerta de Atocha 15:52 → Barcelona-Sants 18:54 · 3 h · directo. Bol
+ etos ya comprados (los QR están en su correo de Omio).\n\nLleguen 30 mi
+ n antes: el embarque cierra 2 min antes de la salida.\n\nEquipaje de man
+ o: maleta en el portaequipaje y mochila bajo el asiento.\n\nDía 5 en la
+  app: https://dmonica90.github.io/Mytravel/#d1
+LOCATION:Estación de Madrid Puerta de Atocha
+GEO:40.4066;-3.6892
 URL:https://dmonica90.github.io/Mytravel/#d1
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:Mañana: Tren Madrid → Barcelona
+DESCRIPTION:Mañana: Tren iryo 06151 · Madrid → Barcelona
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-PT1H
-DESCRIPTION:En 1 h: Tren Madrid → Barcelona
+DESCRIPTION:En 1 h: Tren iryo 06151 · Madrid → Barcelona
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:d1-20-00-moni@viaje-oct-2026
+UID:d1-18-54-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261015T180000Z
-DTEND:20261015T183000Z
-SUMMARY:Taxi o Metro L4 al hotel
-DESCRIPTION:En unos 30 minutos están en la Barceloneta\; a las 20:30 ya 
- es el check-in.\n\nHotel en la Barceloneta · 20:00–20:30\n\nDía 5 en
-  la app: https://dmonica90.github.io/Mytravel/#d1
+DTSTART:20261015T165400Z
+DTEND:20261015T171500Z
+SUMMARY:Llegada a Barcelona-Sants
+DESCRIPTION:Moni\, a las 18:54 llegan a Sants. Ya están en Barcelona.\n\
+ nDía 5 en la app: https://dmonica90.github.io/Mytravel/#d1
+LOCATION:Estació de Sants Barcelona
+GEO:41.3791;2.14
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-19-15-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T171500Z
+DTEND:20261015T174500Z
+SUMMARY:Taxi o Metro L3 + L4 al hotel
+DESCRIPTION:En unos 30 minutos están en la Barceloneta\; a las 19:45 ya 
+ es el check-in.\n\nHotel en la Barceloneta · unos 25–30 min.\n\nDía 
+ 5 en la app: https://dmonica90.github.io/Mytravel/#d1
 LOCATION:Barceloneta\, Barcelona
 GEO:41.3797;2.1885
 URL:https://dmonica90.github.io/Mytravel/#d1
 END:VEVENT
 BEGIN:VEVENT
-UID:d1-20-30-moni@viaje-oct-2026
+UID:d1-19-45-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261015T183000Z
-DTEND:20261015T190000Z
+DTSTART:20261015T174500Z
+DTEND:20261015T184500Z
 SUMMARY:Check-in y descanso
 DESCRIPTION:Dejen las maletas y\, si les queda energía\, den una vuelta 
  corta juntos por la Barceloneta.\n\nExploración del barrio Barceloneta 
@@ -316,10 +346,10 @@ DESCRIPTION:Dejen las maletas y\, si les queda energía\, den una vuelta
 URL:https://dmonica90.github.io/Mytravel/#d1
 END:VEVENT
 BEGIN:VEVENT
-UID:d1-21-00-moni@viaje-oct-2026
+UID:d1-20-45-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261015T190000Z
-DTEND:20261015T200000Z
+DTSTART:20261015T184500Z
+DTEND:20261015T194500Z
 SUMMARY:Cena
 DESCRIPTION:Moni\, cena tranquila con Nando en el Mercat Barceloneta y a 
  dormir temprano: mañana Articulate empieza a las 8:00.\n\nMercat Barcel
@@ -539,22 +569,23 @@ BEGIN:VEVENT
 UID:d4-09-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261018T070000Z
-DTEND:20261018T080000Z
+DTEND:20261018T074500Z
 SUMMARY:Desayuno relajado
-DESCRIPTION:Moni\, desayuno sin prisa a las 9:00: hoy la mañana es para 
- ustedes.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
+DESCRIPTION:Moni\, desayuno sin prisa a las 9:00: hoy la mañana es corta
+ \, pero es suya.\n\nDía 8 en la app: https://dmonica90.github.io/Mytrav
+ el/#d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-10-00-moni@viaje-oct-2026
+UID:d4-09-45-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T080000Z
+DTSTART:20261018T074500Z
 DTEND:20261018T090000Z
-SUMMARY:Exploración última
-DESCRIPTION:A las 10:00\, última vuelta juntos por el Gòtic para las fo
- tos que faltaron. Tienen 1 h antes del checkout.\n\nBarrio Gótico\, fot
- os que faltaron.\n\nDía 8 en la app: https://dmonica90.github.io/Mytrav
- el/#d4
+SUMMARY:Última vuelta
+DESCRIPTION:A las 9:45\, última vuelta juntos para las fotos que faltaro
+ n. Tienen 1 h 15 min antes del checkout.\n\nBarceloneta o Gòtic\, las f
+ otos que faltaron.\n\nDía 8 en la app: https://dmonica90.github.io/Mytr
+ avel/#d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT
 BEGIN:VEVENT
@@ -562,66 +593,69 @@ UID:d4-11-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261018T090000Z
 DTEND:20261018T100000Z
-SUMMARY:Checkout del hotel
-DESCRIPTION:Checkout a las 11:00. Tienen hasta las  para comer algo rico 
- y llegar a Sants.\n\nDía 8 en la app: https://dmonica90.github.io/Mytra
- vel/#d4
+SUMMARY:Checkout y salida a Sants
+DESCRIPTION:Checkout a las 11:00. Salgan hacia Sants a más tardar a las 
+ 11:30.\n\nSalgan a más tardar a las 11:30 (taxi o metro\, unos 25 min).
+ \n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-14-00-moni@viaje-oct-2026
+UID:d4-12-14-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T120000Z
-DTEND:20261018T143000Z
-SUMMARY:Salida del tren · Estación Sants
-DESCRIPTION:Moni\, su tren sale de Sants a las 14:00. Pidan ventana y lle
- ven snacks: son 2\,5 horas para platicar.\n\nDuración 2\,5 horas · com
- pra online.\n\nCompartir tren\, ventana\, snacks.\n\nDía 8 en la app: h
- ttps://dmonica90.github.io/Mytravel/#d4
+DTSTART:20261018T101400Z
+DTEND:20261018T131400Z
+SUMMARY:Tren iryo 06320 · Barcelona → Madrid
+DESCRIPTION:Moni\, su tren iryo 06320 sale de Sants a las 12:14. El embar
+ que cierra 2 min antes: estén ahí hacia las 11:45.\n\nBarcelona-Sants 
+ 12:14 → Madrid-Puerta de Atocha 15:16 · 3 h · directo. Boletos ya co
+ mprados (los QR están en su correo de Omio).\n\nEl embarque cierra 2 mi
+ n antes de la salida: estén en Sants hacia las 11:45.\n\nCompren algo d
+ e comer antes de subir: llegan a Madrid a media tarde.\n\nDía 8 en la a
+ pp: https://dmonica90.github.io/Mytravel/#d4
 LOCATION:Estació de Sants Barcelona
 GEO:41.3791;2.14
 URL:https://dmonica90.github.io/Mytravel/#d4
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:Mañana: Salida del tren · Estación Sants
+DESCRIPTION:Mañana: Tren iryo 06320 · Barcelona → Madrid
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-PT1H
-DESCRIPTION:En 1 h: Salida del tren · Estación Sants
+DESCRIPTION:En 1 h: Tren iryo 06320 · Barcelona → Madrid
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-16-30-moni@viaje-oct-2026
+UID:d4-15-16-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T143000Z
-DTEND:20261018T153000Z
+DTSTART:20261018T131600Z
+DTEND:20261018T141600Z
 SUMMARY:Llegada · Puerta de Atocha
-DESCRIPTION:A las 16:30 llegan a Atocha: ya están juntos en Madrid.\n\nD
+DESCRIPTION:A las 15:16 llegan a Atocha: ya están juntos en Madrid.\n\nD
  ía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
-LOCATION:Estación Puerta de Atocha Madrid
+LOCATION:Estación de Madrid Puerta de Atocha
 GEO:40.4066;-3.6892
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-17-00-moni@viaje-oct-2026
+UID:d4-15-45-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T150000Z
-DTEND:20261018T153000Z
+DTSTART:20261018T134500Z
+DTEND:20261018T141500Z
 SUMMARY:Taxi o metro al hotel
-DESCRIPTION:Taxi o metro al hotel\; a las 17:30 hacen check-in.\n\nVallec
+DESCRIPTION:Taxi o metro al hotel\; a las 16:15 hacen check-in.\n\nVallec
  as o centro.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#
  d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-17-30-moni@viaje-oct-2026
+UID:d4-16-15-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T153000Z
-DTEND:20261018T160000Z
+DTSTART:20261018T141500Z
+DTEND:20261018T150000Z
 SUMMARY:Check-in
-DESCRIPTION:Check-in a las 17:30 y un rato para acomodarse.\n\nReserva de
+DESCRIPTION:Check-in a las 16:15 y un rato para acomodarse.\n\nReserva de
   antemano.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 BEGIN:VALARM
@@ -631,12 +665,12 @@ DESCRIPTION:En 1 h: Check-in
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:d4-18-00-moni@viaje-oct-2026
+UID:d4-17-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261018T160000Z
+DTSTART:20261018T150000Z
 DTEND:20261018T173000Z
 SUMMARY:Exploración del barrio y descanso
-DESCRIPTION:A las 18:00\, vuelta por el barrio y un descanso antes de cen
+DESCRIPTION:A las 17:00\, vuelta por el barrio y un descanso antes de cen
  ar.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
 URL:https://dmonica90.github.io/Mytravel/#d4
 END:VEVENT

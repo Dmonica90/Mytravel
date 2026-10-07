@@ -11,7 +11,7 @@ const NAMES = {moni:'Moni', nando:'Nando'};
 const OTHER_ID = user==='moni' ? 'nando' : 'moni';
 const $ = id => document.getElementById(id);
 const LKEY = 'viaje-gastos', CKEY = 'viaje-gastos-cache', RKEY = 'viaje-tc';
-const BUDGET_EUR = 634;
+const BUDGET_EUR = 771;
 const CATS = [
   {id:'comida', n:'Comida', icon:'utensils'},
   {id:'transporte', n:'Transporte', icon:'train-front'},
