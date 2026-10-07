@@ -1,11 +1,11 @@
-/* Pestañas tipo app: Viaje · Álbum · Pendientes · Más.
+/* Pestañas tipo app: Viaje · Álbum · Pendientes · Gastos · Más.
    Cada bloque de la página lleva data-tab="…" y solo se ven los de la pestaña activa.
    La pestaña vive en el hash (#album, #pendientes…), así funcionan "atrás" y los enlaces
    internos (#d3 abre Viaje y baja al día 3). En el celular la barra va abajo; en
    pantallas anchas se mueve al header. También maneja "Instalar en el celular". */
 (function(){
 'use strict';
-const TABS = ['viaje','album','pendientes','mas'];
+const TABS = ['viaje','album','pendientes','gastos','mas'];
 const $ = id => document.getElementById(id);
 const scrollPos = {}, listeners = {};
 let cur = null;

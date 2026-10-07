@@ -1,9 +1,9 @@
 /* Offline: la app se guarda al instalar; los tiles del mapa se guardan al verlos (máx. 400). */
-const VERSION = 'viaje-v11';
+const VERSION = 'viaje-v12';
 const APP = [
   './', 'index.html', 'manifest.webmanifest',
   'css/m-design.css', 'css/app.css',
-  'js/config.js', 'js/nube.js', 'js/itinerario.js', 'js/tabs.js', 'js/app.js', 'js/visitas.js', 'js/ubicacion.js', 'js/editar.js', 'js/previaje.js', 'js/diario.js', 'js/sesion.js',
+  'js/config.js', 'js/nube.js', 'js/itinerario.js', 'js/tabs.js', 'js/app.js', 'js/visitas.js', 'js/ubicacion.js', 'js/editar.js', 'js/previaje.js', 'js/diario.js', 'js/gastos.js', 'js/avisos.js', 'js/sesion.js',
   'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css',
   'vendor/gesture/leaflet-gesture-handling.min.js', 'vendor/gesture/leaflet-gesture-handling.min.css',
   'vendor/lucide/lucide.min.js', 'vendor/supabase/supabase.js',
@@ -52,4 +52,22 @@ self.addEventListener('fetch', e => {
       const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); return res;
     }).catch(() => caches.match(req).then(r => r || caches.match('index.html'))));
   }
+});
+
+/* Notificaciones push (las manda la Edge Function "avisos" de Supabase). */
+self.addEventListener('push', e => {
+  let m = {};
+  try { m = e.data ? e.data.json() : {}; } catch (x) { m = {body: e.data && e.data.text()}; }
+  e.waitUntil(self.registration.showNotification(m.title || 'Viaje Oct 2026', {
+    body: m.body || '', tag: m.tag, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: {url: m.url || '#viaje'}
+  }));
+});
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const target = new URL(e.notification.data && e.notification.data.url || '#viaje', self.registration.scope).href;
+  e.waitUntil(self.clients.matchAll({type: 'window', includeUncontrolled: true}).then(list => {
+    const c = list.find(x => x.url.startsWith(self.registration.scope));
+    if (c) { c.focus(); return c.navigate ? c.navigate(target) : null; }
+    return self.clients.openWindow(target);
+  }));
 });

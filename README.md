@@ -19,13 +19,31 @@ La app pide **quién eres (Moni o Nando)** y una **contraseña compartida** (no 
 
 ## Pestañas
 
-Abajo (arriba en la computadora) hay cuatro pestañas: **Viaje** (días, mapas y modo "Ahora"), **Álbum** (diario del viaje), **Pendientes** ("Antes de viajar" con % y checklist maestro) y **Más** (vuelos, resumen, presupuesto, qué llevar, notas y ajustes). La pestaña queda en la dirección (`#album`, `#pendientes`…), así que el botón "atrás" funciona.
+Abajo (arriba en la computadora) hay cinco pestañas: **Viaje** (días, mapas y modo "Ahora"), **Álbum** (diario del viaje), **Pendientes** ("Antes de viajar" con % y checklist maestro), **Gastos** y **Más** (vuelos, resumen, presupuesto, qué llevar, notas y ajustes). La pestaña queda en la dirección (`#album`, `#pendientes`…), así que el botón "atrás" funciona.
 
 ## Instalar en el celular
 
 - **iPhone:** abrir la dirección en Safari → Compartir (cuadrito con flecha) → **Agregar a inicio** → Agregar.
 - **Android:** abrir en Chrome → menú ⋮ → **Instalar app** (o "Agregar a la pantalla principal").
 - También está el botón **Más → Ajustes → Instalar en el celular**, que abre el instalador o muestra los pasos.
+
+## Gastos
+
+Pestaña **Gastos**: cada quien agrega lo que paga (monto, EUR o MXN, concepto, categoría, quién pagó, para quién y día). Arriba se ve el total por moneda, Europa contra el presupuesto (~771 €), los gastos por categoría y **cuentas claras** (quién le debe a quién: lo de "los dos" se divide a la mitad). Tocar un gasto lo edita o borra. "Descargar CSV" lo abre en Excel o Numbers. Con Supabase se comparte en vivo.
+
+## Calendario y notificaciones
+
+- **Calendario (iPhone):** Más → Ajustes → **Agregar a mi calendario** → Suscribirme. Al suscribirse, **apaga "Quitar alertas"**. Cada quien tiene su calendario (`calendario/viaje-moni.ics`, `calendario/viaje-nando.ics`) con su redacción, alarmas antes de vuelos, trenes y reservas, y el check-in de cada vuelo (aviso 3 días antes y cuando abre).
+- **Notificaciones push:** con la app **instalada en la pantalla de inicio** (iOS 16.4+): Más → Ajustes → **Notificaciones** → permitir → **Probar notificación**. Llegan aunque la app esté cerrada: la noche anterior ("Mañana: día 7…"), 30 min antes de cada parada con lugar, check-in y cuando el otro sube una foto o escribe en el diario.
+- **Si cambia el itinerario** (`js/itinerario.js`): corre `node tools/calendario.mjs`. Regenera los `.ics` y `supabase/avisos.sql`; vuelve a correr `avisos.sql` en Supabase.
+
+### Configurar las notificaciones en Supabase (una sola vez)
+
+1. **SQL Editor:** corre `supabase/schema.sql` (agrega `gastos`, `push_subs` y `avisos`).
+2. **Edge Functions → Deploy a new function → Via Editor**, nombre **`avisos`**: pega el contenido de `supabase/functions/avisos/index.ts` y despliega.
+3. **Edge Functions → Secrets** (Manage secrets): agrega `VAPID_PUBLIC_KEY` (la misma de `js/config.js`) y `VAPID_PRIVATE_KEY` (la que te pasé por el chat; no va en el repo).
+4. **SQL Editor:** corre `supabase/push.sql` (tarea cada 5 min y avisos de fotos/diario) y luego `supabase/avisos.sql` (los avisos programados del viaje).
+5. En cada iPhone: abre la app instalada → Más → Ajustes → Notificaciones → Probar notificación.
 
 ## Checklist, fotos y ubicación
 
@@ -77,6 +95,11 @@ js/app.js             render, mapas, modo "Ahora"
 js/tabs.js            pestañas e "Instalar en el celular"
 js/visitas.js         checklist, cámara, notas de fotos y visor
 js/diario.js          pestaña Álbum (diario del viaje)
+js/gastos.js          pestaña Gastos
+js/avisos.js          calendario y notificaciones (Ajustes)
+tools/calendario.mjs  genera los .ics y supabase/avisos.sql
+calendario/           calendarios .ics para suscribirse
+supabase/functions/   Edge Function "avisos" (push)
 js/ubicacion.js       "estoy cerca"
 js/sesion.js          entrada Moni / Nando
 js/config.js          URL y clave pública de Supabase
@@ -84,6 +107,8 @@ js/nube.js            conexión con Supabase
 js/editar.js          cambiar hora / nota de una parada
 js/previaje.js        checklist "Antes de viajar"
 supabase/schema.sql   tablas, bucket y reglas de seguridad
+supabase/push.sql     tarea programada y triggers de las notificaciones
+supabase/avisos.sql   avisos programados (generado)
 sw.js                 modo offline
 vendor/               Leaflet 1.9.4, leaflet-gesture-handling, Lucide (licencias incluidas)
 ```

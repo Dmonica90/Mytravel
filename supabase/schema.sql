@@ -95,12 +95,59 @@ drop policy if exists diario_write on public.diario;
 create policy diario_read  on public.diario for select to authenticated using (true);
 create policy diario_write on public.diario for all    to authenticated using (true) with check (true);
 
+-- ---------- Gastos del viaje (compartidos; cualquiera de los dos edita) ----------
+create table if not exists public.gastos (
+  id uuid primary key,
+  monto numeric(12,2) not null check (monto >= 0),
+  moneda text not null check (moneda in ('EUR','MXN')),
+  concepto text not null default '',
+  categoria text not null default 'otros',
+  dia text not null,
+  pago text not null check (pago in ('moni','nando')),
+  para text not null default 'ambos' check (para in ('ambos','moni','nando')),
+  who text not null check (who in ('moni','nando')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table public.gastos enable row level security;
+drop policy if exists gastos_read on public.gastos;
+drop policy if exists gastos_write on public.gastos;
+create policy gastos_read  on public.gastos for select to authenticated using (true);
+create policy gastos_write on public.gastos for all    to authenticated using (true) with check (true);
+
+-- ---------- Notificaciones push ----------
+-- Suscripciones de cada celular (una por iPhone/navegador). Cada quien ve y borra solo las suyas.
+create table if not exists public.push_subs (
+  endpoint text primary key,
+  owner uuid not null default auth.uid() references auth.users on delete cascade,
+  who text not null check (who in ('moni','nando')),
+  p256dh text not null,
+  auth text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.push_subs enable row level security;
+drop policy if exists push_subs_own on public.push_subs;
+create policy push_subs_own on public.push_subs for all to authenticated using (owner = auth.uid()) with check (owner = auth.uid());
+-- Avisos programados (los llena supabase/avisos.sql). Sin políticas: solo la función "avisos" los lee.
+create table if not exists public.avisos (
+  id text primary key,
+  send_at timestamptz not null,
+  who text not null check (who in ('moni','nando','ambos')),
+  titulo text not null default '',
+  cuerpo text not null default '',
+  url text not null default '',
+  sent_at timestamptz
+);
+alter table public.avisos enable row level security;
+create index if not exists avisos_pendientes on public.avisos (send_at) where sent_at is null;
+
 -- ---------- Avisos en vivo (Realtime) ----------
 alter table public.visits replica identity full;
 alter table public.photos replica identity full;
 alter table public.edits  replica identity full;
 alter table public.prechecks replica identity full;
 alter table public.diario replica identity full;
+alter table public.gastos replica identity full;
 do $$
 begin
   begin alter publication supabase_realtime add table public.visits; exception when duplicate_object then null; end;
@@ -108,6 +155,7 @@ begin
   begin alter publication supabase_realtime add table public.edits;  exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.prechecks; exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.diario; exception when duplicate_object then null; end;
+  begin alter publication supabase_realtime add table public.gastos; exception when duplicate_object then null; end;
 end $$;
 
 -- ---------- Storage: bucket privado "fotos" ----------

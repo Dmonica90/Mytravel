@@ -172,6 +172,15 @@ $('flights').innerHTML = (window.VUELOS||[]).map(f=>`<article class="flight">
     <div class="fl-end fl-to"><span class="fl-time">${esc(f.arr)}${f.arrNote?`<sup>${esc(f.arrNote)}</sup>`:''}</span><span class="fl-city">${esc(f.to)}</span><span class="fl-ap">${esc(f.toAp)}</span></div>
   </div>
   <div class="flight-links">${f.legs.map(l=>`<a class="md-btn md-btn--outline md-btn--sm" href="${legUrl(l)}" target="_blank" rel="noopener"><i data-lucide="radar"></i>Estado ${esc(l.replace(/^([A-Z]+)(\d+)$/, '$1 $2'))}</a>`).join('')}</div>
+</article>`).join('')
+  + (window.TRENES||[]).map(f=>`<article class="flight train">
+  <div class="flight-top"><span class="flight-air">${esc(f.airline)} · <b>${esc(f.code)}</b></span><a class="flight-day" href="#${f.day}">${esc(f.date)}</a></div>
+  <div class="flight-route">
+    <div class="fl-end"><span class="fl-time">${esc(f.dep)}</span><span class="fl-city">${esc(f.from)}</span><span class="fl-ap">${esc(f.fromAp)}</span></div>
+    <div class="fl-mid"><span class="fl-dur">${esc(f.dur)}</span><span class="fl-line" aria-hidden="true"></span><span class="fl-stops">${esc(f.stops)}</span></div>
+    <div class="fl-end fl-to"><span class="fl-time">${esc(f.arr)}</span><span class="fl-city">${esc(f.to)}</span><span class="fl-ap">${esc(f.toAp)}</span></div>
+  </div>
+  <div class="flight-links"><span class="train-paid"><i data-lucide="ticket-check"></i>Comprado · ${esc(f.price)}</span><a class="md-btn md-btn--outline md-btn--sm" href="https://iryo.eu/es/home" target="_blank" rel="noopener"><i data-lucide="train-front"></i>Abrir iryo</a></div>
 </article>`).join('');
 $('overview').innerHTML = DAYS.map(d=>`<a class="ov t-${d.tone}" href="#${d.id}"><div class="ov-top"><span class="ov-num">${d.n}</span><span class="city-tag t-${d.tone}">${esc(d.city)}</span></div><p class="ov-title">${esc(d.date)} · ${esc(d.title.join(''))}</p><p class="ov-text">${esc(voice((window.OV||{})[d.id]) || d.ov)}</p></a>`).join('');
 $('days').innerHTML = DAYS.map(renderDay).join('');
