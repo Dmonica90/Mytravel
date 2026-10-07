@@ -79,6 +79,21 @@ N.saveDiario = async (day, texto) => {
   ok(await sb.from('diario').upsert({day, texto:texto||'', who, updated_at:new Date().toISOString()}, {onConflict:'day'}));
 };
 
+/* Gastos compartidos */
+N.listGastos = async () => ok(await sb.from('gastos').select('*')) || [];
+N.saveGasto = async (g) => {
+  ok(await sb.from('gastos').upsert({id:g.id, monto:g.monto, moneda:g.moneda, concepto:g.concepto, categoria:g.categoria, dia:g.dia, pago:g.pago, para:g.para, who, created_at:new Date(g.ts).toISOString(), updated_at:new Date().toISOString()}, {onConflict:'id'}));
+};
+N.delGasto = async (id) => { ok(await sb.from('gastos').delete().eq('id', id)); };
+
+/* Notificaciones push */
+N.savePush = async (sub) => {
+  const j = sub.toJSON ? sub.toJSON() : sub;
+  ok(await sb.from('push_subs').upsert({endpoint:j.endpoint, owner:uid, who, p256dh:j.keys.p256dh, auth:j.keys.auth}, {onConflict:'endpoint'}));
+};
+N.delPush = async (endpoint) => { ok(await sb.from('push_subs').delete().eq('endpoint', endpoint)); };
+N.testPush = async () => { const r = await sb.functions.invoke('avisos', {body:{tipo:'prueba'}}); if (r.error) throw r.error; return r.data; };
+
 /* Avisos en vivo: cada cambio llega como evento "nube:change" con {table, type, row}. */
 N.subscribe = () => {
   const emit = (table) => (p) => {
@@ -91,6 +106,7 @@ N.subscribe = () => {
     .on('postgres_changes', {event:'*', schema:'public', table:'edits'}, emit('edits'))
     .on('postgres_changes', {event:'*', schema:'public', table:'prechecks'}, emit('prechecks'))
     .on('postgres_changes', {event:'*', schema:'public', table:'diario'}, emit('diario'))
+    .on('postgres_changes', {event:'*', schema:'public', table:'gastos'}, emit('gastos'))
     .subscribe();
 };
 })();

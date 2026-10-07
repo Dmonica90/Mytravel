@@ -361,10 +361,12 @@ var VOZ = {
 };
 
 /* Vuelos del viaje (sin códigos de reserva: el repositorio es público). */
+/* tz: zona de la salida; checkin: horas antes de la salida en que abre el check-in en línea
+   (Viva nacional ~72 h; Aeroméxico ~24 h, en algunas rutas 48 h). Lo usan el calendario y los avisos. */
 var VUELOS = [
-  {airline:'Viva Aerobus', legs:['VB1380'], code:'VB 1380', date:'Domingo 11 oct', from:'Ciudad de México', fromAp:'MEX · AICM T1', dep:'8:25', to:'Cancún', toAp:'CUN', arr:'11:45', dur:'2 h 20 min', stops:'Directo', day:'c1'},
-  {airline:'Aeroméxico', legs:['AM527','AM1'], code:'AM 527 + AM 1', date:'Miércoles 14 oct → jueves 15 oct', from:'Cancún', fromAp:'CUN T4', dep:'12:40', to:'Madrid', toAp:'MAD T2', arr:'12:35', arrNote:'+1 día', dur:'16 h 55 min', stops:'1 escala · CDMX', day:'c4'},
-  {airline:'Aeroméxico', legs:['AM20','AM536'], code:'AM 20 + AM 536', date:'Miércoles 21 oct', from:'Madrid', fromAp:'MAD T1', dep:'9:00', to:'Cancún', toAp:'CUN T2', arr:'18:48', dur:'16 h 48 min', stops:'1 escala · CDMX', day:'d7'}
+  {airline:'Viva Aerobus', legs:['VB1380'], code:'VB 1380', date:'Domingo 11 oct', from:'Ciudad de México', fromAp:'MEX · AICM T1', dep:'8:25', to:'Cancún', toAp:'CUN', arr:'11:45', dur:'2 h 20 min', stops:'Directo', day:'c1', tz:'America/Mexico_City', checkin:72},
+  {airline:'Aeroméxico', legs:['AM527','AM1'], code:'AM 527 + AM 1', date:'Miércoles 14 oct → jueves 15 oct', from:'Cancún', fromAp:'CUN T4', dep:'12:40', to:'Madrid', toAp:'MAD T2', arr:'12:35', arrNote:'+1 día', dur:'16 h 55 min', stops:'1 escala · CDMX', day:'c4', tz:'America/Cancun', checkin:24},
+  {airline:'Aeroméxico', legs:['AM20','AM536'], code:'AM 20 + AM 536', date:'Miércoles 21 oct', from:'Madrid', fromAp:'MAD T1', dep:'9:00', to:'Cancún', toAp:'CUN T2', arr:'18:48', dur:'16 h 48 min', stops:'1 escala · CDMX', day:'d7', tz:'Europe/Madrid', checkin:24}
 ];
 
 /* Checklist "Antes de viajar": lo que deben tener listo antes de salir.

@@ -1,0 +1,1064 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Viaje Oct 2026//Monica y Nando//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Viaje Oct 2026 · Moni
+X-WR-TIMEZONE:Europe/Madrid
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:c1-06-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261011T123000Z
+DTEND:20261011T142500Z
+SUMMARY:Salida al aeropuerto
+DESCRIPTION:Moni\, a las 6:30 (hora de CDMX) salen juntos al AICM\, Termi
+ nal 1. Revisen boletos e identificaciones antes de cerrar la puerta.\n\n
+ AICM · Terminal 1 (hora de CDMX).\n\nLleguen con al menos 1\,5 h de ant
+ icipación.\n\nDía 1 en la app: https://dmonica90.github.io/Mytravel/#c
+ 1
+LOCATION:Aeropuerto Internacional de la Ciudad de México Terminal 1
+URL:https://dmonica90.github.io/Mytravel/#c1
+END:VEVENT
+BEGIN:VEVENT
+UID:c1-08-25-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261011T142500Z
+DTEND:20261011T164500Z
+SUMMARY:Vuelo VB 1380 · CDMX → Cancún
+DESCRIPTION:A las 8:25 despega su vuelo VB 1380 a Cancún: 2 h 20 min de 
+ vuelo para empezar el viaje juntos.\n\nViva Aerobus · AICM Terminal 1 
+ → Cancún · 2 h 20 min (hora de CDMX).\n\nDía 1 en la app: https://d
+ monica90.github.io/Mytravel/#c1
+LOCATION:Aeropuerto Internacional de la Ciudad de México Terminal 1
+GEO:19.4361;-99.0719
+URL:https://dmonica90.github.io/Mytravel/#c1
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana vuelan: Vuelo VB 1380 · CDMX → Cancún
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT2H
+DESCRIPTION:En 2 h sale su vuelo: Vuelo VB 1380 · CDMX → Cancún
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c1-11-45-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261011T164500Z
+DTEND:20261011T183000Z
+SUMMARY:Llegada a Cancún
+DESCRIPTION:Moni\, a las 11:45 aterrizan en Cancún. Ajusten el reloj una
+  hora: aquí empieza la playa.\n\nAeropuerto Internacional de Cancún (h
+ ora de Cancún).\n\nCancún va una hora adelante de CDMX: ajusten el rel
+ oj.\n\nDía 1 en la app: https://dmonica90.github.io/Mytravel/#c1
+LOCATION:Aeropuerto Internacional de Cancún
+GEO:21.0365;-86.877
+URL:https://dmonica90.github.io/Mytravel/#c1
+END:VEVENT
+BEGIN:VEVENT
+UID:c1-13-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261011T183000Z
+DTEND:20261011T210000Z
+SUMMARY:Comida con Emilio y Didi
+DESCRIPTION:Comida con Emilio y Didi a las 13:30: abrazos\, ponerse al d
+ ía y planear los próximos días.\n\nBienvenida y a ponerse al día.\n\
+ nDía 1 en la app: https://dmonica90.github.io/Mytravel/#c1
+URL:https://dmonica90.github.io/Mytravel/#c1
+END:VEVENT
+BEGIN:VEVENT
+UID:c1-16-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261011T210000Z
+DTEND:20261012T000000Z
+SUMMARY:Tarde de playa
+DESCRIPTION:Moni\, a las 16:00 primera tarde de playa con Nando: tienen 4
+  h para no hacer nada.\n\nLa playa que recomienden Emilio y Didi.\n\nDí
+ a 1 en la app: https://dmonica90.github.io/Mytravel/#c1
+URL:https://dmonica90.github.io/Mytravel/#c1
+END:VEVENT
+BEGIN:VEVENT
+UID:c1-20-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T010000Z
+DTEND:20261012T020000Z
+SUMMARY:Cena con Emilio y Didi
+DESCRIPTION:Cena con Emilio y Didi a las 20:00. Disfruten la primera noch
+ e juntos en Cancún.\n\nPrimera noche juntos en Cancún.\n\nDía 1 en la
+  app: https://dmonica90.github.io/Mytravel/#c1
+URL:https://dmonica90.github.io/Mytravel/#c1
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-09-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T143000Z
+DTEND:20261012T160000Z
+SUMMARY:Desayuno con calma
+DESCRIPTION:Moni\, desayuno a las 9:30 sin despertador: hoy el día es le
+ nto.\n\nCon Emilio y Didi\, sin prisa.\n\nDía 2 en la app: https://dmon
+ ica90.github.io/Mytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-11-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T160000Z
+DTEND:20261012T190000Z
+SUMMARY:Día de playa
+DESCRIPTION:A las 11:00 a la playa con Nando: 4 h de sol\, mar y pies en 
+ la arena.\n\nToallas\, bloqueador y agua.\n\nDía 2 en la app: https://d
+ monica90.github.io/Mytravel/#c2
+GEO:21.0606;-86.7799
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-15-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T200000Z
+DTEND:20261012T230000Z
+SUMMARY:Comida
+DESCRIPTION:Comida a las 15:00\, algo fresco y rico cerca del mar.\n\nAlg
+ o fresco cerca de la playa.\n\nDía 2 en la app: https://dmonica90.githu
+ b.io/Mytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-18-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T230000Z
+DTEND:20261013T013000Z
+SUMMARY:Caminata al atardecer
+DESCRIPTION:Moni\, a las 18:00 caminata al atardecer con Nando\, Emilio y
+  Didi.\n\nPaseo tranquilo con Emilio y Didi.\n\nDía 2 en la app: https:
+ //dmonica90.github.io/Mytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-20-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T013000Z
+DTEND:20261013T023000Z
+SUMMARY:Cena con Emilio y Didi
+DESCRIPTION:Cena con Emilio y Didi a las 20:30. Una noche tranquila para 
+ platicar.\n\nCena en casa o salir\, lo que prefieran.\n\nDía 2 en la ap
+ p: https://dmonica90.github.io/Mytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-09-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T140000Z
+DTEND:20261013T150000Z
+SUMMARY:Desayuno
+DESCRIPTION:Moni\, desayuno a las 9:00 y deciden juntos el paseo del día
+ .\n\nDía 3 en la app: https://dmonica90.github.io/Mytravel/#c3
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-10-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T150000Z
+DTEND:20261013T180000Z
+SUMMARY:Paseo opcional
+DESCRIPTION:A las 10:00\, paseo opcional: Isla Mujeres en ferry\, Playa d
+ el Carmen o más playa. Tienen 4 h antes de comer.\n\nDía 3 en la app: 
+ https://dmonica90.github.io/Mytravel/#c3
+GEO:21.1827;-86.8053
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-14-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T190000Z
+DTEND:20261013T220000Z
+SUMMARY:Comida
+DESCRIPTION:Comida a las 14:00 donde los encuentre el paseo.\n\nDía 3 en
+  la app: https://dmonica90.github.io/Mytravel/#c3
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-17-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T223000Z
+DTEND:20261014T010000Z
+SUMMARY:Caminata
+DESCRIPTION:Moni\, a las 17:30 una última caminata con calma con Nando.\
+ n\nÚltimo paseo con calma.\n\nDía 3 en la app: https://dmonica90.githu
+ b.io/Mytravel/#c3
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-20-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261014T010000Z
+DTEND:20261014T020000Z
+SUMMARY:Cena de despedida con Emilio y Didi
+DESCRIPTION:Cena de despedida a las 20:00: denles las gracias a Emilio y 
+ Didi por recibirlos.\n\nPara agradecerles la hospitalidad.\n\nDía 3 en 
+ la app: https://dmonica90.github.io/Mytravel/#c3
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c4-08-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261014T130000Z
+DTEND:20261014T143000Z
+SUMMARY:Desayuno de despedida
+DESCRIPTION:Moni\, último desayuno con Emilio y Didi a las 8:00. Tómens
+ e una foto todos juntos y denles un abrazo largo.\n\nCon Emilio y Didi.\
+ n\nDía 4 en la app: https://dmonica90.github.io/Mytravel/#c4
+URL:https://dmonica90.github.io/Mytravel/#c4
+END:VEVENT
+BEGIN:VEVENT
+UID:c4-09-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261014T143000Z
+DTEND:20261014T173000Z
+SUMMARY:Salida al aeropuerto
+DESCRIPTION:A las 9:30 salen a la Terminal 4. Revisen pasaportes y que no
+  se quede nada en casa de Emilio y Didi.\n\nAeropuerto de Cancún · Ter
+ minal 4. Vuelo internacional: lleguen unas 3 h antes.\n\nDía 4 en la ap
+ p: https://dmonica90.github.io/Mytravel/#c4
+LOCATION:Aeropuerto Internacional de Cancún Terminal 4
+URL:https://dmonica90.github.io/Mytravel/#c4
+END:VEVENT
+BEGIN:VEVENT
+UID:c4-12-40-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261014T174000Z
+DTEND:20261014T184000Z
+SUMMARY:Vuelo AM 527 + AM 1 · Cancún → Madrid
+DESCRIPTION:Moni\, a las 12:40 despega su vuelo AM 527 a CDMX y de ahí e
+ l AM 1 a Madrid. Duerman lo que puedan en el avión: mañana empieza Eur
+ opa.\n\nAeroméxico · CUN T4 → escala en CDMX → Madrid T2 · 16 h 5
+ 5 min. Llegan el jueves 15 a las 12:35 (hora de Madrid).\n\nDía 4 en la
+  app: https://dmonica90.github.io/Mytravel/#c4
+LOCATION:Aeropuerto Internacional de Cancún Terminal 4
+GEO:21.041;-86.874
+URL:https://dmonica90.github.io/Mytravel/#c4
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana vuelan: Vuelo AM 527 + AM 1 · Cancún → Madrid
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT2H
+DESCRIPTION:En 2 h sale su vuelo: Vuelo AM 527 + AM 1 · Cancún → Madr
+ id
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-12-35-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T103500Z
+DTEND:20261015T133500Z
+SUMMARY:Llegada a Madrid · Terminal 2
+DESCRIPTION:Moni\, a las 12:35 aterrizan en Madrid\, Terminal 2. Tómense
+  un café\, estiren las piernas y al tren: Barcelona los espera.\n\nAter
+ rizan del vuelo AM 1 desde CDMX. Después\, traslado a la estación para
+  el tren a Barcelona.\n\nDía 5 en la app: https://dmonica90.github.io/M
+ ytravel/#d1
+LOCATION:Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 2
+GEO:40.4697;-3.57
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-19-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T170000Z
+DTEND:20261015T180000Z
+SUMMARY:Tren Madrid → Barcelona
+DESCRIPTION:Moni\, a las 19:00 llegan a Sants en el tren desde Madrid. Ya
+  están en Barcelona.\n\nLlegada a Estación Sants · 19:00–20:00\n\nD
+ ía 5 en la app: https://dmonica90.github.io/Mytravel/#d1
+LOCATION:Estació de Sants Barcelona
+GEO:41.3791;2.14
+URL:https://dmonica90.github.io/Mytravel/#d1
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana: Tren Madrid → Barcelona
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Tren Madrid → Barcelona
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-20-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T180000Z
+DTEND:20261015T183000Z
+SUMMARY:Taxi o Metro L4 al hotel
+DESCRIPTION:En unos 30 minutos están en la Barceloneta\; a las 20:30 ya 
+ es el check-in.\n\nHotel en la Barceloneta · 20:00–20:30\n\nDía 5 en
+  la app: https://dmonica90.github.io/Mytravel/#d1
+LOCATION:Barceloneta\, Barcelona
+GEO:41.3797;2.1885
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-20-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T183000Z
+DTEND:20261015T190000Z
+SUMMARY:Check-in y descanso
+DESCRIPTION:Dejen las maletas y\, si les queda energía\, den una vuelta 
+ corta juntos por la Barceloneta.\n\nExploración del barrio Barceloneta 
+ si tienen energía.\n\nDía 5 en la app: https://dmonica90.github.io/Myt
+ ravel/#d1
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:d1-21-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261015T190000Z
+DTEND:20261015T200000Z
+SUMMARY:Cena
+DESCRIPTION:Moni\, cena tranquila con Nando en el Mercat Barceloneta y a 
+ dormir temprano: mañana Articulate empieza a las 8:00.\n\nMercat Barcel
+ oneta (casual) o room service.\n\nDía 5 en la app: https://dmonica90.gi
+ thub.io/Mytravel/#d1
+LOCATION:Mercat de la Barceloneta
+GEO:41.3807;2.1893
+URL:https://dmonica90.github.io/Mytravel/#d1
+END:VEVENT
+BEGIN:VEVENT
+UID:pre-d2-08-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261016T060000Z
+DTEND:20261016T080000Z
+SUMMARY:Desayuno y comienza el evento
+DESCRIPTION:Moni\, desayuna rico: de 8:00 a 10:00 es el arranque de Artic
+ ulate.\n\n08:00–10:00\n\nDía 6 en la app: https://dmonica90.github.io
+ /Mytravel/#d2
+URL:https://dmonica90.github.io/Mytravel/#d2
+END:VEVENT
+BEGIN:VEVENT
+UID:pre-d2-10-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261016T080000Z
+DTEND:20261016T110000Z
+SUMMARY:Evento
+DESCRIPTION:De 10:00 a 18:30 estás en el evento. Será largo: cuídate y
+  guarda energía para la noche con Nando.\n\n10:00–18:30 · asumir tod
+ o ocupado\n\nDía 6 en la app: https://dmonica90.github.io/Mytravel/#d2
+URL:https://dmonica90.github.io/Mytravel/#d2
+END:VEVENT
+BEGIN:VEVENT
+UID:pre-d2-18-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261016T163000Z
+DTEND:20261016T173000Z
+SUMMARY:Disponible
+DESCRIPTION:Moni\, a las 18:30 sales y por fin te reencuentras con Nando.
+  Cena ligera y a consentirte: hoy te lo ganaste.\n\nEvento casi todo el 
+ día: Monica se cansará. Mantener cena ligera.\n\nDía 6 en la app: htt
+ ps://dmonica90.github.io/Mytravel/#d2
+URL:https://dmonica90.github.io/Mytravel/#d2
+END:VEVENT
+BEGIN:VEVENT
+UID:d2-18-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261016T163000Z
+DTEND:20261016T173000Z
+SUMMARY:Reunión pareja
+DESCRIPTION:Cena ligera: Can Culleretes o taberna cercana (6–8€ cada 
+ uno). Descanso\, charla sobre el día.\n\nDía 6 en la app: https://dmon
+ ica90.github.io/Mytravel/#d2
+URL:https://dmonica90.github.io/Mytravel/#d2
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-07-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T053000Z
+DTEND:20261017T063000Z
+SUMMARY:Desayuno · Mercat Barceloneta
+DESCRIPTION:Moni\, empiezan juntos a las 7:30 en el Mercat Barceloneta\, 
+ a 5 minutos del hotel: café\, jamón y pan tumaca. Tienen 1 h antes de 
+ Montcada.\n\nA 5 min del hotel · café con jamón ibérico\, pan tumaca
+ \, churros · 45 min.\n\nLlegar temprano\, es muy concurrido.\n\nDía 7 
+ en la app: https://dmonica90.github.io/Mytravel/#d3
+LOCATION:Mercat de la Barceloneta
+GEO:41.3807;2.1893
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-08-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T063000Z
+DTEND:20261017T080000Z
+SUMMARY:Carrer de Montcada
+DESCRIPTION:A las 8:30 llegan a Montcada con la mejor luz y casi sin turi
+ stas. Aprovechen para sus primeras fotos del día.\n\nPalacios medievale
+ s\, arcos góticos\, patios interiores · 30 min (fotos incluidas).\n\nM
+ ejor luz matutina\, sin turistas aún.\n\nDía 7 en la app: https://dmon
+ ica90.github.io/Mytravel/#d3
+LOCATION:Carrer de Montcada Barcelona
+GEO:41.3846;2.1812
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-10-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T080000Z
+DTEND:20261017T103000Z
+SUMMARY:Basílica Santa Maria del Mar
+DESCRIPTION:Santa Maria del Mar a las 10:00. Después tienen tiempo libre
+  para pasear de la mano por el Born hasta la comida de las 12:30.\n\nPla
+ ça Santa Maria\, Born · interior gótico\, vitrales\, acústica sublim
+ e · 45 min.\n\nDonación voluntaria ~1€.\n\nSilencio interior\, medit
+ ación posible.\n\nDía 7 en la app: https://dmonica90.github.io/Mytrave
+ l/#d3
+LOCATION:Basílica de Santa Maria del Mar
+GEO:41.3838;2.182
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-12-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T103000Z
+DTEND:20261017T113000Z
+SUMMARY:Comida
+DESCRIPTION:Comida a las 12:30: Mercat Santa Caterina\, La Cova Fumada o 
+ Can Solé. A las 13:30 siguen a la Ciutadella.\n\n1 hora (comer + espera
+ r).\n\nDía 7 en la app: https://dmonica90.github.io/Mytravel/#d3
+GEO:41.3862;2.1786
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-13-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T113000Z
+DTEND:20261017T140000Z
+SUMMARY:Descanso · Parc de la Ciutadella
+DESCRIPTION:Moni\, de 13:30 a 16:00 descansan en la Ciutadella: una banca
+ \, un café y piernas arriba con Nando. Es el respiro largo del día.\n\
+ nPasseig de Picasso · Cascada Monumental\, lago\, gente local · 1\,5 h
+ oras.\n\nPicar algo ligero si hace falta\, no comer de nuevo.\n\nDía 7 
+ en la app: https://dmonica90.github.io/Mytravel/#d3
+LOCATION:Parc de la Ciutadella
+GEO:41.3897;2.1866
+URL:https://dmonica90.github.io/Mytravel/#d3
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Descanso · Parc de la Ciutadella
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-16-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T140000Z
+DTEND:20261017T153000Z
+SUMMARY:Museu Picasso
+DESCRIPTION:Moni\, a las 16:00 entran juntos al Museu Picasso. Tienen 1 h
+  30 min para perderse en Las Meninas antes de la Catedral. Hoy es sábad
+ o: la entrada cuesta 14€.\n\nCarrer de Montcada\, 15–23 · Las Menin
+ as (4 versiones)\, obras cubistas\, azulejos · 1\,5 horas.\n\nSábado: 
+ entrada normal 14€\, mejor reservar online. La entrada gratis es solo 
+ los jueves por la tarde.\n\nHorario: viernes–domingo 10–20h\, jueves
+  10–21h.\n\nAudioguía 5€ (muy recomendada).\n\nPosible fila a las 1
+ 8h: ir a las 16:00.\n\nDía 7 en la app: https://dmonica90.github.io/Myt
+ ravel/#d3
+LOCATION:Museu Picasso Barcelona
+GEO:41.3852;2.1808
+URL:https://dmonica90.github.io/Mytravel/#d3
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Museu Picasso
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-17-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T153000Z
+DTEND:20261017T160000Z
+SUMMARY:Catedral (exterior)
+DESCRIPTION:A las 17:30 llegan a la Catedral con luz naranja: la mejor fo
+ to juntos es entre 17:30 y 18:30.\n\nPlaça de la Seu · fachada frontal
+ \, luz de atardecer\, gárgolas · 30 min.\n\nInterior + subida: 16€\,
+  menos importante que el exterior.\n\nMejor foto entre 17:30 y 18:30 con
+  luz naranja.\n\nDía 7 en la app: https://dmonica90.github.io/Mytravel/
+ #d3
+LOCATION:Catedral de Barcelona
+GEO:41.384;2.1762
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-18-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T160000Z
+DTEND:20261017T163000Z
+SUMMARY:Plaça Reial · mejor foto del día
+DESCRIPTION:Moni\, a las 18:00 llegan a la Plaça Reial: tómense la foto
+  del viaje desde la esquina SE\, antes de las 18:15.\n\nArcadas\, dos fa
+ rolas de Gaudí\, palmeras\, atardecer en azul · 45 min.\n\nMejor foto 
+ desde la esquina SE.\n\nEsperar la luz azul después del atardecer.\n\nE
+ vitar turistas: ir antes de 18:15.\n\nDía 7 en la app: https://dmonica9
+ 0.github.io/Mytravel/#d3
+LOCATION:Plaça Reial Barcelona
+GEO:41.3801;2.1754
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-18-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T163000Z
+DTEND:20261017T180000Z
+SUMMARY:Cena
+DESCRIPTION:Cena a las 18:30. Can Culleretes está a unos pasos de la pla
+ za\; tienen 1 h 30 min para cenar sin prisa.\n\n1\,5 horas (comer + espe
+ rar).\n\nDía 7 en la app: https://dmonica90.github.io/Mytravel/#d3
+GEO:41.3816;2.1745
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d3-20-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261017T180000Z
+DTEND:20261017T190000Z
+SUMMARY:Paseo nocturno · Moll de la Fusta
+DESCRIPTION:Cierran su día a las 20:00 en Moll de la Fusta: barcos ilumi
+ nados y una última copa con Nando.\n\nBarcos iluminados y agua · últi
+ ma bebida · 1 hora.\n\nMejor foto 20:30–21:00 (azul profundo + luces)
+ .\n\nLlevar un trapo pequeño por la humedad del puerto.\n\nDía 7 en la
+  app: https://dmonica90.github.io/Mytravel/#d3
+LOCATION:Moll de la Fusta Barcelona
+GEO:41.3778;2.1805
+URL:https://dmonica90.github.io/Mytravel/#d3
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-09-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T070000Z
+DTEND:20261018T080000Z
+SUMMARY:Desayuno relajado
+DESCRIPTION:Moni\, desayuno sin prisa a las 9:00: hoy la mañana es para 
+ ustedes.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-10-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T080000Z
+DTEND:20261018T090000Z
+SUMMARY:Exploración última
+DESCRIPTION:A las 10:00\, última vuelta juntos por el Gòtic para las fo
+ tos que faltaron. Tienen 1 h antes del checkout.\n\nBarrio Gótico\, fot
+ os que faltaron.\n\nDía 8 en la app: https://dmonica90.github.io/Mytrav
+ el/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-11-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T090000Z
+DTEND:20261018T100000Z
+SUMMARY:Checkout del hotel
+DESCRIPTION:Checkout a las 11:00. Tienen hasta las  para comer algo rico 
+ y llegar a Sants.\n\nDía 8 en la app: https://dmonica90.github.io/Mytra
+ vel/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-14-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T120000Z
+DTEND:20261018T143000Z
+SUMMARY:Salida del tren · Estación Sants
+DESCRIPTION:Moni\, su tren sale de Sants a las 14:00. Pidan ventana y lle
+ ven snacks: son 2\,5 horas para platicar.\n\nDuración 2\,5 horas · com
+ pra online.\n\nCompartir tren\, ventana\, snacks.\n\nDía 8 en la app: h
+ ttps://dmonica90.github.io/Mytravel/#d4
+LOCATION:Estació de Sants Barcelona
+GEO:41.3791;2.14
+URL:https://dmonica90.github.io/Mytravel/#d4
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana: Salida del tren · Estación Sants
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Salida del tren · Estación Sants
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-16-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T143000Z
+DTEND:20261018T153000Z
+SUMMARY:Llegada · Puerta de Atocha
+DESCRIPTION:A las 16:30 llegan a Atocha: ya están juntos en Madrid.\n\nD
+ ía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
+LOCATION:Estación Puerta de Atocha Madrid
+GEO:40.4066;-3.6892
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-17-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T150000Z
+DTEND:20261018T153000Z
+SUMMARY:Taxi o metro al hotel
+DESCRIPTION:Taxi o metro al hotel\; a las 17:30 hacen check-in.\n\nVallec
+ as o centro.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#
+ d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-17-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T153000Z
+DTEND:20261018T160000Z
+SUMMARY:Check-in
+DESCRIPTION:Check-in a las 17:30 y un rato para acomodarse.\n\nReserva de
+  antemano.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Check-in
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-18-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T160000Z
+DTEND:20261018T173000Z
+SUMMARY:Exploración del barrio y descanso
+DESCRIPTION:A las 18:00\, vuelta por el barrio y un descanso antes de cen
+ ar.\n\nDía 8 en la app: https://dmonica90.github.io/Mytravel/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d4-19-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261018T173000Z
+DTEND:20261018T183000Z
+SUMMARY:Cena
+DESCRIPTION:Cena de tapas cerca del hotel a las 19:30. Mañana Madrid es 
+ todo suyo.\n\nTapas cerca del hotel.\n\nDía 8 en la app: https://dmonic
+ a90.github.io/Mytravel/#d4
+URL:https://dmonica90.github.io/Mytravel/#d4
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-08-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T060000Z
+DTEND:20261019T070000Z
+SUMMARY:Desayuno · cafetería local
+DESCRIPTION:Moni\, desayuno a las 8:00 cerca del hotel\; a las 9:00 ya es
+ tán en el Prado.\n\nCerca del hotel · 30 min.\n\nDía 9 en la app: htt
+ ps://dmonica90.github.io/Mytravel/#d5
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-09-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T070000Z
+DTEND:20261019T093000Z
+SUMMARY:Museo del Prado
+DESCRIPTION:Moni\, a las 9:00 entran al Prado y tienen 2 h 30 min. Deja q
+ ue Nando te lleve a su Goya\; Las Meninas\, para verlas juntos.\n\nPaseo
+  del Prado\, s/n · 2 horas (pausado).\n\nGratis en ciertos horarios (no
+ che\, domingos).\n\nEnfocarse en Goya (dark vibes) y Las Meninas (Veláz
+ quez).\n\nDía 9 en la app: https://dmonica90.github.io/Mytravel/#d5
+LOCATION:Museo del Prado
+GEO:40.4138;-3.6921
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-11-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T093000Z
+DTEND:20261019T110000Z
+SUMMARY:Retiro + Palacio Real
+DESCRIPTION:A las 11:30 cruzan al Retiro caminando desde el Prado: lago y
+  paseo de 1 h 30 min para los dos.\n\nParque del Retiro\, caminable desd
+ e el Prado · 1\,5 horas de paseo.\n\n+2€ café si quieren.\n\nDía 9 
+ en la app: https://dmonica90.github.io/Mytravel/#d5
+LOCATION:Parque del Retiro Madrid
+GEO:40.4153;-3.6845
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-13-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T110000Z
+DTEND:20261019T121500Z
+SUMMARY:Comida
+DESCRIPTION:Comida a las 13:00: Mercado San Miguel\, Taberna La Bola o el
+  restaurante del Prado.\n\nDía 9 en la app: https://dmonica90.github.io
+ /Mytravel/#d5
+GEO:40.4153;-3.7089
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-14-15-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T121500Z
+DTEND:20261019T143000Z
+SUMMARY:Exploración libre (elegir 1–2)
+DESCRIPTION:Moni\, de 14:15 a 16:30 eligen juntos: Plaza Mayor\, Malasañ
+ a\, Templo de Debod o el barrio de América Latina.\n\nDía 9 en la app:
+  https://dmonica90.github.io/Mytravel/#d5
+GEO:40.4155;-3.7074
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-16-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T143000Z
+DTEND:20261019T151500Z
+SUMMARY:Café descanso
+DESCRIPTION:Café a las 16:30 en una terraza del centro: 45 min para reca
+ rgar y platicar.\n\nTerraza en el centro · 30 min.\n\nDía 9 en la app:
+  https://dmonica90.github.io/Mytravel/#d5
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-17-15-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T151500Z
+DTEND:20261019T164500Z
+SUMMARY:Museo Reina Sofía
+DESCRIPTION:Moni\, a las 17:15 van al Reina Sofía\; el Guernica es la il
+ usión de Nando. Si quieren la hora gratis\, entren a las 19:00.\n\nCall
+ e de Santa Isabel\, 52 · 1\,5 horas.\n\nGratis por la noche jueves–s
+ ábado (18:00–21:00): no compren entrada.\n\nSi van a la hora gratis: 
+ 19:00–20:30.\n\nDía 9 en la app: https://dmonica90.github.io/Mytravel
+ /#d5
+LOCATION:Museo Reina Sofía
+GEO:40.4086;-3.6943
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-18-45-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T164500Z
+DTEND:20261019T180000Z
+SUMMARY:Atardecer
+DESCRIPTION:Atardecer a las 18:45: el Templo de Debod para la vista de 36
+ 0°\, o el Retiro si se les antoja algo romántico.\n\n1 hora.\n\nDía 9
+  en la app: https://dmonica90.github.io/Mytravel/#d5
+GEO:40.424;-3.7178
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-20-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T180000Z
+DTEND:20261019T193000Z
+SUMMARY:Cena
+DESCRIPTION:Cena a las 20:00: Café Gijón\, Taberna El Sur\, Casa Botín
+  o\, si se quieren consentir\, El Club Allard.\n\nDía 9 en la app: http
+ s://dmonica90.github.io/Mytravel/#d5
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d5-21-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261019T193000Z
+DTEND:20261019T203000Z
+SUMMARY:Paseo de noche (opcional)
+DESCRIPTION:Si les queda energía\, a las 21:30 un paseo de noche por el 
+ Retiro\, la Plaza Mayor o Malasaña.\n\nRetiro iluminado\, Plaza Mayor c
+ on bares o Malasaña · 1 hora.\n\nDía 9 en la app: https://dmonica90.g
+ ithub.io/Mytravel/#d5
+URL:https://dmonica90.github.io/Mytravel/#d5
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-05-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T033000Z
+DTEND:20261020T050000Z
+SUMMARY:Despertar y café rápido
+DESCRIPTION:Moni\, despertador a las 5:30: café rápido\, un abrazo y a 
+ las 6:00 salen hacia Atocha.\n\n06:00 salida del hotel → Estación Ato
+ cha (metro).\n\nDía 10 en la app: https://dmonica90.github.io/Mytravel/
+ #d6
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-07-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T050000Z
+DTEND:20261020T063000Z
+SUMMARY:Tren Madrid → Toledo
+DESCRIPTION:A las 7:00 sale su tren a Toledo\; llegan como a las 8:00.\n\
+ nAVE o regional · 30–60 min (el regional es más barato) · llegada ~
+ 08:00.\n\nDía 10 en la app: https://dmonica90.github.io/Mytravel/#d6
+LOCATION:Estación de tren de Toledo
+GEO:39.8628;-4.0118
+URL:https://dmonica90.github.io/Mytravel/#d6
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana: Tren Madrid → Toledo
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Tren Madrid → Toledo
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-08-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T063000Z
+DTEND:20261020T074500Z
+SUMMARY:Alcázar
+DESCRIPTION:Moni\, a las 8:30 empiezan por lo alto: 1 h 15 min en el Alc
+ ázar antes de bajar a la Catedral.\n\nCima de la ciudad · fortaleza im
+ ponente\, museo militar · 45 min.\n\nGratis si solo ven el exterior.\n\
+ nFoto perfecta desde el puente (vista clásica).\n\nDía 10 en la app: h
+ ttps://dmonica90.github.io/Mytravel/#d6
+LOCATION:Alcázar de Toledo
+GEO:39.8578;-4.0207
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-09-45-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T074500Z
+DTEND:20261020T091500Z
+SUMMARY:Catedral
+DESCRIPTION:A las 9:45 entran a la Catedral: gótico puro y la “Asunci
+ ón” de El Greco. Tienen 1 h 30 min.\n\nCentro de la ciudad · gótico
+  puro\, interior suntuoso · 1 hora.\n\nAudioguía recomendada +3€.\n\
+ nCuadro: “Asunción” de El Greco.\n\nDía 10 en la app: https://dmon
+ ica90.github.io/Mytravel/#d6
+LOCATION:Catedral Primada de Toledo
+GEO:39.8569;-4.0237
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-11-15-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T091500Z
+DTEND:20261020T110000Z
+SUMMARY:Museo El Greco
+DESCRIPTION:A las 11:15\, Museo El Greco: busquen juntos la “Vista de T
+ oledo”\, la favorita de Nando.\n\nCasa museo El Greco · 16 cuadros\, 
+ ambiente renacentista · 1 hora.\n\nCuadro clave: “Vista de Toledo”.
+ \n\nDía 10 en la app: https://dmonica90.github.io/Mytravel/#d6
+LOCATION:Museo del Greco Toledo
+GEO:39.8559;-4.0283
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-13-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T110000Z
+DTEND:20261020T123000Z
+SUMMARY:Comida
+DESCRIPTION:Comida a las 13:00: carcamusa en Casa Aurelio o una terraza c
+ on vistas en Venta del Alma.\n\n13:00–14:15.\n\nDía 10 en la app: htt
+ ps://dmonica90.github.io/Mytravel/#d6
+GEO:39.8572;-4.0247
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-14-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T123000Z
+DTEND:20261020T141500Z
+SUMMARY:Exploración libre
+DESCRIPTION:De 14:30 a 16:15\, Toledo es suyo: San Juan de los Reyes\, lo
+ s callejones\, la Sinagoga del Tránsito o el mirador.\n\n14:30–16:00.
+ \n\nDía 10 en la app: https://dmonica90.github.io/Mytravel/#d6
+GEO:39.859;-4.0312
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-16-15-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T141500Z
+DTEND:20261020T160000Z
+SUMMARY:Café mirador y fotos
+DESCRIPTION:Moni\, a las 16:15 café en el mirador del puente: su foto co
+ n el Alcázar y la Catedral al atardecer.\n\nDesde el puente: Alcázar +
+  catedral · 1 hora (atardecer).\n\nDía 10 en la app: https://dmonica90
+ .github.io/Mytravel/#d6
+LOCATION:Puente de Alcántara Toledo
+GEO:39.8593;-4.017
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-18-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T160000Z
+DTEND:20261020T174500Z
+SUMMARY:Tren Toledo → Madrid
+DESCRIPTION:A las 18:00 sale el tren de regreso\; a las 19:30 ya están e
+ n Madrid.\n\nRegional 18:00–19:30 · llegada a Madrid ~19:30.\n\nDía 
+ 10 en la app: https://dmonica90.github.io/Mytravel/#d6
+URL:https://dmonica90.github.io/Mytravel/#d6
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana: Tren Toledo → Madrid
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT1H
+DESCRIPTION:En 1 h: Tren Toledo → Madrid
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d6-19-45-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T174500Z
+DTEND:20261020T184500Z
+SUMMARY:Llegada a Madrid y descanso
+DESCRIPTION:Cena ligera y a dormir temprano\, Moni: mañana el vuelo es a
+  las 9:00.\n\nCena ligera (tapas o room service). Dormir temprano: vuelo
+  mañana a las 9:00.\n\nDía 10 en la app: https://dmonica90.github.io/M
+ ytravel/#d6
+URL:https://dmonica90.github.io/Mytravel/#d6
+END:VEVENT
+BEGIN:VEVENT
+UID:d7-06-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261021T043000Z
+DTEND:20261021T050000Z
+SUMMARY:Despertar y desayuno rápido
+DESCRIPTION:Moni\, despertador a las 6:30 y desayuno rápido juntos.\n\nD
+ ía 11 en la app: https://dmonica90.github.io/Mytravel/#d7
+URL:https://dmonica90.github.io/Mytravel/#d7
+END:VEVENT
+BEGIN:VEVENT
+UID:d7-07-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261021T050000Z
+DTEND:20261021T053000Z
+SUMMARY:Checkout del hotel
+DESCRIPTION:Checkout a las 7:00. Revisa que el pasaporte vaya a la mano.\
+ n\nDía 11 en la app: https://dmonica90.github.io/Mytravel/#d7
+URL:https://dmonica90.github.io/Mytravel/#d7
+END:VEVENT
+BEGIN:VEVENT
+UID:d7-07-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261021T053000Z
+DTEND:20261021T070000Z
+SUMMARY:Taxi al aeropuerto · Terminal 1
+DESCRIPTION:A las 7:30 sale el taxi a Barajas\, Terminal 1.\n\nDía 11 en
+  la app: https://dmonica90.github.io/Mytravel/#d7
+LOCATION:Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 1
+URL:https://dmonica90.github.io/Mytravel/#d7
+END:VEVENT
+BEGIN:VEVENT
+UID:d7-09-00-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261021T070000Z
+DTEND:20261021T100000Z
+SUMMARY:Vuelo AM 20 + AM 536 · Madrid → Cancún
+DESCRIPTION:Moni\, su vuelo AM 20 sale a las 9:00\, con escala en CDMX. G
+ racias por este viaje juntos.\n\nAeroméxico · MAD T1 → escala en CDM
+ X → Cancún T2 · 16 h 48 min. Pasaporte listo.\n\nDía 11 en la app: 
+ https://dmonica90.github.io/Mytravel/#d7
+LOCATION:Aeropuerto Adolfo Suárez Madrid-Barajas Terminal 1
+GEO:40.4697;-3.57
+URL:https://dmonica90.github.io/Mytravel/#d7
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Mañana vuelan: Vuelo AM 20 + AM 536 · Madrid → Cancún
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT2H
+DESCRIPTION:En 2 h sale su vuelo: Vuelo AM 20 + AM 536 · Madrid → Canc
+ ún
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d7-18-48-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261021T234800Z
+DTEND:20261022T004800Z
+SUMMARY:Llegada a Cancún · Terminal 2
+DESCRIPTION:A las 18:48 (hora de Cancún) aterrizan en casa de nuevo. Bue
+ n regreso\, Moni.\n\nHora de Cancún. Fin del viaje.\n\nDía 11 en la ap
+ p: https://dmonica90.github.io/Mytravel/#d7
+LOCATION:Aeropuerto Internacional de Cancún Terminal 2
+GEO:21.0365;-86.877
+URL:https://dmonica90.github.io/Mytravel/#d7
+END:VEVENT
+BEGIN:VEVENT
+UID:checkin-VB1380-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261008T142500Z
+DTEND:20261008T145500Z
+SUMMARY:Check-in Viva Aerobus VB 1380
+DESCRIPTION:Abre el check-in en línea (~72 h antes de la salida de las 8
+ :25).\n\nVuelo: Ciudad de México → Cancún\, Domingo 11 oct.\nhttps:/
+ /dmonica90.github.io/Mytravel/#vuelos
+URL:https://dmonica90.github.io/Mytravel/#vuelos
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P3D
+DESCRIPTION:Faltan 3 días para el check-in de VB 1380
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:PT0M
+DESCRIPTION:Ya pueden hacer el check-in de VB 1380
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:checkin-AM527-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T174000Z
+DTEND:20261013T181000Z
+SUMMARY:Check-in Aeroméxico AM 527 + AM 1
+DESCRIPTION:Abre el check-in en línea (~24 h antes de la salida de las 1
+ 2:40). En algunas rutas abre desde 48 h antes: si quieren\, inténtenlo 
+ un día antes.\n\nVuelo: Cancún → Madrid\, Miércoles 14 oct → juev
+ es 15 oct.\nhttps://dmonica90.github.io/Mytravel/#vuelos
+URL:https://dmonica90.github.io/Mytravel/#vuelos
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P3D
+DESCRIPTION:Faltan 3 días para el check-in de AM 527 + AM 1
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:PT0M
+DESCRIPTION:Ya pueden hacer el check-in de AM 527 + AM 1
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:checkin-AM20-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261020T070000Z
+DTEND:20261020T073000Z
+SUMMARY:Check-in Aeroméxico AM 20 + AM 536
+DESCRIPTION:Abre el check-in en línea (~24 h antes de la salida de las 9
+ :00). En algunas rutas abre desde 48 h antes: si quieren\, inténtenlo u
+ n día antes.\n\nVuelo: Madrid → Cancún\, Miércoles 21 oct.\nhttps:/
+ /dmonica90.github.io/Mytravel/#vuelos
+URL:https://dmonica90.github.io/Mytravel/#vuelos
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P3D
+DESCRIPTION:Faltan 3 días para el check-in de AM 20 + AM 536
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:PT0M
+DESCRIPTION:Ya pueden hacer el check-in de AM 20 + AM 536
+END:VALARM
+END:VEVENT
+END:VCALENDAR

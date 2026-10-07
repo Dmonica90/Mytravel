@@ -34,6 +34,7 @@
   <a class="tab" href="#viaje" data-tab-link="viaje"><i data-lucide="map"></i><span>Viaje</span></a>
   <a class="tab" href="#album" data-tab-link="album"><i data-lucide="images"></i><span>Álbum</span><b class="tab-dot" id="dotAlbum" hidden></b></a>
   <a class="tab" href="#pendientes" data-tab-link="pendientes"><i data-lucide="list-checks"></i><span>Pendientes</span><b class="tab-badge" id="badgePend" hidden></b></a>
+  <a class="tab" href="#gastos" data-tab-link="gastos"><i data-lucide="wallet"></i><span>Gastos</span></a>
   <a class="tab" href="#mas" data-tab-link="mas"><i data-lucide="menu"></i><span>Más</span></a>
 </nav>
 
@@ -154,6 +155,55 @@
     </div>
   </section>
 
+  <section class="section gastos-sec" id="gastos" data-tab="gastos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="md-eyebrow-label muted">Gastos del viaje</p>
+        <h2 class="md-heading">¿Cuánto <span class="accent">llevamos?</span></h2>
+        <p id="gaIntro"></p>
+      </div>
+      <div id="gaSummary"></div>
+      <form class="panel ga-form" id="gaForm" novalidate>
+        <h3 id="gaFormTitle">Nuevo gasto</h3>
+        <div class="ga-amount">
+          <div class="ga-field"><label class="md-label" for="gaMonto">Monto</label><input class="md-input" id="gaMonto" type="text" inputmode="decimal" autocomplete="off" placeholder="0,00"></div>
+          <div class="seg" role="radiogroup" aria-label="Moneda">
+            <label><input type="radio" name="gaMoneda" value="EUR"><span>EUR €</span></label>
+            <label><input type="radio" name="gaMoneda" value="MXN"><span>MXN $</span></label>
+          </div>
+        </div>
+        <label class="md-label" for="gaConcepto">Concepto</label>
+        <input class="md-input" id="gaConcepto" type="text" maxlength="80" placeholder="Ej.: churros en San Ginés">
+        <p class="md-label">Categoría</p>
+        <div class="ga-catgrid" id="gaCats" role="radiogroup" aria-label="Categoría"></div>
+        <div class="ga-two">
+          <div><p class="md-label">Pagó</p><div class="seg" role="radiogroup" aria-label="Quién pagó">
+            <label><input type="radio" name="gaPago" value="moni"><span>Moni</span></label>
+            <label><input type="radio" name="gaPago" value="nando"><span>Nando</span></label>
+          </div></div>
+          <div><p class="md-label">Para</p><div class="seg" role="radiogroup" aria-label="Para quién">
+            <label><input type="radio" name="gaPara" value="ambos"><span>Los dos</span></label>
+            <label><input type="radio" name="gaPara" value="moni"><span>Moni</span></label>
+            <label><input type="radio" name="gaPara" value="nando"><span>Nando</span></label>
+          </div></div>
+        </div>
+        <label class="md-label" for="gaDia">Día</label>
+        <select class="md-input" id="gaDia"></select>
+        <p class="gate-error" id="gaError" role="alert" hidden></p>
+        <div class="lightbox-actions">
+          <button class="md-btn primary" id="gaSubmit" type="submit">Agregar gasto</button>
+          <button class="md-btn md-btn--ghost" id="gaCancel" type="button" hidden>Cancelar</button>
+          <button class="md-btn md-btn--outline" id="gaDelete" type="button" hidden>Borrar</button>
+        </div>
+      </form>
+      <div class="ga-tools">
+        <label class="ga-rate" for="gaRate">Tipo de cambio: 1 € = <input class="md-input" id="gaRate" type="text" inputmode="decimal"> MXN</label>
+        <button class="md-btn md-btn--outline md-btn--sm" id="gaCsv" type="button" hidden><i data-lucide="download"></i>Descargar CSV</button>
+      </div>
+      <div id="gaList"></div>
+    </div>
+  </section>
+
   <section class="section" id="notas" data-tab="mas">
     <div class="wrap">
       <div class="section-head">
@@ -174,6 +224,9 @@
         <p class="set-who" id="setWho"></p>
         <button class="set-row loc-btn" id="setLoc" type="button" aria-pressed="false"><i data-lucide="locate"></i><span class="lbl">Usar mi ubicación</span><small>Distancia a cada parada y aviso al llegar</small></button>
         <button class="set-row" id="themeBtn" type="button"><i data-lucide="sun-moon"></i><span>Tema claro u oscuro</span><small id="themeLbl"></small></button>
+        <button class="set-row" id="calBtn" type="button"><i data-lucide="calendar-plus"></i><span>Agregar a mi calendario</span><small>El viaje en el calendario del iPhone, con alarmas</small></button>
+        <button class="set-row" id="pushBtn" type="button"><i data-lucide="bell-ring"></i><span>Notificaciones</span><small id="pushLbl">Check-in, "en 30 min…" y fotos de los dos</small></button>
+        <button class="set-row" id="pushTest" type="button" hidden><i data-lucide="bell"></i><span>Probar notificación</span><small>Te llega una de prueba en unos segundos</small></button>
         <button class="set-row" id="installBtn" type="button"><i data-lucide="smartphone"></i><span>Instalar en el celular</span><small id="installLbl">Como app, en la pantalla de inicio</small></button>
         <button class="set-row danger" id="logoutBtn" type="button"><i data-lucide="log-out"></i><span>Cerrar sesión</span></button>
       </div>
@@ -278,6 +331,24 @@
   </form>
 </div>
 
+<div class="lightbox sheet" id="calSheet" role="dialog" aria-modal="true" aria-labelledby="calTitle" hidden>
+  <div class="sheet-panel">
+    <p class="md-eyebrow-label muted">Calendario del viaje</p>
+    <h2 class="sheet-title" id="calTitle">Todo el viaje en tu iPhone</h2>
+    <ol class="plain-list install-steps">
+      <li><span class="k">1</span><span>Toca <b>Suscribirme</b> y confirma <b>Suscribirse</b>.</span></li>
+      <li><span class="k">2</span><span>En la pantalla que sigue, <b>apaga "Quitar alertas"</b> para que el iPhone te avise antes de vuelos, trenes y check-in.</span></li>
+      <li><span class="k">3</span><span>Toca <b>Agregar</b>. Aparece el calendario "Viaje Oct 2026" con tus paradas y tu redacción.</span></li>
+    </ol>
+    <p class="sheet-sub">Se actualiza solo si cambiamos el plan. Los cambios de hora que hagan con "Editar" en la app no se pasan al calendario.</p>
+    <div class="lightbox-actions">
+      <a class="md-btn primary" id="calSub" href="#"><i data-lucide="calendar-plus"></i>Suscribirme</a>
+      <a class="md-btn md-btn--outline" id="calDl" href="#">Descargar una sola vez</a>
+      <button class="md-btn md-btn--ghost" type="button" id="calClose">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <div class="lightbox sheet" id="installSheet" role="dialog" aria-modal="true" aria-labelledby="installTitle" hidden>
   <div class="sheet-panel">
     <p class="md-eyebrow-label muted">Instalar en el celular</p>
@@ -301,6 +372,8 @@
 <script src="js/editar.js"></script>
 <script src="js/previaje.js"></script>
 <script src="js/diario.js"></script>
+<script src="js/gastos.js"></script>
+<script src="js/avisos.js"></script>
 <script src="js/sesion.js"></script>
 </body>
 </html>
