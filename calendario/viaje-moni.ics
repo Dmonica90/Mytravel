@@ -75,44 +75,108 @@ UID:c1-16-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261011T210000Z
 DTEND:20261012T000000Z
-SUMMARY:Tarde de playa
-DESCRIPTION:Moni\, a las 16:00 primera tarde de playa con Nando: tienen 4
-  h para no hacer nada.\n\nLa playa que recomienden Emilio y Didi.\n\nDí
- a 1 en la app: https://dmonica90.github.io/Mytravel/#c1
+SUMMARY:Paseo por Plaza La Isla
+DESCRIPTION:Moni\, a las 16:00 paseo por Plaza La Isla con Nando: canales
+ \, laguna y un helado. Tienen 3 h antes de la cena.\n\nZona Hotelera\, k
+ m 12.5: canales y muelle sobre la laguna\, tiendas y un helado. El acuar
+ io es opcional y se paga aparte.\n\nHacia las 18:20 se mete el sol sobre
+  la laguna: busquen el muelle.\n\nDía 1 en la app: https://dmonica90.gi
+ thub.io/Mytravel/#c1
+LOCATION:La Isla Cancún Shopping Village
+GEO:21.1107;-86.7628
 URL:https://dmonica90.github.io/Mytravel/#c1
 END:VEVENT
 BEGIN:VEVENT
-UID:c1-20-00-moni@viaje-oct-2026
+UID:c1-19-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T010000Z
-DTEND:20261012T020000Z
-SUMMARY:Cena con Emilio y Didi
-DESCRIPTION:Cena con Emilio y Didi a las 20:00. Disfruten la primera noch
- e juntos en Cancún.\n\nPrimera noche juntos en Cancún.\n\nDía 1 en la
-  app: https://dmonica90.github.io/Mytravel/#c1
+DTSTART:20261012T000000Z
+DTEND:20261012T010000Z
+SUMMARY:Cena en Bubba Gump con Emilio y Didi
+DESCRIPTION:Cena en Bubba Gump con Emilio y Didi a las 19:00. Pidan terra
+ za a la laguna y brinden por el inicio del viaje.\n\nPlaza Flamingo\, Bl
+ vd. Kukulcán km 11.5 · a unos 15 min caminando o 5 en taxi desde La Is
+ la.\n\nPidan mesa en la terraza de la laguna.\n\nDía 1 en la app: https
+ ://dmonica90.github.io/Mytravel/#c1
+LOCATION:Bubba Gump Shrimp Co. Cancún Plaza Flamingo
+GEO:21.118;-86.759
 URL:https://dmonica90.github.io/Mytravel/#c1
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-09-30-moni@viaje-oct-2026
+UID:c2-07-30-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T143000Z
-DTEND:20261012T160000Z
-SUMMARY:Desayuno con calma
-DESCRIPTION:Moni\, desayuno a las 9:30 sin despertador: hoy el día es le
- nto.\n\nCon Emilio y Didi\, sin prisa.\n\nDía 2 en la app: https://dmon
- ica90.github.io/Mytravel/#c2
+DTSTART:20261012T123000Z
+DTEND:20261012T130000Z
+SUMMARY:Boletos en Ultramar · Puerto Juárez
+DESCRIPTION:Moni\, a las 7:30 compran los boletos en Ultramar\, Puerto Ju
+ árez. Pidan el ferry de las 8:00.\n\nTaquilla oficial de Ultramar. Ida 
+ y vuelta $580 MXN por persona\, o $200 con INE de Quintana Roo.\n\nPidan
+  el ferry de las 8:00 para llegar a la isla antes de las 8:30.\n\nDía 2
+  en la app: https://dmonica90.github.io/Mytravel/#c2
+LOCATION:Ultramar Puerto Juárez Cancún
+GEO:21.1827;-86.8053
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-11-00-moni@viaje-oct-2026
+UID:c2-08-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T160000Z
-DTEND:20261012T190000Z
-SUMMARY:Día de playa
-DESCRIPTION:A las 11:00 a la playa con Nando: 4 h de sol\, mar y pies en 
- la arena.\n\nToallas\, bloqueador y agua.\n\nDía 2 en la app: https://d
- monica90.github.io/Mytravel/#c2
-GEO:21.0606;-86.7799
+DTSTART:20261012T130000Z
+DTEND:20261012T133000Z
+SUMMARY:Ferry a Isla Mujeres
+DESCRIPTION:A las 8:00 sale su ferry a Isla Mujeres: unos 20 minutos de m
+ ar juntos.\n\nUnos 20–25 min de cruce.\n\nDía 2 en la app: https://dm
+ onica90.github.io/Mytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-08-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T133000Z
+DTEND:20261012T153000Z
+SUMMARY:Playa Norte
+DESCRIPTION:Moni\, a las 8:30 Playa Norte casi para ustedes: tienen 2 h d
+ e playa tranquila.\n\nA esa hora está tranquila. Después caminen o ren
+ ten bici en el pueblo.\n\nDía 2 en la app: https://dmonica90.github.io/
+ Mytravel/#c2
+LOCATION:Playa Norte Isla Mujeres
+GEO:21.2615;-86.752
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-10-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T153000Z
+DTEND:20261012T183000Z
+SUMMARY:Centro\, malecón y Museo de la Isla
+DESCRIPTION:A las 10:30\, el pueblo\, el malecón y\, si les late\, el Mu
+ seo de la Isla.\n\nRecorran el centro y el malecón\; el Museo de la Isl
+ a si les interesa.\n\nEl golf cart solo conviene si lo comparten entre c
+ uatro.\n\nDía 2 en la app: https://dmonica90.github.io/Mytravel/#c2
+LOCATION:Malecón Isla Mujeres
+GEO:21.2585;-86.749
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-13-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T183000Z
+DTEND:20261012T193000Z
+SUMMARY:Comida en el pueblo
+DESCRIPTION:Comida en el pueblo a las 13:30: algo rico y sencillo.\n\nAlg
+ o local y sencillo.\n\nDía 2 en la app: https://dmonica90.github.io/Myt
+ ravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
+UID:c2-14-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T193000Z
+DTEND:20261012T200000Z
+SUMMARY:Ferry de regreso
+DESCRIPTION:Moni\, a las 14:30 toman el ferry de regreso. No lo dejen par
+ a después de las 15:00.\n\nSalgan de la isla a más tardar a las 14:30 
+ o 15:00. Llegan a Puerto Juárez unos 20–25 min después.\n\nDía 2 en
+  la app: https://dmonica90.github.io/Mytravel/#c2
+LOCATION:Ultramar Isla Mujeres
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
@@ -120,10 +184,10 @@ UID:c2-15-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261012T200000Z
 DTEND:20261012T230000Z
-SUMMARY:Comida
-DESCRIPTION:Comida a las 15:00\, algo fresco y rico cerca del mar.\n\nAlg
- o fresco cerca de la playa.\n\nDía 2 en la app: https://dmonica90.githu
- b.io/Mytravel/#c2
+SUMMARY:Puerto Juárez → casa
+DESCRIPTION:De Puerto Juárez a casa en R1 o taxi\, unos 20–30 minutos.
+ \n\nCamión R1 o taxi\, unos 20–30 min.\n\nDía 2 en la app: https://d
+ monica90.github.io/Mytravel/#c2
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
@@ -131,10 +195,13 @@ UID:c2-18-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261012T230000Z
 DTEND:20261013T013000Z
-SUMMARY:Caminata al atardecer
-DESCRIPTION:Moni\, a las 18:00 caminata al atardecer con Nando\, Emilio y
-  Didi.\n\nPaseo tranquilo con Emilio y Didi.\n\nDía 2 en la app: https:
- //dmonica90.github.io/Mytravel/#c2
+SUMMARY:Descanso o Parque de las Palapas
+DESCRIPTION:A las 18:00\, descanso o una vuelta por el Parque de las Pala
+ pas: marquesitas y ambiente local.\n\nOpcional: plaza del centro con mar
+ quesitas\, esquites y ambiente local. Gratis.\n\nDía 2 en la app: https
+ ://dmonica90.github.io/Mytravel/#c2
+LOCATION:Parque de las Palapas Cancún
+GEO:21.1613;-86.8274
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
@@ -143,9 +210,9 @@ DTSTAMP:20261006T120000Z
 DTSTART:20261013T013000Z
 DTEND:20261013T023000Z
 SUMMARY:Cena con Emilio y Didi
-DESCRIPTION:Cena con Emilio y Didi a las 20:30. Una noche tranquila para 
- platicar.\n\nCena en casa o salir\, lo que prefieran.\n\nDía 2 en la ap
- p: https://dmonica90.github.io/Mytravel/#c2
+DESCRIPTION:Cena con Emilio y Didi a las 20:30. Cuéntenles todo de la is
+ la.\n\nCena en casa o salir\, lo que prefieran.\n\nDía 2 en la app: htt
+ ps://dmonica90.github.io/Mytravel/#c2
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
@@ -154,20 +221,34 @@ DTSTAMP:20261006T120000Z
 DTSTART:20261013T140000Z
 DTEND:20261013T150000Z
 SUMMARY:Desayuno
-DESCRIPTION:Moni\, desayuno a las 9:00 y deciden juntos el paseo del día
- .\n\nDía 3 en la app: https://dmonica90.github.io/Mytravel/#c3
+DESCRIPTION:Moni\, desayuno a las 9:00 con calma: hoy toca historia maya.
+ \n\nDía 3 en la app: https://dmonica90.github.io/Mytravel/#c3
 URL:https://dmonica90.github.io/Mytravel/#c3
 END:VEVENT
 BEGIN:VEVENT
 UID:c3-10-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261013T150000Z
-DTEND:20261013T180000Z
-SUMMARY:Paseo opcional
-DESCRIPTION:A las 10:00\, paseo opcional: Isla Mujeres en ferry\, Playa d
- el Carmen o más playa. Tienen 4 h antes de comer.\n\nDía 3 en la app: 
- https://dmonica90.github.io/Mytravel/#c3
-GEO:21.1827;-86.8053
+DTEND:20261013T173000Z
+SUMMARY:Museo Maya de Cancún
+DESCRIPTION:A las 10:00\, Museo Maya con Nando: tienen 2 h 30 min para re
+ correrlo sin prisa.\n\nZona Hotelera\, km 16.5 · unas dos horas y media
+ .\n\n$210 extranjeros\, $105 mexicanos\; gratis para 60 años o más y m
+ enores de 13.\n\nDía 3 en la app: https://dmonica90.github.io/Mytravel/
+ #c3
+LOCATION:Museo Maya de Cancún
+GEO:21.0717;-86.7781
+URL:https://dmonica90.github.io/Mytravel/#c3
+END:VEVENT
+BEGIN:VEVENT
+UID:c3-12-30-moni@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261013T173000Z
+DTEND:20261013T190000Z
+SUMMARY:Comida en el Centro
+DESCRIPTION:Comida en el Centro a las 12:30: Mercado 23 o Labná.\n\nDía
+  3 en la app: https://dmonica90.github.io/Mytravel/#c3
+GEO:21.168;-86.833
 URL:https://dmonica90.github.io/Mytravel/#c3
 END:VEVENT
 BEGIN:VEVENT
@@ -175,9 +256,15 @@ UID:c3-14-00-moni@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261013T190000Z
 DTEND:20261013T220000Z
-SUMMARY:Comida
-DESCRIPTION:Comida a las 14:00 donde los encuentre el paseo.\n\nDía 3 en
-  la app: https://dmonica90.github.io/Mytravel/#c3
+SUMMARY:San Miguelito (zona arqueológica)
+DESCRIPTION:Moni\, a las 14:00 San Miguelito\, si no llueve. Lleguen ante
+ s de las 15:00.\n\nAl aire libre\, junto al Museo Maya. Solo si no lluev
+ e.\n\nSegún el INAH el último acceso es a las 16:30\, pero las fuentes
+  no coinciden: lleguen antes de las 15:00.\n\nQueda junto al museo: si p
+ refieren\, véanla al salir del museo y coman después.\n\nDía 3 en la 
+ app: https://dmonica90.github.io/Mytravel/#c3
+LOCATION:Zona Arqueológica San Miguelito Cancún
+GEO:21.0705;-86.7772
 URL:https://dmonica90.github.io/Mytravel/#c3
 END:VEVENT
 BEGIN:VEVENT
