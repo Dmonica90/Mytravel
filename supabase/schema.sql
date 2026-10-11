@@ -61,6 +61,11 @@ create table if not exists public.edits (
   updated_at timestamptz not null default now(),
   primary key (day, item_t)
 );
+-- Cambiar el lugar de una parada: nombre nuevo, búsqueda para Google Maps y punto en el mapa.
+alter table public.edits add column if not exists titulo text;
+alter table public.edits add column if not exists lugar text;
+alter table public.edits add column if not exists lat double precision;
+alter table public.edits add column if not exists lng double precision;
 alter table public.edits enable row level security;
 drop policy if exists edits_read on public.edits;
 drop policy if exists edits_write on public.edits;

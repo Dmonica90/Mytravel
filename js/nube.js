@@ -61,8 +61,10 @@ N.deletePhoto = async (row) => {
 
 /* Cambios al itinerario */
 N.listEdits = async () => ok(await sb.from('edits').select('*')) || [];
-N.saveEdit = async (day, item_t, hora, nota) => {
-  ok(await sb.from('edits').upsert({day, item_t, hora:hora||null, nota:nota||null, who, updated_at:new Date().toISOString()}, {onConflict:'day,item_t'}));
+N.saveEdit = async (day, item_t, hora, nota, lugar) => {
+  /* Las columnas del lugar solo se mandan si se usan: así sigue funcionando aunque aún no corran el SQL nuevo. */
+  const extra = lugar && (lugar.titulo || lugar.lugar || lugar.lat!=null) ? {titulo:lugar.titulo||null, lugar:lugar.lugar||null, lat:lugar.lat ?? null, lng:lugar.lng ?? null} : {};
+  ok(await sb.from('edits').upsert({day, item_t, hora:hora||null, nota:nota||null, ...extra, who, updated_at:new Date().toISOString()}, {onConflict:'day,item_t'}));
 };
 N.clearEdit = async (day, item_t) => { ok(await sb.from('edits').delete().eq('day', day).eq('item_t', item_t)); };
 

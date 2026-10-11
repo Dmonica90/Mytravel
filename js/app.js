@@ -66,6 +66,7 @@ function renderItem(it, dayId, pinIndex, flatIdx, voz){
       <span class="status" hidden></span>`;
   if (voz) h += `<p class="voz">${esc(voz)}</p>`;
   if (it.t0 && it.t!==it.t0) h += `<p class="edited">Hora cambiada (antes ${esc(it.t0)})</p>`;
+  if (it.lugarEditado) h += `<p class="edited">Lugar cambiado${it.title0 && it.title0!==it.title ? ` (antes: ${esc(it.title0)})` : ''}${it.lugarWho ? ` por ${esc(NAMES[it.lugarWho]||'')}` : ''}</p>`;
   if (it.nota) h += `<p class="nota"><b>Nota de ${esc(NAMES[it.notaWho]||'')}:</b> ${esc(it.nota)}</p>`;
   if (it.why) h += `<p class="why"><b>${it.whoWhy?'¿Por qué Nando?':'¿Por qué?'}</b> ${esc(it.why)}</p>`;
   if (it.detail) h += `<p class="item-detail">${esc(it.detail)}</p>`;
@@ -131,7 +132,7 @@ function renderDay(d){
   const {items} = DAYDATA[d.id];
   let k = 0;
   const blocks = d.blocks.map(b=>{
-    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, vozFor(`${d.id}|${e.it.t0||e.it.t}`, e.it, nx && nx.it, d)); }).join('');
+    const lis = b.items.map(()=>{ const e = items[k++], nx = items[e.idx+1]; return renderItem(e.it, d.id, e.pin, e.idx, e.it.lugarEditado ? '' : vozFor(`${d.id}|${e.it.t0||e.it.t}`, e.it, nx && nx.it, d)); }).join('');
     return `<div>${b.label?`<p class="md-eyebrow-label muted block-title">${esc(youLabel(b.label))}</p>`:''}<ol class="tl">${lis}</ol></div>`;
   }).join('');
   const pre = d.pre ? `<div class="panel wash-tertiary"><p class="md-eyebrow-label muted block-title"><i data-lucide="briefcase"></i>${esc(youLabel(d.pre.who))}</p><ol class="tl">${d.pre.items.map((it,i,a)=>renderItem(it,d.id,null,null,vozFor(`pre:${d.id}|${it.t}`, it, a[i+1], d))).join('')}</ol></div>` : '';

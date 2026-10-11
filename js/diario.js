@@ -67,7 +67,7 @@ function render(){
   /* Durante el viaje, el día de hoy va primero. */
   pages.sort((a,b)=>(b.id===t) - (a.id===t));
   if (!pages.length) {
-    grid.innerHTML = `<div class="album-empty"><i data-lucide="camera"></i><p>Aún no hay fotos. Toma la primera desde una parada o con el botón <b>Tomar foto</b>. Cuando empiece el viaje, aquí también podrán escribir cómo les fue cada día.</p></div>`;
+    grid.innerHTML = `<div class="album-empty"><i data-lucide="camera"></i><p>Aún no hay fotos. Tómenla desde una parada o súbanla de su galería con <b>Agregar fotos</b>. Cuando empiece el viaje, aquí también podrán escribir cómo les fue cada día.</p></div>`;
   } else {
     grid.innerHTML = pages.map(d=>{
       const ph = list.filter(p=>p.day===d.id);
@@ -138,6 +138,11 @@ $('pickForm').addEventListener('submit', e=>{
   const [day, pin] = $('pickStop').value.split('|');
   sheet.hidden = true;
   V.visits.openCamera(day, +pin);
+});
+$('pickGal').addEventListener('click', ()=>{
+  const [day, pin] = $('pickStop').value.split('|');
+  sheet.hidden = true;
+  V.visits.openGallery(day, +pin);
 });
 $('pickCancel').addEventListener('click', ()=>{ sheet.hidden = true; });
 sheet.addEventListener('click', e=>{ if (e.target===sheet) sheet.hidden = true; });

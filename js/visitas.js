@@ -104,42 +104,59 @@ async function syncPhotos(){
   return n;
 }
 
-/* ---------- Cámara ---------- */
-const cam = document.createElement('input');
-cam.type = 'file'; cam.accept = 'image/*'; cam.setAttribute('capture','environment'); cam.hidden = true; cam.id = 'camInput';
-document.body.appendChild(cam);
+/* ---------- Cámara y galería ---------- */
+const mkInput = (id, capture, multiple) => {
+  const el = document.createElement('input');
+  el.type = 'file'; el.accept = 'image/*'; el.hidden = true; el.id = id;
+  if (capture) el.setAttribute('capture', 'environment');
+  if (multiple) el.multiple = true;
+  document.body.appendChild(el); return el;
+};
+const cam = mkInput('camInput', true, false);
+const gal = mkInput('galInput', false, true);
 let camTarget = null;
 function openCamera(day, pin){ camTarget = {day, pin}; cam.value = ''; cam.click(); }
-cam.addEventListener('change', async ()=>{
-  const f = cam.files && cam.files[0]; if (!f || !camTarget) return;
-  const {day, pin} = camTarget, ts = Date.now();
-  try {
-    const [full, thumb] = await Promise.all([shrink(f, 1600, .82), shrink(f, 480, .72)]);
-    const rec = {id:`${user}:${day}-${pin}-${ts}`, owner:user, day, pin, ts, full, thumb, pending:!!N};
-    let uploaded = false;
-    if (N && navigator.onLine) { try { await N.uploadPhoto(rec); uploaded = true; } catch(e){ console.warn(e); } }
-    if (!uploaded) await putLocal(rec);
-    setVisited(day, pin, true);
-    await refreshPhotos();
-    const mine = photos.find(p=>p.day===day && p.pin===pin && p.ts===ts);
-    toast(N
-      ? (uploaded ? `Foto de <b>${esc(stopName(day,pin))}</b> compartida con ${esc(OTHER)}.` : `Foto de <b>${esc(stopName(day,pin))}</b> guardada. Se compartirá con ${esc(OTHER)} cuando haya internet.`)
-      : `Foto guardada en <b>${esc(stopName(day,pin))}</b>. Guárdala también en tu galería desde la miniatura.`,
-      mine ? [{label:'Escribir nota', run:()=>{ openLightbox(mine.id); setTimeout(()=>$('lbNotaInput').focus(), 50); }}] : []);
-  } catch(e){
-    console.error(e);
-    toast('No se pudo guardar la foto. Revisa el espacio disponible o tómala con la app de cámara.');
+function openGallery(day, pin){ camTarget = {day, pin}; gal.value = ''; gal.click(); }
+/* Reduce, guarda o sube cada foto (cámara o galería) y marca la parada como visitada. */
+async function processFiles(files, day, pin, fromGallery){
+  if (!files.length) return;
+  let ok = 0, up = 0, lastTs = 0;
+  for (const [i, f] of files.entries()) {
+    const now = Date.now() + i;
+    const ts = fromGallery && f.lastModified && f.lastModified < now ? f.lastModified : now;
+    try {
+      const [full, thumb] = await Promise.all([shrink(f, 1600, .82), shrink(f, 480, .72)]);
+      const rec = {id:`${user}:${day}-${pin}-${ts}`, owner:user, day, pin, ts, full, thumb, pending:!!N};
+      let uploaded = false;
+      if (N && navigator.onLine) { try { await N.uploadPhoto(rec); uploaded = true; } catch(e){ console.warn(e); } }
+      if (!uploaded) await putLocal(rec);
+      ok++; if (uploaded) up++; lastTs = ts;
+    } catch(e){ console.error(e); }
   }
-});
+  if (!ok) { toast('No se pudo guardar la foto. Revisa el espacio disponible o tómala con la app de cámara.'); return; }
+  setVisited(day, pin, true);
+  await refreshPhotos();
+  const where = `<b>${esc(stopName(day,pin))}</b>`;
+  const n = ok===1 ? 'Foto' : `${ok} fotos`;
+  const mine = ok===1 ? photos.find(p=>p.day===day && p.pin===pin && p.ts===lastTs) : null;
+  toast(N
+    ? (up===ok ? `${n} de ${where} ${ok===1?'compartida':'compartidas'} con ${esc(OTHER)}.` : `${n} de ${where} ${ok===1?'guardada':'guardadas'}. Se compartirán con ${esc(OTHER)} cuando haya internet.`)
+    : `${n} ${ok===1?'guardada':'guardadas'} en ${where}.`,
+    mine ? [{label:'Escribir nota', run:()=>{ openLightbox(mine.id); setTimeout(()=>$('lbNotaInput').focus(), 50); }}] : []);
+}
+cam.addEventListener('change', ()=>{ if (camTarget) processFiles([...(cam.files||[])], camTarget.day, camTarget.pin, false); });
+gal.addEventListener('change', ()=>{ if (camTarget) processFiles([...(gal.files||[])], camTarget.day, camTarget.pin, true); });
 
 /* ---------- Controles de cada parada ---------- */
 document.querySelectorAll('.visit').forEach(v=>{
   const day = v.dataset.day, pin = +v.dataset.pin, id = `v-${day}-${pin}`;
   v.innerHTML = `<label class="v-check" for="${id}"><input type="checkbox" id="${id}"><span class="v-label">Visitada</span></label>
     <button type="button" class="md-btn md-btn--outline md-btn--sm v-cam"><i data-lucide="camera"></i>Tomar foto</button>
+    <button type="button" class="md-btn md-btn--ghost md-btn--sm v-gal"><i data-lucide="image-plus"></i>Galería</button>
     <div class="v-thumbs"></div>`;
   v.querySelector('input').addEventListener('change', e=>setVisited(day, pin, e.target.checked));
   v.querySelector('.v-cam').addEventListener('click', ()=>openCamera(day, pin));
+  v.querySelector('.v-gal').addEventListener('click', ()=>openGallery(day, pin));
 });
 function paintAll(){ DAYS.forEach(d=>DAYDATA[d.id].pins.forEach((_,i)=>paint(d.id,i))); updateProgress(); }
 paintAll();
@@ -313,5 +330,5 @@ async function bootCloud(){
 }
 if (N) bootCloud(); else refreshPhotos();
 
-V.visits = {isVisited, setVisited, openCamera, openLightbox, saveFiles, stopName, photoTime, photos: () => photos};
+V.visits = {isVisited, setVisited, openCamera, openGallery, openLightbox, saveFiles, stopName, photoTime, photos: () => photos};
 });
