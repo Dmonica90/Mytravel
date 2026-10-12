@@ -1,5 +1,5 @@
 -- Generado por tools/calendario.mjs a partir de js/itinerario.js. No lo edites a mano.
--- Notificaciones push programadas del viaje (111). Córrelo en el SQL Editor de Supabase
+-- Notificaciones push programadas del viaje (115). Córrelo en el SQL Editor de Supabase
 -- después de supabase/schema.sql. Se puede volver a correr: actualiza los que aún no se mandan.
 insert into public.avisos (id, send_at, who, titulo, cuerpo, url) values
   ('ci3:VB1380', '2026-10-05T14:25:00.000Z', 'ambos', 'Faltan 3 días para el check-in', 'Viva Aerobus VB 1380 (Domingo 11 oct). El check-in en línea abre unas 72 h antes de la salida.', '#vuelos'),
@@ -13,11 +13,15 @@ insert into public.avisos (id, send_at, who, titulo, cuerpo, url) values
   ('p30:c1|16:00:nando', '2026-10-11T20:30:00.000Z', 'nando', 'En 30 min: Paseo por Plaza La Isla', 'Nando, a las 16:00 paseo por Plaza La Isla con Moni: canales, laguna y un helado. Tienen 3 h antes de la cena.', '#c1'),
   ('p30:c1|19:00:moni', '2026-10-11T23:30:00.000Z', 'moni', 'En 30 min: Cena en Bubba Gump con Emilio y Didi', 'Cena en Bubba Gump con Emilio y Didi a las 19:00. Pidan terraza a la laguna y brinden por el inicio del viaje.', '#c1'),
   ('p30:c1|19:00:nando', '2026-10-11T23:30:00.000Z', 'nando', 'En 30 min: Cena en Bubba Gump con Emilio y Didi', 'Cena en Bubba Gump con Emilio y Didi a las 19:00. Pidan terraza a la laguna y brinden por el inicio del viaje.', '#c1'),
-  ('noche:c2:moni', '2026-10-12T02:00:00.000Z', 'moni', 'Mañana: día 2 · Cancún', 'Moni, empiezan a las 10:00: Desayuno con calma. Día tranquilo y juegos de mesa con Emilio y Didi.', '#c2'),
-  ('noche:c2:nando', '2026-10-12T02:00:00.000Z', 'nando', 'Mañana: día 2 · Cancún', 'Nando, empiezan a las 10:00: Desayuno con calma. Día tranquilo y juegos de mesa con Emilio y Didi.', '#c2'),
-  ('p30:c2|12:00:moni', '2026-10-12T16:30:00.000Z', 'moni', 'En 30 min: Mañana libre', 'A las 12:00, mañana libre con Nando: playa, alberca o descanso. Tienen 3 h.', '#c2'),
-  ('p30:c2|12:00:nando', '2026-10-12T16:30:00.000Z', 'nando', 'En 30 min: Mañana libre', 'A las 12:00, mañana libre con Moni: playa, alberca o descanso. Tienen 3 h.', '#c2'),
+  ('noche:c2:moni', '2026-10-12T02:00:00.000Z', 'moni', 'Mañana: día 2 · Cancún · Centro', 'Moni, empiezan a las 8:00: Desayuno en el depa con Didi. Mercado 28, Av. Tulum, comida con Emilio y Las Palapas.', '#c2'),
+  ('noche:c2:nando', '2026-10-12T02:00:00.000Z', 'nando', 'Mañana: día 2 · Cancún · Centro', 'Nando, empiezan a las 8:00: Desayuno en el depa con Didi. Mercado 28, Av. Tulum, comida con Emilio y Las Palapas.', '#c2'),
+  ('p30:c2|10:00:moni', '2026-10-12T14:30:00.000Z', 'moni', 'En 30 min: Mercado 28', 'A las 10:00, R1 al Centro y Mercado 28. Paguen en pesos, regateen y eviten joyería y tequila.', '#c2'),
+  ('p30:c2|10:00:nando', '2026-10-12T14:30:00.000Z', 'nando', 'En 30 min: Mercado 28', 'A las 10:00, R1 al Centro y Mercado 28. Paguen en pesos, regateen y eviten joyería y tequila.', '#c2'),
+  ('p30:c2|13:00:moni', '2026-10-12T17:30:00.000Z', 'moni', 'En 30 min: Paseo por Av. Tulum o Casa de Cultura', 'Moni, a las 13:00 paseo por Av. Tulum o la Casa de Cultura. Si llueve, más Mercado 28.', '#c2'),
+  ('p30:c2|13:00:nando', '2026-10-12T17:30:00.000Z', 'nando', 'En 30 min: Paseo por Av. Tulum o Casa de Cultura', 'Nando, a las 13:00 paseo por Av. Tulum o la Casa de Cultura. Si llueve, más Mercado 28.', '#c2'),
   ('ci48:AM527', '2026-10-12T17:40:00.000Z', 'ambos', 'Intenten el check-in de AM 527 + AM 1', 'En algunas rutas Aeroméxico abre desde 48 h antes. Si aún no, mañana a esta hora seguro.', '#vuelos'),
+  ('p30:c2|19:00:moni', '2026-10-12T23:30:00.000Z', 'moni', 'En 30 min: Parque de las Palapas', 'Moni, a las 19:00 Parque de las Palapas: marquesitas y tacos. No se desvelen: mañana a las 7:00 salen al ferry.', '#c2'),
+  ('p30:c2|19:00:nando', '2026-10-12T23:30:00.000Z', 'nando', 'En 30 min: Parque de las Palapas', 'Nando, a las 19:00 Parque de las Palapas: marquesitas y tacos. No se desvelen: mañana a las 7:00 salen al ferry.', '#c2'),
   ('noche:c3:moni', '2026-10-13T02:00:00.000Z', 'moni', 'Mañana: día 3 · Cancún · Isla Mujeres', 'Moni, empiezan a las 7:00: Salida rumbo a Puerto Juárez. Isla Mujeres: ferry 8:00, regreso 14:30 y cena de despedida.', '#c3'),
   ('noche:c3:nando', '2026-10-13T02:00:00.000Z', 'nando', 'Mañana: día 3 · Cancún · Isla Mujeres', 'Nando, empiezan a las 7:00: Salida rumbo a Puerto Juárez. Isla Mujeres: ferry 8:00, regreso 14:30 y cena de despedida.', '#c3'),
   ('p30:c3|07:30:moni', '2026-10-13T12:00:00.000Z', 'moni', 'En 30 min: Boletos en Ultramar · Puerto Juárez', 'A las 7:30 compran los boletos en Ultramar. Busquen el ferry de las 8:00.', '#c3'),

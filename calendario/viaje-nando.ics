@@ -102,59 +102,79 @@ GEO:21.118;-86.759
 URL:https://dmonica90.github.io/Mytravel/#c1
 END:VEVENT
 BEGIN:VEVENT
+UID:c2-08-00-nando@viaje-oct-2026
+DTSTAMP:20261006T120000Z
+DTSTART:20261012T130000Z
+DTEND:20261012T150000Z
+SUMMARY:Desayuno en el depa con Didi
+DESCRIPTION:Nando\, desayuno a las 8:00 en el depa con Didi y Moni.\n\nEm
+ ilio sale a trabajar.\n\nDía 2 en la app: https://dmonica90.github.io/M
+ ytravel/#c2
+URL:https://dmonica90.github.io/Mytravel/#c2
+END:VEVENT
+BEGIN:VEVENT
 UID:c2-10-00-nando@viaje-oct-2026
 DTSTAMP:20261006T120000Z
 DTSTART:20261012T150000Z
-DTEND:20261012T170000Z
-SUMMARY:Desayuno con calma
-DESCRIPTION:Nando\, desayuno a las 10:00 sin despertador: hoy el día es 
- lento.\n\nSin despertador: ayer fue un gran día.\n\nDía 2 en la app: h
- ttps://dmonica90.github.io/Mytravel/#c2
+DTEND:20261012T180000Z
+SUMMARY:Mercado 28
+DESCRIPTION:A las 10:00\, R1 al Centro y Mercado 28. Paguen en pesos\, re
+ gateen y eviten joyería y tequila.\n\nCamión R1 hacia el Centro ($15 M
+ XN). Artesanías\, recuerdos y antojitos.\n\nPaguen en pesos y regateen.
+ \n\nEviten joyería y tequila: hay quejas de piezas falsas.\n\nDía 2 en
+  la app: https://dmonica90.github.io/Mytravel/#c2
+LOCATION:Mercado 28 Cancún
+GEO:21.1617;-86.8338
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-12-00-nando@viaje-oct-2026
+UID:c2-13-00-nando@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T170000Z
-DTEND:20261012T200000Z
-SUMMARY:Mañana libre
-DESCRIPTION:A las 12:00\, mañana libre con Moni: playa\, alberca o desca
- nso. Tienen 3 h.\n\nPlaya\, alberca o descanso: lo que se les antoje.\n\
- nDía 2 en la app: https://dmonica90.github.io/Mytravel/#c2
-GEO:21.0606;-86.7799
+DTSTART:20261012T180000Z
+DTEND:20261012T203000Z
+SUMMARY:Paseo por Av. Tulum o Casa de Cultura
+DESCRIPTION:Nando\, a las 13:00 paseo por Av. Tulum o la Casa de Cultura.
+  Si llueve\, más Mercado 28.\n\nCaminen por Av. Tulum o pasen a la Casa
+  de Cultura: gratis y bajo techo.\n\nSi llueve fuerte\, quédense más t
+ iempo en el Mercado 28.\n\nDía 2 en la app: https://dmonica90.github.io
+ /Mytravel/#c2
+LOCATION:Avenida Tulum Cancún
+GEO:21.1595;-86.8262
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-15-00-nando@viaje-oct-2026
+UID:c2-15-30-nando@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T200000Z
-DTEND:20261012T230000Z
-SUMMARY:Comida
-DESCRIPTION:Comida a las 15:00\, algo rico y sin prisa.\n\nDía 2 en la a
- pp: https://dmonica90.github.io/Mytravel/#c2
+DTSTART:20261012T203000Z
+DTEND:20261012T210000Z
+SUMMARY:Regreso al depa
+DESCRIPTION:A las 15:30 regresan al depa en R1 o taxi.\n\nR1 o taxi.\n\nD
+ ía 2 en la app: https://dmonica90.github.io/Mytravel/#c2
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-18-00-nando@viaje-oct-2026
+UID:c2-16-00-nando@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261012T230000Z
-DTEND:20261013T013000Z
-SUMMARY:Juegos de mesa en casa de Emilio y Didi
-DESCRIPTION:Nando\, a las 18:00 juegos de mesa en casa de Emilio y Didi. 
- Que gane el mejor.\n\nTarde tranquila en casa.\n\nDía 2 en la app: http
- s://dmonica90.github.io/Mytravel/#c2
+DTSTART:20261012T210000Z
+DTEND:20261013T000000Z
+SUMMARY:Comida con Emilio
+DESCRIPTION:Comida con Emilio a las 16:00.\n\nDía 2 en la app: https://d
+ monica90.github.io/Mytravel/#c2
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
-UID:c2-20-30-nando@viaje-oct-2026
+UID:c2-19-00-nando@viaje-oct-2026
 DTSTAMP:20261006T120000Z
-DTSTART:20261013T013000Z
-DTEND:20261013T023000Z
-SUMMARY:Cena con Emilio y Didi
-DESCRIPTION:Cena con Emilio y Didi a las 20:30. No se desvelen: mañana a
-  las 7:00 salen al ferry.\n\nEn casa. Mañana se madruga: el ferry sale 
- a las 8:00.\n\nDía 2 en la app: https://dmonica90.github.io/Mytravel/#c
- 2
+DTSTART:20261013T000000Z
+DTEND:20261013T010000Z
+SUMMARY:Parque de las Palapas
+DESCRIPTION:Nando\, a las 19:00 Parque de las Palapas: marquesitas y taco
+ s. No se desvelen: mañana a las 7:00 salen al ferry.\n\nNo hay un event
+ o confirmado para el lunes. Si no hay música\, cenen marquesitas y taco
+ s: sigue siendo barato.\n\nDía 2 en la app: https://dmonica90.github.io
+ /Mytravel/#c2
+LOCATION:Parque de las Palapas Cancún
+GEO:21.1613;-86.8274
 URL:https://dmonica90.github.io/Mytravel/#c2
 END:VEVENT
 BEGIN:VEVENT
