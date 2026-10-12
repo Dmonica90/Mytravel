@@ -48,8 +48,10 @@ function noteBlock(d){
 }
 function polaroid(p){
   const stop = V.visits.stopName(p.day, p.pin);
-  const note = p.nota ? `<span class="pol-note">${esc(p.nota)}</span>`
-    : p.who===user ? `<button type="button" class="pol-add" data-note="${esc(p.id)}">+ Escribir nota</button>` : '';
+  const notes = V.visits.notesOf(p);
+  const canNote = !!N || p.who===user;
+  const note = notes.map(n=>`<span class="pol-note">${esc(n.nota)}${N ? ` <small>— ${esc(NAMES[n.who]||'')}</small>` : ''}</span>`).join('')
+    + (canNote && !V.visits.myNote(p) ? `<button type="button" class="pol-add" data-note="${esc(p.id)}">+ ${notes.length ? 'Agregar tu nota' : 'Escribir nota'}</button>` : '');
   return `<figure class="pol"><button type="button" class="thumb pol-img" data-id="${esc(p.id)}" aria-label="Ver foto de ${esc(stop)}"><img src="${esc(p.thumbUrl||'')}" alt="" loading="lazy">${p.pending?'<span class="pend-tag">pendiente</span>':''}</button>
     <figcaption>${note}<span class="pol-meta">${esc(stop)}${N ? ` · ${esc(NAMES[p.who]||'')}` : ''} · ${esc(V.visits.photoTime(p))}</span></figcaption></figure>`;
 }

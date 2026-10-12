@@ -51,7 +51,7 @@ Pestaña **Gastos**: cada quien agrega lo que paga (monto, EUR o MXN, concepto, 
 - **Editar parada** (lápiz): cambiar la hora, el **nombre y el lugar** (con búsqueda en el mapa que mueve el punto) o dejar una nota. Lo ve el otro al momento.
 - "Tomar foto" abre la cámara del celular; la foto queda guardada en la app y la parada se marca como visitada.
 - Las fotos se guardan **solo en ese celular** (y por persona). Toca una miniatura → **Guardar en galería** para pasarla a tus fotos; en la pestaña **Álbum** está "Guardar todas".
-- **Álbum = diario:** una página por día con **Nuestro día** (lo que escriban de ese día, cualquiera de los dos) y las fotos en polaroid. Quien tomó la foto le puede poner una **nota**, que también aparece debajo de la actividad.
+- **Álbum = diario:** una página por día con **Nuestro día** (lo que escriban de ese día, cualquiera de los dos) y las fotos en polaroid. Cada quien puede dejarle su **nota** a cualquier foto (sea de quien sea); se ven las dos en el álbum y debajo de la actividad.
 - **Usar mi ubicación** (arriba o en la barra "Ahora") muestra tu punto en el mapa, la distancia a cada parada y avisa al llegar a menos de 150 m de una parada pendiente. Solo funciona **con la app abierta** y en la dirección `https://`.
 
 ## Conectar Supabase (álbum y checks compartidos, avisos en vivo)

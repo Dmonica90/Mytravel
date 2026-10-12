@@ -42,7 +42,10 @@ N.listPhotos = async () => {
   const paths = rows.flatMap(r => [r.path, r.thumb_path]);
   const urls = ok(await sb.storage.from('fotos').createSignedUrls(paths, 60*60*6)) || [];
   const m = Object.fromEntries(urls.map(u => [u.path, u.signedUrl]));
-  return rows.map(r => ({...r, url:m[r.path], thumbUrl:m[r.thumb_path]}));
+  /* Notas de cada quien en cualquier foto (tabla fotos_notas). Si aún no existe la tabla, se sigue sin ellas. */
+  let notas = [];
+  try { notas = ok(await sb.from('fotos_notas').select('*')) || []; } catch(e){ console.warn('fotos_notas', e); }
+  return rows.map(r => ({...r, url:m[r.path], thumbUrl:m[r.thumb_path], notas:notas.filter(x=>x.photo_id===r.id).map(x=>({who:x.who, nota:x.nota, ts:Date.parse(x.updated_at)}))}));
 };
 N.thumbUrl = async (path) => (ok(await sb.storage.from('fotos').createSignedUrls([path], 60*60)) || [])[0]?.signedUrl;
 N.uploadPhoto = async ({day, pin, full, thumb, ts, nota}) => {
@@ -52,6 +55,11 @@ N.uploadPhoto = async ({day, pin, full, thumb, ts, nota}) => {
   ok(await st.upload(`${base}-t.jpg`, thumb, {contentType:'image/jpeg', upsert:true}));
   /* "nota" solo se envía si hay: así sigue funcionando aunque aún no corran el SQL nuevo. */
   ok(await sb.from('photos').insert({owner:uid, who, day, pin, path:`${base}.jpg`, thumb_path:`${base}-t.jpg`, created_at:new Date(ts).toISOString(), ...(nota ? {nota} : {})}));
+};
+/* Nota propia en cualquier foto (de quien sea). Vacía = se borra. */
+N.setFotoNota = async (photo_id, nota) => {
+  if (!nota) ok(await sb.from('fotos_notas').delete().eq('photo_id', photo_id).eq('owner', uid));
+  else ok(await sb.from('fotos_notas').upsert({photo_id, owner:uid, who, nota, updated_at:new Date().toISOString()}, {onConflict:'photo_id,owner'}));
 };
 N.setPhotoNote = async (id, nota) => { ok(await sb.from('photos').update({nota:nota||null}).eq('id', id)); };
 N.deletePhoto = async (row) => {
@@ -105,6 +113,7 @@ N.subscribe = () => {
   sb.channel('viaje')
     .on('postgres_changes', {event:'*', schema:'public', table:'visits'}, emit('visits'))
     .on('postgres_changes', {event:'*', schema:'public', table:'photos'}, emit('photos'))
+    .on('postgres_changes', {event:'*', schema:'public', table:'fotos_notas'}, emit('fotos_notas'))
     .on('postgres_changes', {event:'*', schema:'public', table:'edits'}, emit('edits'))
     .on('postgres_changes', {event:'*', schema:'public', table:'prechecks'}, emit('prechecks'))
     .on('postgres_changes', {event:'*', schema:'public', table:'diario'}, emit('diario'))

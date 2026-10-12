@@ -51,6 +51,21 @@ drop policy if exists photos_write on public.photos;
 create policy photos_read  on public.photos for select to authenticated using (true);
 create policy photos_write on public.photos for all    to authenticated using (owner = auth.uid()) with check (owner = auth.uid());
 
+-- ---------- Notas en las fotos: cada quien puede dejar su nota en cualquier foto ----------
+create table if not exists public.fotos_notas (
+  photo_id uuid not null references public.photos on delete cascade,
+  owner uuid not null default auth.uid() references auth.users on delete cascade,
+  who text not null check (who in ('moni','nando')),
+  nota text not null,
+  updated_at timestamptz not null default now(),
+  primary key (photo_id, owner)
+);
+alter table public.fotos_notas enable row level security;
+drop policy if exists fotos_notas_read on public.fotos_notas;
+drop policy if exists fotos_notas_write on public.fotos_notas;
+create policy fotos_notas_read  on public.fotos_notas for select to authenticated using (true);
+create policy fotos_notas_write on public.fotos_notas for all    to authenticated using (owner = auth.uid()) with check (owner = auth.uid());
+
 -- ---------- Cambios al itinerario (hora y nota por parada), compartidos ----------
 create table if not exists public.edits (
   day text not null,
@@ -153,6 +168,7 @@ alter table public.edits  replica identity full;
 alter table public.prechecks replica identity full;
 alter table public.diario replica identity full;
 alter table public.gastos replica identity full;
+alter table public.fotos_notas replica identity full;
 do $$
 begin
   begin alter publication supabase_realtime add table public.visits; exception when duplicate_object then null; end;
@@ -161,6 +177,7 @@ begin
   begin alter publication supabase_realtime add table public.prechecks; exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.diario; exception when duplicate_object then null; end;
   begin alter publication supabase_realtime add table public.gastos; exception when duplicate_object then null; end;
+  begin alter publication supabase_realtime add table public.fotos_notas; exception when duplicate_object then null; end;
 end $$;
 
 -- ---------- Storage: bucket privado "fotos" ----------

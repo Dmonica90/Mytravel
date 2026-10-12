@@ -543,3 +543,4 @@ textarea.md-input{height:auto;min-height:5.5rem;padding-block:.6rem;line-height:
 .sheet-panel{max-height:calc(100dvh - 2rem);overflow-y:auto}
 body[data-view="album"] .toast{bottom:calc(var(--tabbar-h) + 5rem + env(safe-area-inset-bottom,0px))}
 @media (min-width:900px){body[data-view="album"] .toast{bottom:calc(var(--space-8) + 4.5rem)}}
+.pol-note small{font-style:normal;font-weight:var(--weight-regular);font-size:.68rem;color:#6b7080}
