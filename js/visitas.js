@@ -171,6 +171,13 @@ function photoTime(p){
   const f = hourFmt[tz] || (hourFmt[tz] = new Intl.DateTimeFormat('es-MX', {hour:'numeric', minute:'2-digit', hourCycle:'h23', timeZone:tz}));
   try { return f.format(new Date(p.ts)); } catch(e){ return ''; }
 }
+/* Notas de una foto: la de cada quien (la nota vieja de quien la subió cuenta como suya). */
+function notesOf(p){
+  const list = (p.notas || []).slice();
+  if (p.nota && !list.some(n=>n.who===p.who)) list.unshift({who:p.who, nota:p.nota});
+  return list.filter(n=>n.nota);
+}
+const myNote = p => (notesOf(p).find(n=>n.who===user) || {}).nota || '';
 async function fullBlob(p){ return p.full || await (await fetch(p.url)).blob(); }
 async function saveFiles(list){
   let files;
@@ -192,11 +199,11 @@ async function refreshPhotos(){
   document.querySelectorAll('.v-thumbs').forEach(t=>{
     const v = t.closest('.visit'), list = photos.filter(p=>p.day===v.dataset.day && p.pin===+v.dataset.pin);
     t.innerHTML = list.map(p=>`<button type="button" class="thumb" data-id="${esc(p.id)}" aria-label="Ver foto de ${esc(NAMES[p.who]||'')}"><img src="${esc(p.thumbUrl||'')}" alt="">${pend(p)}</button>`).join('');
-    const notes = list.filter(p=>p.nota);
+    const notes = list.flatMap(notesOf);
     let ul = v.querySelector('.v-notes');
     if (!notes.length) { if (ul) ul.remove(); return; }
     if (!ul) { ul = document.createElement('ul'); ul.className = 'v-notes'; v.appendChild(ul); }
-    ul.innerHTML = notes.map(p=>`<li>“${esc(p.nota)}”${N ? ` <span>· ${esc(NAMES[p.who]||'')}</span>` : ''}</li>`).join('');
+    ul.innerHTML = notes.map(n=>`<li>“${esc(n.nota)}”${N ? ` <span>· ${esc(NAMES[n.who]||'')}</span>` : ''}</li>`).join('');
   });
   window.dispatchEvent(new CustomEvent('viaje:fotos'));
 }
@@ -214,10 +221,14 @@ function openLightbox(id, list){
   $('lbCaption').textContent = `${stopName(lbPhoto.day, lbPhoto.pin)} · Día ${parseInt(d.n)} · ${photoTime(lbPhoto)}${N ? ` · foto de ${NAMES[lbPhoto.who]||''}` : ''}`;
   $('lbNote').textContent = N ? (lbPhoto.pending ? 'Esta foto se compartirá cuando haya internet.' : `La ven los dos. Guárdala en tu galería si la quieres en tu celular.`) : 'La foto vive en este celular: guárdala en tu galería para no perderla.';
   const mine = lbPhoto.who===user;
-  $('lbNota').hidden = mine || !lbPhoto.nota;
-  $('lbNota').textContent = lbPhoto.nota ? `“${lbPhoto.nota}” · ${NAMES[lbPhoto.who]||''}` : '';
-  $('lbNotaForm').hidden = !mine;
-  $('lbNotaInput').value = lbPhoto.nota || '';
+  /* Cada quien escribe su nota en cualquier foto; arriba se ven las del otro. */
+  const others = notesOf(lbPhoto).filter(n=>n.who!==user);
+  $('lbNota').hidden = !others.length;
+  $('lbNota').innerHTML = others.map(n=>`“${esc(n.nota)}” · ${esc(NAMES[n.who]||'')}`).join('<br>');
+  const canNote = !!N || mine;
+  $('lbNotaForm').hidden = !canNote;
+  $('lbNotaInput').value = myNote(lbPhoto);
+  $('lbNotaLabel').textContent = N ? `Tu nota, ${ME}` : 'Nota de la foto';
   $('lbDelete').hidden = !mine;
   const k = lbList.indexOf(id);
   $('lbPrev').hidden = k<=0; $('lbNext').hidden = k<0 || k>=lbList.length-1;
@@ -268,19 +279,25 @@ $('lbDelete').addEventListener('click', async ()=>{
 async function setPhotoNote(p, text){
   const nota = (text||'').trim().slice(0, 280);
   if (p.local) {
+    /* Foto que aún vive en este celular (sin Supabase o pendiente de subir): la nota va con ella. */
     const rec = await tx('readonly', s=>s.get(p.id));
     if (rec) { rec.nota = nota; await putLocal(rec); }
-  } else await N.setPhotoNote(p.id, nota);
-  p.nota = nota;
+    p.nota = nota;
+    return nota;
+  }
+  await N.setFotoNota(p.id, nota);
+  /* Si era mi foto y tenía nota en el formato anterior, la limpio para no duplicarla. */
+  if (p.who===user && p.nota) { try { await N.setPhotoNote(p.id, null); } catch(e){} p.nota = ''; }
+  return nota;
 }
 $('lbNotaForm').addEventListener('submit', async e=>{
   e.preventDefault();
-  if (!lbPhoto || lbPhoto.who!==user) return;
+  if (!lbPhoto || (!N && lbPhoto.who!==user)) return;
   const p = lbPhoto, btn = e.target.querySelector('button'); btn.disabled = true;
   try {
-    await setPhotoNote(p, $('lbNotaInput').value);
+    const saved = await setPhotoNote(p, $('lbNotaInput').value);
     await refreshPhotos();
-    toast(p.nota ? 'Nota guardada.' : 'Nota borrada.');
+    toast(saved ? 'Nota guardada.' : 'Nota borrada.');
     if (lbPhoto && lbPhoto.id===p.id) openLightbox(p.id);
   } catch(x){
     console.warn(x);
@@ -313,6 +330,15 @@ async function bootCloud(){
       if (type!=='DELETE' && row.visited) { if (navigator.vibrate) try { navigator.vibrate(80); } catch(x){}
         toast(`<b>${esc(NAMES[row.who])}</b> marcó <b>${esc(stopName(row.day,row.pin))}</b> como visitada.`); }
     }
+    if (table==='fotos_notas') {
+      await refreshPhotos();
+      const p = photos.find(x=>x.id===row.photo_id);
+      if (type!=='DELETE' && row.nota && p) {
+        const img = p.thumbUrl ? `<img class="toast-img" src="${esc(p.thumbUrl)}" alt="">` : '';
+        toast(`${img}<b>${esc(NAMES[row.who])} escribió en ${p.who===user ? 'tu foto' : 'su foto'}</b><span>${esc(stopName(p.day,p.pin))}: “${esc(row.nota)}”</span>`,
+          [{label:'Ver', run:()=>{ if (window.ViajeTabs) ViajeTabs.go('#album'); openLightbox(p.id); }}]);
+      }
+    }
     if (table==='photos') {
       await refreshPhotos();
       const p = photos.find(x=>x.id===row.id);
@@ -330,5 +356,5 @@ async function bootCloud(){
 }
 if (N) bootCloud(); else refreshPhotos();
 
-V.visits = {isVisited, setVisited, openCamera, openGallery, openLightbox, saveFiles, stopName, photoTime, photos: () => photos};
+V.visits = {isVisited, setVisited, openCamera, openGallery, openLightbox, notesOf, myNote, saveFiles, stopName, photoTime, photos: () => photos};
 });
