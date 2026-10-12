@@ -17,21 +17,19 @@ var DAYS = [
   callout:{tone:'info', icon:'check', title:'Plan de hoy confirmado', text:'Vuelo VB 1380, comida con Emilio y Didi, Plaza La Isla y cena en Bubba Gump.'},
   budget:[['Vuelo CDMX → Cancún (VB 1380)','Ya comprado'],['Taxi a La Isla y regreso','~$300 MXN'],['Cena Bubba Gump','~$450–650 MXN c/u']], total:'~$1,200–1,600 MXN los dos'},
 
- {id:'c2', iso:'2026-10-12', tz:'America/Cancun', travel:'driving', n:'02', date:'12 oct', city:'Cancún', tone:'secondary', map:'cun',
-  title:['Día tranquilo y ', 'juegos de mesa.'], sub:'Día con calma en Cancún y por la tarde juegos de mesa en casa de Emilio y Didi.',
-  ov:'Día tranquilo; juegos de mesa con Emilio y Didi.',
+ {id:'c2', iso:'2026-10-12', tz:'America/Cancun', travel:'transit', n:'02', date:'12 oct', city:'Cancún · Centro', tone:'secondary', map:'cun',
+  title:['Mercado 28 ', 'y Las Palapas.'], sub:'Desayuno con Didi, Mercado 28 y paseo por el Centro, comida con Emilio y de noche el Parque de las Palapas.',
+  ov:'Mercado 28, Av. Tulum, comida con Emilio y Las Palapas.',
   blocks:[{type:'tl', items:[
-    {t:'10:00', icon:'coffee', title:'Desayuno con calma', detail:'Sin despertador: ayer fue un gran día.'},
-    {t:'12:00', icon:'sun', title:'Mañana libre', detail:'Playa, alberca o descanso: lo que se les antoje.', pin:{lat:21.0606,lng:-86.7799,l:'Playa Delfines'},
-     opts:[{n:'A · Playa Delfines', lines:['Zona Hotelera, mirador con el letrero de Cancún. Gratis.'], q:'Playa Delfines Cancún'},
-           {n:'B · Playa Tortugas', lines:['Agua tranquila, gratis.'], q:'Playa Tortugas Cancún'},
-           {n:'C · Descanso', lines:['Quedarse en casa y recargar pilas para Isla Mujeres.']}]},
-    {t:'15:00', icon:'utensils', title:'Comida'},
-    {t:'18:00', icon:'dice-5', title:'Juegos de mesa en casa de Emilio y Didi', detail:'Tarde tranquila en casa.'},
-    {t:'20:30', icon:'wine', title:'Cena con Emilio y Didi', detail:'En casa. Mañana se madruga: el ferry sale a las 8:00.'}
+    {t:'08:00', icon:'coffee', title:'Desayuno en el depa con Didi', detail:'Emilio sale a trabajar.'},
+    {t:'10:00', icon:'shopping-bag', title:'Mercado 28', detail:'Camión R1 hacia el Centro ($15 MXN). Artesanías, recuerdos y antojitos.', tips:['Paguen en pesos y regateen.','Eviten joyería y tequila: hay quejas de piezas falsas.'], cost:'R1 $15 MXN', q:'Mercado 28 Cancún', pin:{lat:21.1617,lng:-86.8338,l:'Mercado 28'}},
+    {t:'13:00', icon:'footprints', title:'Paseo por Av. Tulum o Casa de Cultura', detail:'Caminen por Av. Tulum o pasen a la Casa de Cultura: gratis y bajo techo.', tips:['Si llueve fuerte, quédense más tiempo en el Mercado 28.'], q:'Avenida Tulum Cancún', pin:{lat:21.1595,lng:-86.8262,l:'Av. Tulum'}},
+    {t:'15:30', icon:'bus', title:'Regreso al depa', detail:'R1 o taxi.'},
+    {t:'16:00', icon:'utensils', title:'Comida con Emilio'},
+    {t:'19:00', icon:'tent', title:'Parque de las Palapas', detail:'No hay un evento confirmado para el lunes. Si no hay música, cenen marquesitas y tacos: sigue siendo barato.', q:'Parque de las Palapas Cancún', pin:{lat:21.1613,lng:-86.8274,l:'Las Palapas'}}
   ]}],
   callout:{tone:'info', icon:'alarm-clock', title:'Mañana se madruga', text:'Salen a las 7:00 rumbo a Puerto Juárez para el ferry de las 8:00 a Isla Mujeres.'},
-  budget:[['Comida','Por definir']], total:'Por definir'},
+  budget:[['R1 ida y vuelta','$15 MXN c/u por viaje'],['Compras en Mercado 28','Lo que regateen'],['Cena en Las Palapas','~$100–200 MXN c/u']], total:'~$300–500 MXN los dos (sin compras)'},
 
  {id:'c3', iso:'2026-10-13', tz:'America/Cancun', travel:'transit', n:'03', date:'13 oct', city:'Cancún · Isla Mujeres', tone:'secondary', map:'cun',
   title:['Isla Mujeres ', 'y cena de despedida.'], sub:'Ferry de las 8:00 desde Puerto Juárez, Playa Norte, el pueblo y Punta Sur. De regreso a las 15:30 para descansar y la cena de despedida con Emilio y Didi.',
@@ -248,7 +246,7 @@ var MAP_TITLES = {mxcun:'CDMX → Cancún', madbcn:'Madrid → Barcelona', madcu
    Un texto puede ser común o {moni:'…', nando:'…'} cuando cambia por persona. */
 var INTRO = {
   c1:'{yo}, aquí empieza su viaje: a las 8:25 despega su vuelo VB 1380 desde el AICM y a las 11:45 ya están en Cancún. Comida con Emilio y Didi, paseo por Plaza La Isla y la primera cena juntos en Bubba Gump.',
-  c2:'{yo}, hoy toca día tranquilo: desayuno sin prisa, la mañana libre con {otro} y por la tarde juegos de mesa en casa de Emilio y Didi. A dormir temprano, que mañana es Isla Mujeres.',
+  c2:'{yo}, hoy toca Centro: desayuno con Didi, Mercado 28 con {otro}, paseo por Av. Tulum, comida con Emilio y de noche marquesitas en Las Palapas. A dormir temprano, que mañana es Isla Mujeres.',
   c3:'{yo}, hoy madrugan para Isla Mujeres: a las 7:00 salen a Puerto Juárez, ferry de las 8:00, Playa Norte, el pueblo y Punta Sur. A las 15:30 ya están de regreso para descansar y la cena de despedida con Emilio y Didi.',
   c4:'{yo}, último desayuno con Emilio y Didi y a las 9:30 al aeropuerto. A las 12:40 despega su vuelo a Madrid con escala en CDMX: mañana a mediodía ya están en España.',
   d1:{moni:'{yo}, a las 12:35 aterrizan en Madrid y a las 15:52 sale su tren iryo desde Atocha: a las 18:54 llegan a Sants. Taxi o L4 al hotel en la Barceloneta, una cena tranquila en el Mercat y a descansar juntitos: mañana Articulate empieza temprano.',
@@ -263,7 +261,7 @@ var INTRO = {
 };
 var OV = {
   c1:'Vuelo a Cancún a las 8:25; Plaza La Isla y cena en Bubba Gump.',
-  c2:'Día tranquilo y juegos de mesa con Emilio y Didi.',
+  c2:'Mercado 28, Av. Tulum, comida con Emilio y Las Palapas.',
   c3:'Isla Mujeres: ferry 8:00, regreso 14:30 y cena de despedida.',
   c4:'Despedida y vuelo a Madrid a las 12:40.',
   d1:'Aterrizan en Madrid a las 12:35; tren iryo de las 15:52 y llegada a Barcelona a las 18:54.',
@@ -282,11 +280,12 @@ var VOZ = {
   'c1|13:30':'Comida con Emilio y Didi a las {hora}: abrazos, ponerse al día y planear los próximos días.',
   'c1|16:00':'{yo}, a las {hora} paseo por Plaza La Isla con {otro}: canales, laguna y un helado. Tienen {dur} antes de la cena.',
   'c1|19:00':'Cena en Bubba Gump con Emilio y Didi a las {hora}. Pidan terraza a la laguna y brinden por el inicio del viaje.',
-  'c2|10:00':'{yo}, desayuno a las {hora} sin despertador: hoy el día es lento.',
-  'c2|12:00':'A las {hora}, mañana libre con {otro}: playa, alberca o descanso. Tienen {dur}.',
-  'c2|15:00':'Comida a las {hora}, algo rico y sin prisa.',
-  'c2|18:00':'{yo}, a las {hora} juegos de mesa en casa de Emilio y Didi. Que gane el mejor.',
-  'c2|20:30':'Cena con Emilio y Didi a las {hora}. No se desvelen: mañana a las 7:00 salen al ferry.',
+  'c2|08:00':'{yo}, desayuno a las {hora} en el depa con Didi y {otro}.',
+  'c2|10:00':'A las {hora}, R1 al Centro y Mercado 28. Paguen en pesos, regateen y eviten joyería y tequila.',
+  'c2|13:00':'{yo}, a las {hora} paseo por Av. Tulum o la Casa de Cultura. Si llueve, más Mercado 28.',
+  'c2|15:30':'A las {hora} regresan al depa en R1 o taxi.',
+  'c2|16:00':'Comida con Emilio a las {hora}.',
+  'c2|19:00':'{yo}, a las {hora} Parque de las Palapas: marquesitas y tacos. No se desvelen: mañana a las 7:00 salen al ferry.',
   'c3|07:00':'{yo}, a las {hora} salen rumbo a Puerto Juárez: R1 con letrero "Puerto Juárez" o taxi, unos 10 minutos.',
   'c3|07:30':'A las {hora} compran los boletos en Ultramar. Busquen el ferry de las 8:00.',
   'c3|08:00':'A las {hora} sale su ferry a Isla Mujeres: unos 20 minutos de mar juntos.',
