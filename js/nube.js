@@ -120,4 +120,27 @@ N.subscribe = () => {
     .on('postgres_changes', {event:'*', schema:'public', table:'gastos'}, emit('gastos'))
     .subscribe();
 };
+/* Lecturas con límite de tiempo y aviso visible: si la nube no responde (sin internet, o el proyecto
+   de Supabase está en pausa), la app sigue con lo guardado en el celular y lo dice en pantalla. */
+const aviso = (e) => {
+  console.warn('nube', e);
+  const b = document.getElementById('nubeAviso'); if (b) b.hidden = false;
+};
+const limite = (p, ms) => new Promise((res, rej) => {
+  const t = setTimeout(() => rej(new Error('La nube no respondió a tiempo.')), ms);
+  p.then(v => { clearTimeout(t); res(v); }, e => { clearTimeout(t); rej(e); });
+});
+const LIMITE = {session:6000, listEdits:6000};
+let caida = false;
+['session', 'listVisits', 'listPhotos', 'listEdits', 'listPrechecks', 'listDiario', 'listGastos'].forEach(k => {
+  const f = N[k];
+  /* Si ni la sesión respondió, las demás lecturas fallan al instante: el itinerario no espera de más. */
+  N[k] = (...a) => (caida && k!=='session' ? Promise.reject(new Error('Sin conexión con la nube.')) : limite(f(...a), LIMITE[k] || 15000))
+    .catch(e => { if (k==='session') caida = true; aviso(e); throw e; });
+});
+const av = document.getElementById('nubeAviso');
+if (av) {
+  av.querySelector('[data-retry]').addEventListener('click', () => location.reload());
+  av.querySelector('[data-close]').addEventListener('click', () => { av.hidden = true; });
+}
 })();

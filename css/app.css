@@ -544,3 +544,7 @@ textarea.md-input{height:auto;min-height:5.5rem;padding-block:.6rem;line-height:
 body[data-view="album"] .toast{bottom:calc(var(--tabbar-h) + 5rem + env(safe-area-inset-bottom,0px))}
 @media (min-width:900px){body[data-view="album"] .toast{bottom:calc(var(--space-8) + 4.5rem)}}
 .pol-note small{font-style:normal;font-weight:var(--weight-regular);font-size:.68rem;color:#6b7080}
+/* --- Aviso: la nube no responde --------------------------------------- */
+.nube-aviso{position:fixed;left:50%;transform:translateX(-50%);top:calc(var(--space-3) + env(safe-area-inset-top,0px));z-index:210;width:min(30rem, calc(100% - 2rem));display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-md);background:hsl(var(--card));color:hsl(var(--card-foreground));border:var(--border-width) solid hsl(var(--secondary));box-shadow:var(--shadow-lg);font-size:var(--text-sm)}
+.nube-aviso[hidden]{display:none}
+.nube-aviso-actions{display:flex;flex-wrap:wrap;gap:var(--space-2)}
